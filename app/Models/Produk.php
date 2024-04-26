@@ -9,11 +9,18 @@ class Produk extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    public $table = "produk";
+
+    protected $primaryKey = 'id_produk';
+
     protected $fillable = [
         'nama_produk',
         'harga',
         'jumlah_stok',
         'tipe_produk',
+        'kuota_po',
         'porsi',
         'id_hampers',
         'id_resep',

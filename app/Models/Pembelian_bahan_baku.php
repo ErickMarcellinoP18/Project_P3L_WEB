@@ -9,6 +9,11 @@ class Pembelian_bahan_baku extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    public $table = "pembelian_bahan_baku";
+
+    protected $primaryKey = 'id_bahan_baku';
     protected $fillable = [
         'id_bahan_baku',
         'harga_bahan_baku',

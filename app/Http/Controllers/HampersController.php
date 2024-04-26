@@ -11,20 +11,21 @@ class HampersController extends Controller
     public function index()
     {
         $hampers = Hampers::all();
-        return view('hampers.index', compact('hampers'));
+        return view('admin.hampers.index', compact('hampers'));
     }
 
     public function create()
     {
-        return view('hampers.create');
+        return view('admin.hampers.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
+            'nama_hampers' => 'required',
+            'harga_hampers' => 'required',
+            'tgl_mulai_promo' => 'required',
+            'tgl_akhir_promo' => 'required'
         ]);
 
         try {
@@ -38,15 +39,16 @@ class HampersController extends Controller
     public function edit($id)
     {
         $hampers = Hampers::find($id);
-        return view('hampers.edit', compact('hampers'));
+        return view('admin.hampers.edit', compact('hampers'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
+            'nama_hampers' => 'required',
+            'harga_hampers' => 'required',
+            'tgl_mulai_promo' => 'required',
+            'tgl_akhir_promo' => 'required'
         ]);
 
         try {
@@ -57,7 +59,7 @@ class HampersController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             Hampers::find($id)->delete();

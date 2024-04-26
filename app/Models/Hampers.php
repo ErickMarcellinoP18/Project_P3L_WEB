@@ -9,6 +9,12 @@ class Hampers extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    public $table = "hampers";
+
+    protected $primaryKey = 'id_hampers';
+
     protected $fillable = [
         'nama_hampers',
         'harga_hampers',

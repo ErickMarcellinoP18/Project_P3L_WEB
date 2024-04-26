@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="loginStyle.css">
     <title>Atma Kitchen</title>
 </head>
 
@@ -23,11 +23,16 @@
             </form>
         </div>
         <div class="form-container sign-in">
-            <form>
+            @if (Session::has('error'))
+                <div class="alert alert-danger">{{ Session::get('error') }}
+                </div>
+            @endif
+            <form method="post" action="{{ route('actionLogin') }}">
+                @csrf
                 <h1>Sign In</h1>
                 <span>use your email password</span>
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
                 <a href="#">Forget Your Password?</a>
                 <button>Sign In</button>
             </form>
@@ -36,19 +41,19 @@
             <div class="toggle">
                 <div class="toggle-panel toggle-left">
                     <h1>Welcome Back!</h1>
-                    <p>Enter your personal details to use all of site features</p>
+                    <p>Isi semua form yang tersidia untuk dapat membuat sebuah akun</p>
                     <button class="hidden" id="login">Sign In</button>
                 </div>
                 <div class="toggle-panel toggle-right">
                     <h1>Hello, Friend!</h1>
-                    <p>Register with your personal details to use all of site features</p>
+                    <p>Lakukan Register untuk dapat menggunakan semua fitur di dalam situs</p>
                     <button class="hidden" id="register">Sign Up</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="loginScript.js"></script>
 </body>
 
 </html>

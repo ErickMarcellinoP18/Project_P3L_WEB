@@ -9,24 +9,32 @@ use App\Models\Produk;
 
 class ProdukController extends Controller
 {
-    
+
     public function index()
     {
         $produk = Produk::all();
-        return view('produk.index', compact('produk'));
+        return view('admin.produk.index', compact('produk'));
     }
 
     public function create()
     {
-        return view('produk.create');
+
+        return view('admin.produk.create');
     }
+
+    public function createTitipan()
+    {
+        return view('admin.produk.createTitipan');
+    }
+
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama_produk' => 'required',
             'harga' => 'required',
-            'stok' => 'required',
+            'jumlah_stok' => 'required',
+            'tipe_produk' => 'required'
         ]);
 
         try {
@@ -40,15 +48,16 @@ class ProdukController extends Controller
     public function edit($id)
     {
         $produk = Produk::find($id);
-        return view('produk.edit', compact('produk'));
+        return view('admin.produk.edit', compact('produk'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
+            'nama_produk' => 'required',
             'harga' => 'required',
-            'stok' => 'required',
+            'jumlah_stok' => 'required',
+            'tipe_produk' => 'required'
         ]);
 
         try {
@@ -59,7 +68,7 @@ class ProdukController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             Produk::find($id)->delete();
@@ -68,5 +77,4 @@ class ProdukController extends Controller
             return redirect()->route('produk.index')->with('error', 'Data gagal dihapus');
         }
     }
-
 }
