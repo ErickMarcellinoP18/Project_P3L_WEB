@@ -12,12 +12,12 @@ class BahanBakuController extends Controller
     public function index()
     {
         $bahan_baku = Bahan_baku::all();
-        return view('bahan_baku.index', compact('bahan_baku'));
+        return view('admin.bahanBaku.index', compact('bahan_baku'));
     }
 
     public function create()
     {
-        return view('bahan_baku.create');
+        return view('admin.bahanBaku.create');
     }
 
     public function store(Request $request)
@@ -26,11 +26,10 @@ class BahanBakuController extends Controller
             'nama_bahan' => 'required',
             'stok' => 'required',
             'satuan' => 'required',
-            'harga' => 'required',
         ]);
 
         try {
-            Bahan_bak::create($request->all());
+            Bahan_baku::create($request->all());
             return redirect()->route('bahan_baku.index')->with('success', 'Data berhasil ditambahkan');
         } catch (Exception $e) {
             return redirect()->route('bahan_baku.index')->with('error', 'Data gagal ditambahkan');
@@ -40,7 +39,7 @@ class BahanBakuController extends Controller
     public function edit($id)
     {
         $bahan_baku = Bahan_baku ::find($id);
-        return view('bahan_baku.edit', compact('bahan_baku'));
+        return view('admin.bahanBaku.edit', compact('bahan_baku'));
     }
 
     public function update(Request $request, $id)
@@ -49,21 +48,20 @@ class BahanBakuController extends Controller
             'nama_bahan' => 'required',
             'stok' => 'required',
             'satuan' => 'required',
-            'harga' => 'required',
         ]);
 
         try {
-            Bahan_bak::find($id)->update($request->all());
+            Bahan_baku::find($id)->update($request->all());
             return redirect()->route('bahan_baku.index')->with('success', 'Data berhasil diubah');
         } catch (Exception $e) {
             return redirect()->route('bahan_baku.index')->with('error', 'Data gagal diubah');
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
-            Bahan_bak::find($id)->delete();
+            Bahan_baku::find($id)->delete();
             return redirect()->route('bahan_baku.index')->with('success', 'Data berhasil dihapus');
         } catch (Exception $e) {
             return redirect()->route('bahan_baku.index')->with('error', 'Data gagal dihapus');
