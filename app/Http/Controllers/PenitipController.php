@@ -23,9 +23,7 @@ class PenitipController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
+            'nama_penitip' => 'required',
         ]);
 
         try {
@@ -45,9 +43,7 @@ class PenitipController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
+            'nama_penitip' => 'required',
         ]);
 
         try {

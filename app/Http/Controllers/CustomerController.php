@@ -3,68 +3,60 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Exception;
+use illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 use App\Models\Customer;
+use App\Mail\MailSend;
+use Session;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function register()
     {
-        $customer = Customer::all();
-        return view('customer.index', compact('customer'));
-    }
+        return view('register');
+    } 
 
-    public function create()
+    public function actionRegister(Request $request)
     {
-        return view('customer.create');
-    }
-
-    public function store(Request $request)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
+        $str = Str::random(100);
+        $customer = Customer::create([
+            'nama_customer' => $request->nama_customer,
+            'email'=> $request->email,
+            'ulang_tahun'=> $request->ulang_tahun,
+            'saldo' => 0,
+            'jumlah_poin' => 0,
+            'password'=> Hash::make($request->password),
+            'verify_key'=> $str,
         ]);
-
-        try {
-            Customer::create($request->all());
-            return redirect()->route('customer.index')->with('success', 'Data berhasil ditambahkan');
-        } catch (Exception $e) {
-            return redirect()->route('customer.index')->with('error', 'Data gagal ditambahkan');
-        }
+        
+        $details = [
+            'nama_customer' => $request->nama_customer,
+            'website' => 'Atma Kitchen',
+            'datetime' => date('Y-m-d H:i:s'),
+            'url' => request()->getHttpHost() . '/register/verify/' . $str
+        ];
+        Mail::to($request->email)->send(new MailSend($details));
+        Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silakan cek email untuk mengaktifkan akun anda.');
+        return redirect('register');
     }
 
-    public function edit($id)
+    public function verify($verify_key)
     {
-        $customer = Customer::find($id);
-        return view('customer.edit', compact('customer'));
-    }
+        $keyCheck = Customer::select('verify_key')
+            ->where('verify_key', $verify_key)
+            ->exist();
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-        ]);
-
-        try {
-            Customer::find($id)->update($request->all());
-            return redirect()->route('customer.index')->with('success', 'Data berhasil diubah');
-        } catch (Exception $e) {
-            return redirect()->route('customer.index')->with('error', 'Data gagal diubah');
-        }
-    }
-
-    public function delete($id)
-    {
-        try {
-            Customer::find($id)->delete();
-            return redirect()->route('customer.index')->with('success', 'Data berhasil dihapus');
-        } catch (Exception $e) {
-            return redirect()->route('customer.index')->with('error', 'Data gagal dihapus');
-        }
-    }
+        if($keyCheck) {
+            $nama_customer = Customer::where('verify_key', $verify_key)
+            ->update([
+                'active' => 1,
+                'email_verified_at' => date('Y-m-d H:i:s'),
+            ]);
     
+            return "Yeay! Verifikasi berhasil!";
+        }else{
+            return "Keys tidak valid.";
+        }
+    }
 }
