@@ -11,20 +11,20 @@ class PengeluaranLainController extends Controller
     public function index()
     {
         $pengeluaran_lain = Pengeluaran_lain::all();
-        return view('pengeluaran_lain.index', compact('pengeluaran_lain'));
+        return view('mo.pengeluaranLain.index', compact('pengeluaran_lain'));
     }
 
     public function create()
     {
-        return view('pengeluaran_lain.create');
+        return view('mo.pengeluaranLain.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama_pengeluaran' => 'required',
-            'nominal' => 'required',
-            'tanggal' => 'required',
+            'total_pengeluaran' => 'required',
+            'jenis' => 'required',
+            'tanggal_pengeluaran' => 'required',
         ]);
 
         try {
@@ -38,15 +38,15 @@ class PengeluaranLainController extends Controller
     public function edit($id)
     {
         $pengeluaran_lain = Pengeluaran_lain::find($id);
-        return view('pengeluaran_lain.edit', compact('pengeluaran_lain'));
+        return view('mo.pengeluaranLain.edit', compact('pengeluaran_lain'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama_pengeluaran' => 'required',
-            'nominal' => 'required',
-            'tanggal' => 'required',
+            'total_pengeluaran' => 'required',
+            'jenis' => 'required',
+            'tanggal_pengeluaran' => 'required',
         ]);
 
         try {
@@ -57,7 +57,7 @@ class PengeluaranLainController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             Pengeluaran_lain::find($id)->delete();

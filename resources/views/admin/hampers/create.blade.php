@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Atma Kitchen - Edit Hampers</title>
+    <title>Atma Kitchen - Create Hampers</title>
     @include('admin.template.head')
 </head>
 

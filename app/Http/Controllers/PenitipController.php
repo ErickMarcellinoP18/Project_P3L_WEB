@@ -12,18 +12,18 @@ class PenitipController extends Controller
     public function index()
     {
         $penitip = Penitip::all();
-        return view('penitip.index', compact('penitip'));
+        return view('mo.penitip.index', compact('penitip'));
     }
 
     public function create()
     {
-        return view('penitip.create');
+        return view('mo.penitip.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama_penitip' => 'required',
+            'nama_penitip' => 'required'
         ]);
 
         try {
@@ -37,7 +37,7 @@ class PenitipController extends Controller
     public function edit($id)
     {
         $penitip = Penitip::find($id);
-        return view('penitip.edit', compact('penitip'));
+        return view('mo.penitip.edit', compact('penitip'));
     }
 
     public function update(Request $request, $id)
@@ -54,7 +54,7 @@ class PenitipController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             Penitip::find($id)->delete();

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PenitipController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BahanBakuController;
 use App\Http\Controllers\LoginController;
@@ -8,10 +9,11 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PembelianBahanBakuController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\PengeluaranLainController;
 
 
 Route::get('/', function () {
-    return view('homepage');
+    return view('admin/dashboardPage');
 });
 
 //Login
@@ -36,3 +38,5 @@ Route::resource('/hampers', HampersController::class);
 Route::resource('/beliBahan', PembelianBahanBakuController::class);
 Route:: resource('/bahan_baku', BahanBakuController::class);
 Route::resource('/customer', CustomerController::class);
+Route::resource('/penitip',PenitipController::class);
+Route::resource('/pengeluaran_lain', PengeluaranLainController::class);
