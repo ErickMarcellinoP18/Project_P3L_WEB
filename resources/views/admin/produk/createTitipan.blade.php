@@ -75,6 +75,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="font-weight-bold">Penitip</label>
+                                        <select class="form-control  @error('nama_penitip') is-invalid @enderror"
+                                            name="id_penitip">
+                                            <option selected disabled value="">Pilih Penitip</option>
+                                            @foreach ($penitip as $item)
+                                                <option value="{{ $item->id_penitip }}">{{ $item->nama_penitip }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('nama_penitip')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <input type="hidden" name="tipe_produk" value="Titipan">
                                     </div>
 

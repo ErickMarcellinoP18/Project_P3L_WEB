@@ -78,9 +78,29 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="hidden" name="tipe_produk" value="Titipan">
-                                    </div>
+                                    @if ($produk->tipe_produk != 'Asli')
+                                        <div class="form-group">
+                                            <label class="font-weight-bold">Penitip</label>
+                                            <select class="form-control  @error('nama_penitip') is-invalid @enderror"
+                                                name="id_penitip">
+                                                <option selected disabled>Pilih Penitip</option>
+                                                @foreach ($penitip as $item)
+                                                    <option value="{{ $item->id_prnitip }}"
+                                                        {{ $item->id_penitip === $produk->penitip->id_penitip ? 'selected' : '' }}>
+                                                        {{ $item->nama_penitip }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('nama_penitip')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="hidden" name="tipe_produk" value="Titipan">
+                                        </div>
+                                    @endif
                                     @if ($produk->tipe_produk != 'Titipan')
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -107,6 +127,24 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="font-weight-bold">Hampers</label>
+                                            <select class="form-control  @error('nama_hampers') is-invalid @enderror"
+                                                name="id_hampers">
+                                                <option selected disabled>Pilih Jenis Hampers</option>
+                                                @foreach ($hampers as $item)
+                                                    <option value="{{ $item->id_hampers }}"
+                                                        {{ $item->id_hampers === $produk->hampers->id_hampers ? 'selected' : '' }}>
+                                                        {{ $item->nama_hampers }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            @error('nama_hampers')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <input type="hidden" name="tipe_produk" value="Asli">

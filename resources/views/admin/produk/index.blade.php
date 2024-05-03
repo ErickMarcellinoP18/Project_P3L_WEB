@@ -46,6 +46,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Produk</th>
+                                            <th>Hampers / Penitip</th>
                                             <th>Harga</th>
                                             <th>Jumlah Stok</th>
                                             <th>Tipe Produk</th>
@@ -57,6 +58,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>Nama Produk</th>
+                                            <th>Hampers / Penitip</th>
                                             <th>Harga</th>
                                             <th>Jumlah Stok</th>
                                             <th>Tipe Produk</th>
@@ -69,6 +71,10 @@
                                         @forelse ($produk as $item)
                                             <tr>
                                                 <td>{{ $item->nama_produk }}</td>
+                                                <td>{{ $item->tipe_produk == 'Titipan' && $item->penitip ? $item->penitip->nama_penitip : '' }}
+
+                                                    {{ $item->tipe_produk == 'Asli' && $item->hampers ? $item->hampers->nama_hampers : '' }}
+                                                </td>
                                                 <td>{{ $item->harga }}</td>
                                                 <td>{{ $item->jumlah_stok }}</td>
                                                 <td>{{ $item->tipe_produk }}</td>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2024 at 07:14 PM
+-- Generation Time: May 03, 2024 at 02:04 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -292,22 +292,6 @@ INSERT INTO `detil_poin` (`no_nota`, `id_promo`, `jumlah_poin`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `failed_jobs`
---
-
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) NOT NULL,
-  `connection` text NOT NULL,
-  `queue` text NOT NULL,
-  `payload` longtext NOT NULL,
-  `exception` longtext NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `hampers`
 --
 
@@ -331,83 +315,29 @@ INSERT INTO `hampers` (`id_hampers`, `tgl_mulai_promo`, `tgl_akhir_promo`, `nama
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jabatan`
---
-
-CREATE TABLE `jabatan` (
-  `id_jabatan` int(11) NOT NULL,
-  `nama_jabatan` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `jabatan`
---
-
-INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
-(1, 'admin'),
-(2, 'mo'),
-(3, 'pekerja');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `jobs`
---
-
-CREATE TABLE `jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `queue` varchar(255) NOT NULL,
-  `payload` longtext NOT NULL,
-  `attempts` tinyint(3) UNSIGNED NOT NULL,
-  `reserved_at` int(10) UNSIGNED DEFAULT NULL,
-  `available_at` int(10) UNSIGNED NOT NULL,
-  `created_at` int(10) UNSIGNED NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `job_batches`
---
-
-CREATE TABLE `job_batches` (
-  `id` varchar(255) NOT NULL,
-  `name` varchar(255) NOT NULL,
-  `total_jobs` int(11) NOT NULL,
-  `pending_jobs` int(11) NOT NULL,
-  `failed_jobs` int(11) NOT NULL,
-  `failed_job_ids` longtext NOT NULL,
-  `options` mediumtext DEFAULT NULL,
-  `cancelled_at` int(11) DEFAULT NULL,
-  `created_at` int(11) NOT NULL,
-  `finished_at` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `karyawan`
 --
 
 CREATE TABLE `karyawan` (
   `id_karyawan` int(11) NOT NULL,
-  `id_jabatan` int(11) NOT NULL,
+  `password` varchar(255) NOT NULL,
   `honor_harian` int(11) NOT NULL,
   `bonus` int(11) NOT NULL,
-  `nama_karyawan` varchar(30) DEFAULT NULL
+  `nama_karyawan` varchar(30) DEFAULT NULL,
+  `jabatan` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id_karyawan`, `id_jabatan`, `honor_harian`, `bonus`, `nama_karyawan`) VALUES
-(2, 3, 10000, 0, 'Asep'),
-(3, 3, 10000, 0, 'Elu'),
-(4, 3, 10000, 0, 'Klasik'),
-(5, 3, 10000, 0, 'Er[c'),
-(7, 2, 15000, 0, 'Bona'),
-(8, 1, 20000, 0, 'Sql');
+INSERT INTO `karyawan` (`id_karyawan`, `password`, `honor_harian`, `bonus`, `nama_karyawan`, `jabatan`) VALUES
+(2, '12345678', 10000, 0, 'Asep', 'admin'),
+(3, '23456789', 10000, 0, 'Elu', 'mo'),
+(4, '34567890', 10000, 0, 'Klasik', 'owner'),
+(5, 'qwertyui', 10000, 0, 'Eric', 'admin'),
+(7, 'asdfghjk', 15000, 0, 'Bona', 'mo'),
+(8, '09876543', 20000, 0, 'Sql', 'owner');
 
 -- --------------------------------------------------------
 
@@ -427,8 +357,7 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1);
+(2, '2024_05_03_064214_create_personal_access_tokens_table', 1);
 
 -- --------------------------------------------------------
 
@@ -540,6 +469,25 @@ INSERT INTO `penitip` (`id_penitip`, `nama_penitip`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `personal_access_tokens`
+--
+
+CREATE TABLE `personal_access_tokens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `tokenable_type` varchar(255) NOT NULL,
+  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `token` varchar(64) NOT NULL,
+  `abilities` text DEFAULT NULL,
+  `last_used_at` timestamp NULL DEFAULT NULL,
+  `expires_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pesanan`
 --
 
@@ -632,7 +580,7 @@ INSERT INTO `produk` (`id_produk`, `id_hampers`, `id_resep`, `id_penitip`, `nama
 (17, NULL, 9, NULL, 'Choco Creamy Latte', 75000, 0, 'Asli', 1, 1),
 (19, 4, 10, NULL, 'Matcha Creamy Latte', 100000, 0, 'Asli', 1, 0),
 (23, NULL, NULL, 6, 'Keripik Kentang 250 gr', 75000, 50, 'Titipan', 1, 0),
-(24, NULL, NULL, 6, 'Kopi Luwak Bubuk 250 gr', 250000, 25, 'Titpan', 1, 0),
+(24, NULL, NULL, 6, 'Kopi Luwak Bubuk 250 gr', 250000, 25, 'Titipan', 1, 0),
 (26, NULL, NULL, 7, 'Kopi Luwak Bubuk 250 gr', 120000, 25, 'Titipan', 1, 0),
 (27, NULL, NULL, 5, 'Matcha Organik Bubuk 100 gr', 300000, 40, 'Titipan', 1, NULL);
 
@@ -707,7 +655,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('1MKQjwwu5u0cxAGxMgFLiHiOhCBQ97nbd8i9giTQ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoialRtUFJnTVFjZ1VGUDhDU1hlWTN2SFBDUWxUbEo4OWJxREVNOXN5WiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1714149462);
+('UkpQV8UNou1GTB25XSRtNqi76Z9f9bEv26bSeA40', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicjhrN3dGZm12WU5nUkkxZHNjRnZyVmdYaDZrNWs3TFRMd1l1UEpxWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWsiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1714737814);
 
 -- --------------------------------------------------------
 
@@ -716,11 +664,15 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 --
 
 CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
+  `id` int(20) UNSIGNED NOT NULL,
   `name` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `ulang_tahun` datetime DEFAULT NULL,
+  `saldo` int(11) NOT NULL DEFAULT 0,
+  `verify_key` varchar(255) NOT NULL,
+  `active` int(11) DEFAULT NULL,
+  `email_verified_at` timestamp NULL DEFAULT NULL,
   `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -783,43 +735,16 @@ ALTER TABLE `detil_poin`
   ADD KEY `fk_promo` (`id_promo`);
 
 --
--- Indexes for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
 -- Indexes for table `hampers`
 --
 ALTER TABLE `hampers`
   ADD PRIMARY KEY (`id_hampers`);
 
 --
--- Indexes for table `jabatan`
---
-ALTER TABLE `jabatan`
-  ADD PRIMARY KEY (`id_jabatan`);
-
---
--- Indexes for table `jobs`
---
-ALTER TABLE `jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `jobs_queue_index` (`queue`);
-
---
--- Indexes for table `job_batches`
---
-ALTER TABLE `job_batches`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `karyawan`
 --
 ALTER TABLE `karyawan`
-  ADD PRIMARY KEY (`id_karyawan`),
-  ADD KEY `fk_jabatan` (`id_jabatan`);
+  ADD PRIMARY KEY (`id_karyawan`);
 
 --
 -- Indexes for table `migrations`
@@ -856,6 +781,14 @@ ALTER TABLE `penggunaan_bahan_baku`
 --
 ALTER TABLE `penitip`
   ADD PRIMARY KEY (`id_penitip`);
+
+--
+-- Indexes for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
 -- Indexes for table `pesanan`
@@ -930,28 +863,10 @@ ALTER TABLE `customer`
   MODIFY `id_customer` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `hampers`
 --
 ALTER TABLE `hampers`
   MODIFY `id_hampers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT for table `jabatan`
---
-ALTER TABLE `jabatan`
-  MODIFY `id_jabatan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT for table `jobs`
---
-ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `karyawan`
@@ -963,7 +878,7 @@ ALTER TABLE `karyawan`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pengeluaran_lain`
@@ -976,6 +891,12 @@ ALTER TABLE `pengeluaran_lain`
 --
 ALTER TABLE `penitip`
   MODIFY `id_penitip` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `presensi`
@@ -1005,7 +926,7 @@ ALTER TABLE `resep`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Constraints for dumped tables
@@ -1037,12 +958,6 @@ ALTER TABLE `detil_pesanan`
 ALTER TABLE `detil_poin`
   ADD CONSTRAINT `fk_pesanan` FOREIGN KEY (`no_nota`) REFERENCES `pesanan` (`no_nota`),
   ADD CONSTRAINT `fk_promo` FOREIGN KEY (`id_promo`) REFERENCES `promo_poin` (`id_promo`);
-
---
--- Constraints for table `karyawan`
---
-ALTER TABLE `karyawan`
-  ADD CONSTRAINT `fk_jabatan` FOREIGN KEY (`id_jabatan`) REFERENCES `jabatan` (`id_jabatan`);
 
 --
 -- Constraints for table `pembelian_bahan_baku`

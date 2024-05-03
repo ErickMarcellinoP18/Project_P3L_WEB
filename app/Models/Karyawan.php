@@ -4,21 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Traits\HasRoles;
 
 class Karyawan extends Model
 {
-    use HasFactory, HasRoles;
+    use HasFactory;
+
+    protected $table = 'karyawan';
+
+    protected $primaryKey = 'id_karyawan';
 
     protected $fillable = [
         'nama_karyawan',
+        'password',
         'honor_harian',
         'bonus',
-        'jabatan_id',
+        'jabatan'
     ];
-
-    public function jabatan()
-    {
-        return $this->belongsTo(Jabatan::class, 'jabatan_id');
-    }
 }

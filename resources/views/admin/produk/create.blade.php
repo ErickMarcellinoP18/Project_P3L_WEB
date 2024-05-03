@@ -101,6 +101,22 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
+                                        <label class="font-weight-bold">Hampers</label>
+                                        <select class="form-control  @error('hampers') is-invalid @enderror"
+                                            name="id_hampers">
+                                            <option selected disabled value="">Pilih Kategori Hampers</option>
+                                            @foreach ($hampers as $item)
+                                                <option value="{{ $item->id_hampers }}">{{ $item->nama_hampers }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('hampers')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
                                         <input type="hidden" name="tipe_produk" value="Asli">
                                     </div>
 

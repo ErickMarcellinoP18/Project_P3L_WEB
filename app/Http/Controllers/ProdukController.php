@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Exception;
 use App\Models\Produk;
+use App\Models\Penitip;
+use App\Models\Hampers;
 
 
 class ProdukController extends Controller
@@ -18,13 +20,14 @@ class ProdukController extends Controller
 
     public function create()
     {
-
-        return view('admin.produk.create');
+        $hampers = Hampers::all();
+        return view('admin.produk.create', compact('hampers'));
     }
 
     public function createTitipan()
     {
-        return view('admin.produk.createTitipan');
+        $penitip = Penitip::all();
+        return view('admin.produk.createTitipan', compact('penitip'));
     }
 
 
@@ -48,7 +51,9 @@ class ProdukController extends Controller
     public function edit($id)
     {
         $produk = Produk::find($id);
-        return view('admin.produk.edit', compact('produk'));
+        $penitip = Penitip::all();
+        $hampers = Hampers::all();
+        return view('admin.produk.edit', compact('produk', 'penitip', 'hampers'));
     }
 
     public function update(Request $request, $id)

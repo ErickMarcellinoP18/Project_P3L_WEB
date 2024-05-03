@@ -34,7 +34,7 @@
                 <input class="form-control" type="email" name="email" placeholder="Email" required>
                 <input class="form-control" type="password" name="password" placeholder="Password" required>
                 <a href="#">Forget Your Password?</a>
-                <button>Sign In</button>
+                <button type="submit">Sign In</button>
             </form>
         </div>
         <div class="toggle-container">
