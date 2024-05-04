@@ -8,7 +8,6 @@ use App\Models\Bahan_baku;
 
 class BahanBakuController extends Controller
 {
-    
     public function index()
     {
         $bahan_baku = Bahan_baku::all();
@@ -24,8 +23,8 @@ class BahanBakuController extends Controller
     {
         $request->validate([
             'nama_bahan' => 'required',
-            'stok' => 'required',
             'satuan' => 'required',
+            'stok_bahan' => 'required'
         ]);
 
         try {
@@ -38,7 +37,7 @@ class BahanBakuController extends Controller
 
     public function edit($id)
     {
-        $bahan_baku = Bahan_baku ::find($id);
+        $bahan_baku = Bahan_baku::find($id);
         return view('admin.bahanBaku.edit', compact('bahan_baku'));
     }
 
@@ -46,8 +45,8 @@ class BahanBakuController extends Controller
     {
         $request->validate([
             'nama_bahan' => 'required',
-            'stok' => 'required',
             'satuan' => 'required',
+            'stok_bahan' => 'required'
         ]);
 
         try {
@@ -67,5 +66,4 @@ class BahanBakuController extends Controller
             return redirect()->route('bahan_baku.index')->with('error', 'Data gagal dihapus');
         }
     }
-
 }

@@ -43,9 +43,9 @@
                                         <label class="font-weight-bold">Total Pengeluaran</label>
                                         <input type="number"
                                             class="form-control form-control-user @error('total_pengeluaran') is-invalid @enderror"
-                                            id="InputTotal Pengeluaran" placeholder="Total Pengeluaran"
+                                            id="Input Total Pengeluaran" placeholder="Total Pengeluaran"
                                             value="{{ old('total_pengeluaran', $pengeluaran_lain->total_pengeluaran) }}"
-                                            name="total_penegeluaran">
+                                            name="total_pengeluaran">
                                         @error('total_pengeluaran')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

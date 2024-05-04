@@ -50,12 +50,7 @@
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Data Customer</span></a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ url('/pengeluaran_lain') }}">
-            <i class="fas fa-fw fa-clipboard"></i>
-            <span>Data Customer</span></a>
-    </li>
-
+    
     <!-- Nav Item - Pages Collapse Menu -->
 
     <!-- Divider -->
