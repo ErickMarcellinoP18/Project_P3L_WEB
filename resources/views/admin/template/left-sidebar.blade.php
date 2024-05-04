@@ -40,12 +40,6 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/beliBahan') }}">
-            <i class="fas fa-fw fa-clipboard"></i>
-            <span>Pembelian Bahan Baku</span></a>
-    </li>
-
-    <li class="nav-item">
         <a class="nav-link" href="{{ url('/customer') }}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Data Customer</span></a>

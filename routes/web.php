@@ -13,7 +13,7 @@ use App\Http\Controllers\PengeluaranLainController;
 
 
 Route::get('/', function () {
-    return view('admin/dashboardPage');
+    return view('mo/dashboardPage');
 });
 
 //Login
@@ -26,6 +26,10 @@ Route::get('home ', [HomeController::class, 'index'])->name('home')->middleware(
 
 Route::get('/dashboard', function () {
     return view('admin/dashboardPage');
+});
+
+Route::get('/mo', function(){
+    return view('mo/dashboardPage');
 });
 
 Route::get('/loginAdmin', function () {

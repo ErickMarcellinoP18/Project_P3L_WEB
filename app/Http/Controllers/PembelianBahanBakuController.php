@@ -13,13 +13,13 @@ class PembelianBahanBakuController extends Controller
     public function index()
     {
         $pembelian_bahan_baku = Pembelian_bahan_baku::all();
-        return view('admin.beliBahan.index', compact('pembelian_bahan_baku'));
+        return view('mo.beliBahan.index', compact('pembelian_bahan_baku'));
     }
 
     public function create()
     {
         $bahan_baku = Bahan_baku::all();
-        return view('admin.beliBahan.create', compact('bahan_baku'));
+        return view('mo.beliBahan.create', compact('bahan_baku'));
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class PembelianBahanBakuController extends Controller
     {
         $pembelian_bahan_baku = Pembelian_bahan_baku::find($id);
         $bahan_baku = Bahan_baku::all();
-        return view('admin.beliBahan.edit', compact('pembelian_bahan_baku', 'bahan_baku'));
+        return view('mo.beliBahan.edit', compact('pembelian_bahan_baku', 'bahan_baku'));
     }
 
     public function update(Request $request, $id)

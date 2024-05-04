@@ -3,7 +3,7 @@
 
 <head>
     <title>Atma Kitchen - Pembelian Bahan Baku</title>
-    @include('admin.template.head')
+    @include('mo.template.head')
 </head>
 
 <body id="page-top">
@@ -12,7 +12,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('admin.template.left-sidebar')
+        @include('mo.template.left-sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -21,7 +21,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('admin.template.navbar')
+                @include('mo.template.navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -95,7 +95,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            @include('admin.template.footer')
+            @include('mo.template.footer')
             <!-- End of Footer -->
 
         </div>
@@ -104,9 +104,9 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    @include('admin.template.logoutModal')
+    @include('mo.template.logoutModal')
 
-    @include('admin.template.script')
+    @include('mo.template.script')
 
 </body>
 
