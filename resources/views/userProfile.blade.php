@@ -9,76 +9,80 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        /* Add your custom CSS styles here */
         body {
             padding-top: 50px;
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .card-header {
+            background-color: #007bff;
+            color: #fff;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="text-center">User Profile</h3>
+                        <h3>User Profile</h3>
                     </div>
                     <form class="card-body user" action="{{ route('user.update',$user->id) }}" method="POST"
-                    enctype="multipart/form-data">
+                        enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="form-group">
-                            <label for="username">Username:</label>
-                            <input type="text" 
-                                class="form-controlform-control-user @error('name') is-invalid @enderror" 
-                                id="Name" placeholder="Username"
-                                value="{{ old('name', $user->name) }}" name="name">
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 col-form-label">Username:</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="Name" placeholder="Username"
+                                    value="{{ old('name', $user->name) }}" name="name">
+                                @error('name')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="username">Ulang Tahun :</label>
-                            <input type="text" 
-                                class="form-controlform-control-user @error('ulang_tahun') is-invalid @enderror" 
-                                id="UlangTahun" placeholder="Ulang Tahun"
-                                value="{{ old('ulang_tahun', $user->ulang_tahun)}}" name="ulang_tahun">
-                            @error('ulang_tahun')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 col-form-label">Ulang Tahun :</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="UlangTahun" placeholder="Ulang Tahun"
+                                    value="{{ old('ulang_tahun', $user->ulang_tahun)}}" name="ulang_tahun">
+                                @error('ulang_tahun')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-
-                        <div class="form-group">
-                            <label for="username">Saldo:</label>
-                            <input type="number" 
-                                class="form-controlform-control-user @error('saldo') is-invalid @enderror" 
-                                id="Saldo" placeholder="Saldo"
-                                value="{{ old('saldo', $user->saldo) }}" name="saldo" disabled>
-                            @error('saldo')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 col-form-label">Saldo:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="Saldo" placeholder="Saldo"
+                                    value="{{ old('saldo', $user->saldo) }}" name="saldo" disabled>
+                                @error('saldo')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
-
-
-                        <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                        <div class="form-group row">
+                            <div class="col-sm-9 offset-sm-3">
+                                <button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+                            </div>
+                        </div>
                     </form>
-                    
-                    <a href="{{ route('user.historypesanan',$user->id) }}"
-                        class="btn btn-sm btn-primary">History Pemesanan</a>
-
-                    
-                    
-                    
+                    <div class="card-footer">
+                        <a href="{{ route('user.historypesanan',$user->id) }}" class="btn btn-sm btn-primary btn-block">History Pemesanan</a>
+                    </div>
                 </div>
-
-
             </div>
         </div>
     </div>

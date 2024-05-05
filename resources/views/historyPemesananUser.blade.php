@@ -3,36 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <title>History Pesanan</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <style>
-        /* Add your custom CSS styles here */
         body {
             padding-top: 50px;
+            background-color: #f8f9fa; /* Set background color */
+            color: #212529; /* Set text color */
         }
         .table-container {
             overflow-x: auto;
+            border-radius: 10px; /* Rounded corners for the table container */
+            padding: 20px; /* Add padding */
+        }
+        th, td {
+            vertical-align: middle;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .thead-dark th {
+            background-color: #343a40; /* Dark background color for table header */
+            color: #fff; /* Text color for table header */
+        }
+        .btn-primary {
+            background-color: #007bff; /* Primary button color */
+            border-color: #007bff; /* Border color for primary button */
+        }
+        .btn-primary:hover {
+            background-color: #0056b3; /* Button color on hover */
+            border-color: #0056b3; /* Border color on hover */
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
+        <div class="row justify-content-center">
+            <div class="col-md-10">
                 <div class="card">
                     <div class="card-header">
-                        <h3 class="text-center">History Pesanan</h3>
+                        <h3>History Pesanan</h3>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="search" placeholder="Cari Berdasarkan Nama Produk">
+                            <input type="text" class="form-control" id="search" placeholder="Search by Product Name">
                         </div>
                         <div class="table-container">
                             <table class="table table-bordered table-hover" id="dataTable">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
                                         <th>Nomor Nota</th>
                                         <th>Tanggal Ambil</th>
@@ -45,16 +66,16 @@
                                 <tbody>
                                     @forelse ($pesanan as $item)
                                         <tr>
-                                            <td>{{ $item->no_nota}}</td>
+                                            <td>{{ $item->no_nota }}</td>
                                             <td>{{ $item->tanggal_ambil }}</td>
-                                            <td>{{ $item->tanggal_pesan}}</td>
+                                            <td>{{ $item->tanggal_pesan }}</td>
                                             <td>{{ $item->status }}</td>
                                             <td>{{ $item->jenis_delivery }}</td>
                                             <td>{{ $item->nama_produk }}</td>
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="5" class="text-center">Belum Memiliki Pesanan !</td>
+                                            <td colspan="6" class="text-center">No orders yet!</td>
                                         </tr>
                                     @endforelse
                                 </tbody>
@@ -92,4 +113,3 @@
     </script>
 </body>
 </html>
-

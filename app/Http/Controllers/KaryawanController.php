@@ -72,4 +72,33 @@ class KaryawanController extends Controller
             return redirect()->route('karyawan.index')->with('error', 'Data gagal dihapus');
         }
     }
+
+    public function changepassword(Request $request, $role)
+{
+    $request->validate([
+        'nama_karyawan' => 'required',
+        'password' => 'required',
+    ]);
+
+    try {
+        $karyawan = Karyawan::where('nama_karyawan', $request->nama_karyawan)->first();
+
+        if ($karyawan == null) {
+            return view('changeRolePassword', compact('role'))->with('error', 'Karyawan tidak ditemukan');
+        }
+
+        if ($karyawan->jabatan != $role) {
+            return redirect((url()->previous()))->with('error', 'Karyawan tidak ditemukan');
+        }
+
+        $karyawan->password = $request->password;
+        $karyawan->save();
+
+        return redirect('/login')->with('success', 'Password berhasil diubah');
+    } catch (Exception $e) {
+        return view('changeRolePassword', compact('role'))->with('error', 'Password gagal diubah');
+    }
+}
+
+    
 }

@@ -45,7 +45,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('customer_admin.index') }}">
+        <a class="nav-link" href="{{ route('customer_admin.index') }}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Data Customer</span></a>
     </li>
@@ -54,6 +54,12 @@
         <a class="nav-link" href="{{ url('/resep') }}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Resep</span></a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/gantiPasswordview')}}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Ganti Password</span></a>
     </li>
 
     <!-- Divider -->

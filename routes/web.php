@@ -17,6 +17,8 @@ use App\Http\Controllers\KaryawanController;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
 
+use Illuminate\Support\Facades\URL;
+
 
 Route::get('/', function () {
     return view('/homePage');
@@ -99,9 +101,21 @@ Route::post('/reset-password', function (Request $request) {
 })->middleware('guest')->name('password.update');
 
 
+
+Route::get('/gantiPasswordview', function () {
+    $currentUrl1 = URL::previous();
+    $currentUrl = substr($currentUrl1, strrpos($currentUrl1, '/') + 1);
+    return view('changeRolePassword', compact('currentUrl'));
+});
+
+
+
+
 Route::resource('/user', UserController::class);
 Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile' )->name('user.userProfile');
 Route::get('/userProfile/{id}/HistoryPemesanan', 'App\Http\Controllers\UserController@historypesanan' )->name('user.historypesanan');
+
+Route::post('/gantiPasswordview/gantiPassword/{role}', 'App\Http\Controllers\KaryawanController@changepassword' )->name('karyawan.changepassword');
 
 
 Route::get("/customer_admin", 'App\Http\Controllers\UserController@adminindex')->name('customer_admin.index');
