@@ -11,20 +11,19 @@ class ResepController extends Controller
     public function index()
     {
         $resep = Resep::all();
-        return view('resep.index', compact('resep'));
+        return view('admin.resep.index', compact('resep'));
     }
 
     public function create()
     {
-        return view('resep.create');
+        return view('admin.resep.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'id_menu' => 'required',
-            'id_bahan_baku' => 'required',
-            'jumlah' => 'required',
+            'nama_resep' => 'required',
+            'jumlah_stok' => 'required',
         ]);
 
         try {
@@ -34,19 +33,17 @@ class ResepController extends Controller
             return redirect()->route('resep.index')->with('error', 'Data gagal ditambahkan');
         }
     }
-
     public function edit($id)
     {
         $resep = Resep::find($id);
-        return view('resep.edit', compact('resep'));
+        return view('admin.resep.edit', compact('resep'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'id_menu' => 'required',
-            'id_bahan_baku' => 'required',
-            'jumlah' => 'required',
+            'nama_resep' => 'required',
+            'jumlah_stok' => 'required',
         ]);
 
         try {
@@ -57,7 +54,7 @@ class ResepController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             Resep::find($id)->delete();

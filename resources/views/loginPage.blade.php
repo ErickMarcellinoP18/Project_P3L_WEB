@@ -13,12 +13,17 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form>
+            @if (Session::has('Pesan'))
+                <div class="alert alert-danger">{{ Session::get('Pesan') }}
+                </div>
+            @endif
+            <form method="post" action="{{ route('actionRegister') }}">
+                @csrf
                 <h1>Create Account</h1>
-                <span>use your email for registeration</span>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
+                <span>use your email for registration</span>
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password" placeholder="Password" required>
                 <button>Sign Up</button>
             </form>
         </div>

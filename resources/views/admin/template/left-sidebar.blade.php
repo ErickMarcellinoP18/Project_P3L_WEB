@@ -44,8 +44,13 @@
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Data Customer</span></a>
     </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/resep') }}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Resep</span></a>
     
-    <!-- Nav Item - Pages Collapse Menu -->
+  
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

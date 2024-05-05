@@ -7,52 +7,52 @@ use Exception;
 use App\Models\Karyawan;
 
 
+
 class KaryawanController extends Controller
 {
     //
     public function index()
     {
         $karyawan = Karyawan::all();
-        return view('karyawan.index', compact('karyawan'));
+        return view('mo.karyawan.index', compact('karyawan'));
     }
 
     public function create()
-    {
-        return view('karyawan.create');
+    {   
+        return view('mo.karyawan.create');
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_telp' => 'required',
-            'email' => 'required',
-            'id_jabatan' => 'required',
+            'nama_karyawan' => 'required',
+            'password' => 'required',
+            'honor_harian' => 'required',
+            'jabatan' => 'required'
         ]);
+        
 
-        try {
+        
             Karyawan::create($request->all());
             return redirect()->route('karyawan.index')->with('success', 'Data berhasil ditambahkan');
-        } catch (Exception $e) {
-            return redirect()->route('karyawan.index')->with('error', 'Data gagal ditambahkan');
-        }
+       
     }
+
+    
 
     public function edit($id)
     {
         $karyawan = Karyawan::find($id);
-        return view('karyawan.edit', compact('karyawan'));
+        return view('mo.karyawan.edit', compact('karyawan'));
     }
 
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required',
-            'alamat' => 'required',
-            'no_telp' => 'required',
-            'email' => 'required',
-            'id_jabatan' => 'required',
+            'nama_karyawan' => 'required',
+            'password' => 'required',
+            'honor_harian' => 'required',
+            'jabatan' => 'required',
         ]);
 
         try {
@@ -63,7 +63,7 @@ class KaryawanController extends Controller
         }
     }
 
-    public function delete($id)
+    public function destroy($id)
     {
         try {
             Karyawan::find($id)->delete();
