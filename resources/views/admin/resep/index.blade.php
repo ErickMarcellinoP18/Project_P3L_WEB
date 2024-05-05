@@ -43,19 +43,19 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Resep</th>
-                                            <th>Jumlah Stok</th>
-                                            
+                                            <th>Kuota Harian</th>
+                                            <th>Action</th>
+
                                         </tr>
                                     </thead>
-                                    
+
                                     <tbody>
                                         @forelse ($resep as $item)
                                             <tr>
 
                                                 <td>{{ $item->nama_resep }}</td>
-                                                <td>{{ $item->jumlah_stok }}</td>
-                                                <td>{{ $item->kuota_harian}} </td>
-                                                
+                                                <td>{{ $item->kuota_harian }} </td>
+
                                                 <td>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                         action="{{ route('resep.destroy', $item->id_resep) }}"

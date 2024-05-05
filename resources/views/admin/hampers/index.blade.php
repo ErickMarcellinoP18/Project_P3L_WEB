@@ -33,6 +33,18 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
                             <a href="{{ route('hampers.create') }}" class="btn btn-md btn-success mb-3">TAMBAH
                                 HAMPERS</a>
                         </div>
@@ -49,23 +61,16 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nama Hampers</th>
-                                            <th>Harga Hampers</th>
-                                            <th>Mulai Promo</th>
-                                            <th>Akhir Promo</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         @forelse ($hampers as $item)
                                             <tr>
 
                                                 <td>{{ $item->nama_hampers }}</td>
-                                                <td>{{ $item->harga_hampers }}</td>
-                                                <td>{{ $item->tgl_mulai_promo }}</td>
-                                                <td>{{ $item->tgl_akhir_promo }}</td>
+                                                <td>Rp. {{ $item->harga_hampers }}</td>
+                                                <td>{{ $item->tgl_mulai_promo ? \Carbon\Carbon::parse($item->tgl_mulai_promo)->format('d-m-Y') : '' }}
+                                                </td>
+                                                <td>{{ $item->tgl_akhir_promo ? \Carbon\Carbon::parse($item->tgl_akhir_promo)->format('d-m-Y') : '' }}
+                                                </td>
                                                 <td>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                         action="{{ route('hampers.destroy', $item->id_hampers) }}"

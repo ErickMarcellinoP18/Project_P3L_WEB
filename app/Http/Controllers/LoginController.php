@@ -33,7 +33,7 @@ class LoginController extends Controller
             } else {
                 Auth::logout();
                 Session::flash('error', 'Akun Anda belum diverifikasi. Silakan cek email Anda.');
-                return redirect('/');
+                return redirect('/login');
             }
         } elseif (Karyawan::where('nama_karyawan', $request->input('email'))->exists()) {
             $karyawan = Karyawan::where('nama_karyawan', $request->input('email'))->first();

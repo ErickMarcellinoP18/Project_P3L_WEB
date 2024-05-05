@@ -36,26 +36,14 @@
                                 <form class="user" action="{{ route('produk.store') }}" method="POST"
                                     enctype="multipart/form-data">
                                     @csrf
-                                    <div class="form-group">
-                                        <label class="font-weight-bold">Nama Produk</label>
-                                        <input type="text"
-                                            class="form-control form-control-user @error('nama_produk') is-invalid @enderror"
-                                            id="InputNamaProduk" placeholder="Nama Produk"
-                                            value="{{ old('nama_produk') }}" name="nama_produk">
-                                        @error('nama_produk')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
-                                            <label class="font-weight-bold">Harga</label>
-                                            <input type="number"
-                                                class="form-control form-control-user @error('harga') is-invalid @enderror"
-                                                id="InputHarga" placeholder="Harga Produk" value="{{ old('harga') }}"
-                                                name="harga">
-                                            @error('harga')
+                                            <label class="font-weight-bold">Nama Produk</label>
+                                            <input type="text"
+                                                class="form-control form-control-user @error('nama_produk') is-invalid @enderror"
+                                                id="InputNamaProduk" placeholder="Nama Produk"
+                                                value="{{ old('nama_produk') }}" name="nama_produk" required>
+                                            @error('nama_produk')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
@@ -66,7 +54,7 @@
                                             <input type="number"
                                                 class="form-control form-control-user @error('jumlah_stok') is-invalid @enderror"
                                                 id="InputJumlahStok" placeholder="Jumlah Stok"
-                                                value="{{ old('jumlah_stok') }}" name="jumlah_stok">
+                                                value="{{ old('jumlah_stok') }}" name="jumlah_stok" required>
                                             @error('jumlah_stok')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -76,6 +64,18 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-sm-6 mb-3 mb-sm-0">
+                                            <label class="font-weight-bold">Harga</label>
+                                            <input type="number"
+                                                class="form-control form-control-user @error('harga') is-invalid @enderror"
+                                                id="InputHarga" placeholder="Harga Produk" value="{{ old('harga') }}"
+                                                name="harga" required>
+                                            @error('harga')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-sm-6">
                                             <label class="font-weight-bold">Porsi</label>
                                             <input type="text"
                                                 class="form-control form-control-user @error('porsi') is-invalid @enderror"
@@ -86,19 +86,36 @@
                                                     {{ $message }}
                                                 </div>
                                             @enderror
+
                                         </div>
-                                        <div class="col-sm-6">
-                                            <label class="font-weight-bold">Kuota PO</label>
+                                    </div>
+                                    <div class="form-group">
+                                        {{-- <label class="font-weight-bold">Kuota PO</label>
                                             <input type="number"
                                                 class="form-control form-control-user @error('kuota_po') is-invalid @enderror"
                                                 id="InputKuotaPO" placeholder="Kuota PO" value="{{ old('kuota_po') }}"
-                                                name="kuota_po">
+                                                name="kuota_po" required>
                                             @error('kuota_po')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
-                                            @enderror
-                                        </div>
+                                            @enderror --}}
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Resep</label>
+                                        <select class="form-control  @error('resep') is-invalid @enderror"
+                                            name="id_resep">
+                                            <option selected disabled value="">Pilih Resep yang Digunakan</option>
+                                            @foreach ($resep as $item)
+                                                <option value="{{ $item->id_resep }}">{{ $item->nama_resep }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('resep')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label class="font-weight-bold">Hampers</label>

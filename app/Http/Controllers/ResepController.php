@@ -23,7 +23,7 @@ class ResepController extends Controller
     {
         $request->validate([
             'nama_resep' => 'required',
-            'jumlah_stok' => 'required',
+            'kuota_harian' => 'required',
         ]);
 
         try {
@@ -43,7 +43,7 @@ class ResepController extends Controller
     {
         $request->validate([
             'nama_resep' => 'required',
-            'jumlah_stok' => 'required',
+            'kuota_harian' => 'required',
         ]);
 
         try {

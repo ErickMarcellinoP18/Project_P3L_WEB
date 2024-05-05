@@ -17,7 +17,6 @@ class Resep extends Model
 
     protected $fillable = [
         'nama_resep',
-        'jumlah_stok',
         'kuota_harian',
     ];
 }

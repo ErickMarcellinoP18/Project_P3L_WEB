@@ -33,6 +33,18 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
                             <a href="{{ route('beliBahan.create') }}" class="btn btn-md btn-success mb-3">TAMBAH
                                 PEMBELIAN BAHAN BAKU</a>
                         </div>
@@ -49,22 +61,14 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nama Bahan Baku</th>
-                                            <th>Harga Bahan Baku</th>
-                                            <th>Kuantitas</th>
-                                            <th>Tanggal Pengeluaran</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         @forelse ($pembelian_bahan_baku as $item)
                                             <tr>
                                                 <td>{{ $item->bahan_baku->nama_bahan }}</td>
-                                                <td>{{ $item->harga_bahan_baku }}</td>
+                                                <td>Rp. {{ $item->harga_bahan_baku }}</td>
                                                 <td>{{ $item->kuantitas }}</td>
-                                                <td>{{ $item->tanggal_pengeluaran }}</td>
+                                                <td>{{ $item->tanggal_pengeluaran ? \Carbon\Carbon::parse($item->tanggal_pengeluaran)->format('d-m-Y') : '' }}
+                                                </td>
                                                 <td>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"
                                                         action="{{ route('beliBahan.destroy', $item->id_bahan_baku) }}"

@@ -85,7 +85,7 @@
                                                 name="id_penitip">
                                                 <option selected disabled>Pilih Penitip</option>
                                                 @foreach ($penitip as $item)
-                                                    <option value="{{ $item->id_prnitip }}"
+                                                    <option value="{{ $item->id_penitip }}"
                                                         {{ $item->id_penitip === $produk->penitip->id_penitip ? 'selected' : '' }}>
                                                         {{ $item->nama_penitip }}
                                                     </option>
@@ -106,10 +106,11 @@
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <label class="font-weight-bold">Kuota PO</label>
                                                 <input type="number"
-                                                    class="form-control form-control-user @error('kuota_po') is-invalid @enderror"
-                                                    id="InputKuotaPO" placeholder="Kuota PO"
-                                                    value="{{ old('kuota_po', $produk->kuota_po) }}" name="kuota_po">
-                                                @error('kuota_po')
+                                                    class="form-control form-control-user @error('kuota_harian') is-invalid @enderror"
+                                                    id="InputKuotaHarian" placeholder="Kuota PO"
+                                                    value="{{ old('kuota_harian', optional($produk->resep)->kuota_harian) }}"
+                                                    name="kuota_harian">
+                                                @error('kuota_harian')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -135,7 +136,7 @@
                                                 <option selected disabled>Pilih Jenis Hampers</option>
                                                 @foreach ($hampers as $item)
                                                     <option value="{{ $item->id_hampers }}"
-                                                        {{ $item->id_hampers === $produk->hampers->id_hampers ? 'selected' : '' }}>
+                                                        {{ $produk->hampers && $item->id_hampers === $produk->hampers->id_hampers ? 'selected' : '' }}>
                                                         {{ $item->nama_hampers }}
                                                     </option>
                                                 @endforeach

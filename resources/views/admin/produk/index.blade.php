@@ -33,6 +33,18 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            @if (session('error'))
+                                <div class="alert alert-danger">
+                                    {{ session('error') }}
+                                </div>
+                            @endif
+
                             <a href="{{ route('produk.create') }}" class="btn btn-md btn-success mb-3">TAMBAH
                                 PRODUK
                                 SENDIRI</a>
@@ -55,18 +67,6 @@
                                             <th>Action</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>Nama Produk</th>
-                                            <th>Hampers / Penitip</th>
-                                            <th>Harga</th>
-                                            <th>Jumlah Stok</th>
-                                            <th>Tipe Produk</th>
-                                            <th>Kuota PO</th>
-                                            <th>Porsi</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         @forelse ($produk as $item)
                                             <tr>
@@ -75,10 +75,10 @@
 
                                                     {{ $item->tipe_produk == 'Asli' && $item->hampers ? $item->hampers->nama_hampers : '' }}
                                                 </td>
-                                                <td>{{ $item->harga }}</td>
+                                                <td>Rp. {{ $item->harga }}</td>
                                                 <td>{{ $item->jumlah_stok }}</td>
                                                 <td>{{ $item->tipe_produk }}</td>
-                                                <td>{{ $item->kuota_po }}</td>
+                                                <td>{{ $item->resep ? $item->resep->kuota_harian : '' }}</td>
                                                 <td>{{ $item->porsi }}</td>
                                                 <td>
                                                     <form onsubmit="return confirm('Apakah Anda Yakin ?');"

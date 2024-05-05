@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 03, 2024 at 02:04 PM
+-- Generation Time: May 05, 2024 at 09:18 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -73,9 +73,9 @@ INSERT INTO `bahan_baku` (`id_bahan_baku`, `nama_bahan`, `stok_bahan`, `satuan`)
 (5, 'susu bubuk', 54352, 'gr'),
 (6, 'tepung terigu', 12397, 'gr'),
 (7, 'garam', 7542, 'gr'),
-(8, 'coklat bubuk', 54298, 'gr'),
+(8, 'coklat bubuk', 54300, 'gr'),
 (9, 'selai strawberry', 7318, 'gr'),
-(10, 'coklat batang', 71358, 'gr'),
+(10, 'coklat batang', 71356, 'gr'),
 (11, 'minyak goreng', 893644, 'ml'),
 (12, 'tepung maizena', 78647, 'gr'),
 (13, 'baking powder', 767, 'gr'),
@@ -83,9 +83,9 @@ INSERT INTO `bahan_baku` (`id_bahan_baku`, `nama_bahan`, `stok_bahan`, `satuan`)
 (15, 'ragi', 343, 'gr'),
 (16, 'susu cair', 89623, 'ml'),
 (17, 'sosis blackpapper', 431, 'buah'),
-(18, 'whipped cream', 632, 'ml'),
+(18, 'whipped cream', 2846, 'ml'),
 (19, 'susu full cream', 3217, 'ml'),
-(20, 'keju mozzarella', 34332, 'gr'),
+(20, 'keju mozzarella', 34564, 'gr'),
 (21, 'creamer', 2342, 'gr'),
 (22, 'matcha bubuk', 452, 'gr'),
 (23, 'box 20x20cm', 300, 'buah'),
@@ -391,9 +391,7 @@ CREATE TABLE `pembelian_bahan_baku` (
 INSERT INTO `pembelian_bahan_baku` (`id_bahan_baku`, `harga_bahan_baku`, `kuantitas`, `tanggal_pengeluaran`) VALUES
 (2, 2334536, 500, '2024-03-25 00:00:00'),
 (3, 2545235, 250, '2024-03-24 00:00:00'),
-(4, 324534, 100, '2024-03-24 00:00:00'),
-(5, 234245, 342, '2024-03-23 00:00:00'),
-(27, 1234, 1234, '1231-03-12 00:00:00');
+(4, 324534, 100, '2024-03-24 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -555,34 +553,33 @@ CREATE TABLE `produk` (
   `harga` int(11) NOT NULL,
   `jumlah_stok` int(11) DEFAULT NULL,
   `tipe_produk` varchar(20) NOT NULL,
-  `porsi` float DEFAULT NULL,
-  `kuota_po` int(11) DEFAULT NULL
+  `porsi` float DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `produk`
 --
 
-INSERT INTO `produk` (`id_produk`, `id_hampers`, `id_resep`, `id_penitip`, `nama_produk`, `harga`, `jumlah_stok`, `tipe_produk`, `porsi`, `kuota_po`) VALUES
-(1, NULL, 1, NULL, 'lapis legit (uk.20x20)', 850000, 0, 'Asli', 1, 3),
-(3, 1, 1, NULL, 'Lapis Legit (uk.10x20)', 450000, 0, 'Asli', 0.5, 3),
-(4, NULL, 2, NULL, 'Lapis Surabaya (uk.20x20)', 550000, 0, 'Asli', 1, 2),
-(5, 2, 2, NULL, 'Lapis Surabaya (uk.10x20)', 300000, 0, 'Asli', 0.5, 1),
-(7, NULL, 3, NULL, 'Brownies (uk.20x20)', 250000, 0, 'Asli', 1, 2),
-(8, 1, 3, NULL, 'Brownies (uk.10x20)', 150000, 0, 'Asli', 0.5, 0),
-(10, NULL, 4, NULL, 'Mandarin  (uk.20x20)', 450000, 0, 'Asli', 1, 3),
-(11, NULL, 4, NULL, 'Madarin (uk.10x20)', 250000, 0, 'Asli', 0.5, 1),
-(12, NULL, 5, NULL, 'Spikoe (uk.20x20)', 350000, 0, 'Asli', 1, 2),
-(13, 4, 5, NULL, 'Spikoe (uk.10x20)', 200000, 0, 'Asli', 0.5, 0),
-(14, 2, 6, NULL, 'Roti Sosis ', 180000, 0, 'Asli', 1, 4),
-(15, NULL, 7, NULL, 'Milk Bun', 120000, 0, 'Asli', 1, 2),
-(16, NULL, 8, NULL, 'Roti Keju', 150000, 0, 'Asli', 1, 3),
-(17, NULL, 9, NULL, 'Choco Creamy Latte', 75000, 0, 'Asli', 1, 1),
-(19, 4, 10, NULL, 'Matcha Creamy Latte', 100000, 0, 'Asli', 1, 0),
-(23, NULL, NULL, 6, 'Keripik Kentang 250 gr', 75000, 50, 'Titipan', 1, 0),
-(24, NULL, NULL, 6, 'Kopi Luwak Bubuk 250 gr', 250000, 25, 'Titipan', 1, 0),
-(26, NULL, NULL, 7, 'Kopi Luwak Bubuk 250 gr', 120000, 25, 'Titipan', 1, 0),
-(27, NULL, NULL, 5, 'Matcha Organik Bubuk 100 gr', 300000, 40, 'Titipan', 1, NULL);
+INSERT INTO `produk` (`id_produk`, `id_hampers`, `id_resep`, `id_penitip`, `nama_produk`, `harga`, `jumlah_stok`, `tipe_produk`, `porsi`) VALUES
+(1, NULL, 1, NULL, 'lapis legit (uk.20x20)', 850000, 0, 'Asli', 1),
+(3, 1, 1, NULL, 'Lapis Legit (uk.10x20)', 450000, 0, 'Asli', 0.5),
+(4, NULL, 2, NULL, 'Lapis Surabaya (uk.20x20)', 550000, 0, 'Asli', 1),
+(5, 2, 2, NULL, 'Lapis Surabaya (uk.10x20)', 300000, 0, 'Asli', 0.5),
+(7, NULL, 3, NULL, 'Brownies (uk.20x20)', 250000, 0, 'Asli', 1),
+(8, 1, 3, NULL, 'Brownies (uk.10x20)', 150000, 0, 'Asli', 0.5),
+(10, NULL, 4, NULL, 'Mandarin  (uk.20x20)', 450000, 0, 'Asli', 1),
+(11, NULL, 4, NULL, 'Madarin (uk.10x20)', 250000, 0, 'Asli', 0.5),
+(12, NULL, 5, NULL, 'Spikoe (uk.20x20)', 350000, 0, 'Asli', 1),
+(13, 4, 5, NULL, 'Spikoe (uk.10x20)', 200000, 0, 'Asli', 0.5),
+(14, 2, 6, NULL, 'Roti Sosis ', 180000, 0, 'Asli', 1),
+(15, NULL, 7, NULL, 'Milk Bun', 120000, 0, 'Asli', 1),
+(16, NULL, 8, NULL, 'Roti Keju', 150000, 0, 'Asli', 1),
+(17, NULL, 9, NULL, 'Choco Creamy Latte', 75000, 0, 'Asli', 1),
+(19, 4, 10, NULL, 'Matcha Creamy Latte', 100000, 0, 'Asli', 1),
+(23, NULL, NULL, 6, 'Keripik Kentang 250 gr', 75000, 50, 'Titipan', 1),
+(24, NULL, NULL, 6, 'Kopi Luwak Bubuk 250 gr', 250000, 25, 'Titipan', 1),
+(26, NULL, NULL, 7, 'Kopi Luwak Bubuk 250 gr', 120000, 25, 'Titipan', 1),
+(27, NULL, NULL, 5, 'Matcha Organik Bubuk 100 gr', 300000, 40, 'Titipan', 1);
 
 -- --------------------------------------------------------
 
@@ -615,7 +612,6 @@ INSERT INTO `promo_poin` (`id_promo`, `kelipatan`, `besar_poin`) VALUES
 CREATE TABLE `resep` (
   `id_resep` int(11) NOT NULL,
   `nama_resep` varchar(30) NOT NULL,
-  `jumlah_stok` float DEFAULT NULL,
   `kuota_harian` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -623,17 +619,17 @@ CREATE TABLE `resep` (
 -- Dumping data for table `resep`
 --
 
-INSERT INTO `resep` (`id_resep`, `nama_resep`, `jumlah_stok`, `kuota_harian`) VALUES
-(1, 'lapis legit', 0, 10),
-(2, 'lapis surabaya', 0, 20),
-(3, 'brownies', 0.5, 30),
-(4, 'mandarin', 0, 20),
-(5, 'spikoe', 0, 40),
-(6, 'roti sosis', 0, 40),
-(7, 'milk bun', 0, 40),
-(8, 'roti keju', 0, 40),
-(9, 'choco creamy latte', 0.5, 50),
-(10, 'matcha creamy latte', 0, 50);
+INSERT INTO `resep` (`id_resep`, `nama_resep`, `kuota_harian`) VALUES
+(1, 'lapis legit', 10),
+(2, 'lapis surabaya', 40),
+(3, 'brownies', 30),
+(4, 'mandarin', 20),
+(5, 'spikoe', 30),
+(6, 'roti sosis', 40),
+(7, 'milk bun', 40),
+(8, 'roti keju', 40),
+(9, 'choco creamy latte', 50),
+(10, 'matcha creamy latte', 50);
 
 -- --------------------------------------------------------
 
@@ -655,7 +651,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('UkpQV8UNou1GTB25XSRtNqi76Z9f9bEv26bSeA40', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicjhrN3dGZm12WU5nUkkxZHNjRnZyVmdYaDZrNWs3TFRMd1l1UEpxWiI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mjg6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wcm9kdWsiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1714737814);
+('KBviKGXh0S9pSC1Xu6DjpIlSxBUNB2dzxYB0To9R', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR2R3WWcweExHc3RFcXJQU0ZONzFhUDdQNTh5YUpra1FJdU94MHRQOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9iZWxpQmFoYW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1714936720);
 
 -- --------------------------------------------------------
 
@@ -908,7 +904,7 @@ ALTER TABLE `presensi`
 -- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
-  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_produk` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `promo_poin`
@@ -942,15 +938,15 @@ ALTER TABLE `alamat`
 -- Constraints for table `detail_resep`
 --
 ALTER TABLE `detail_resep`
-  ADD CONSTRAINT `fk_bahanbaku` FOREIGN KEY (`id_bahan_baku`) REFERENCES `bahan_baku` (`id_bahan_baku`),
-  ADD CONSTRAINT `fk_resep_detail` FOREIGN KEY (`id_resep`) REFERENCES `resep` (`id_resep`);
+  ADD CONSTRAINT `fk_bahanbaku` FOREIGN KEY (`id_bahan_baku`) REFERENCES `bahan_baku` (`id_bahan_baku`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_resep_detail` FOREIGN KEY (`id_resep`) REFERENCES `resep` (`id_resep`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `detil_pesanan`
 --
 ALTER TABLE `detil_pesanan`
-  ADD CONSTRAINT `fk_pesanan_detil` FOREIGN KEY (`no_nota`) REFERENCES `pesanan` (`no_nota`),
-  ADD CONSTRAINT `fk_produk` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`);
+  ADD CONSTRAINT `fk_pesanan_detil` FOREIGN KEY (`no_nota`) REFERENCES `pesanan` (`no_nota`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_produk` FOREIGN KEY (`id_produk`) REFERENCES `produk` (`id_produk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `detil_poin`

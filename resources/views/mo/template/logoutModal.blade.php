@@ -18,7 +18,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="{{ url('loginAdmin') }}">Logout</a>
+                    <a class="btn btn-primary" href="{{ url('/login') }}">Logout</a>
                 </div>
             </div>
         </div>

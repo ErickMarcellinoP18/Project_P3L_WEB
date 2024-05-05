@@ -40,8 +40,8 @@
                                         <label class="font-weight-bold">Nama Resep</label>
                                         <input type="text"
                                             class="form-control form-control-user @error('nama_resep') is-invalid @enderror"
-                                            id="InputNamaResep" placeholder="Nama Resep"
-                                            value="{{ old('nama_resep') }}" name="nama_resep">
+                                            id="InputNamaResep" placeholder="Nama Resep" value="{{ old('nama_resep') }}"
+                                            name="nama_resep">
                                         @error('nama_resep')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -50,12 +50,12 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="font-weight-bold">Jumlah Stok</label>
+                                        <label class="font-weight-bold">Kuota Harian</label>
                                         <input type="number"
-                                            class="form-control form-control-user @error('jumlah_stok') is-invalid @enderror"
-                                            id="InputJumlahStokResep" placeholder="Jumlah Stok"
-                                            value="{{ old('jumlah_stok') }}" name="jumlah_stok">
-                                        @error('jumlah_stok')
+                                            class="form-control form-control-user @error('kuota_harian') is-invalid @enderror"
+                                            id="InputKuotaHarian" placeholder="Kuota Harian"
+                                            value="{{ old('kuota_harian') }}" name="kuota_harian">
+                                        @error('kuota_harian')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -65,7 +65,7 @@
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Save
                                     </button>
-                                    
+
                                 </form>
 
                             </div>

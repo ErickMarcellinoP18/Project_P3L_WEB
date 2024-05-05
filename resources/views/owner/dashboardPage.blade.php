@@ -3,7 +3,7 @@
 
 <head>
     <title>Atma Kitchen - Dashboard</title>
-    @include('admin.template.head')
+    @include('owner.template.head')
 </head>
 
 <body id="page-top">
@@ -12,7 +12,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        @include('admin.template.left-sidebar')
+        @include('owner.template.left-sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -22,7 +22,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('admin.template.navbar')
+                @include('owner.template.navbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -129,7 +129,7 @@
             <!-- End of Main Content -->
 
             <!-- Footer -->
-            @include('admin.template.footer')
+            @include('owner.template.footer')
             <!-- End of Footer -->
 
         </div>
@@ -138,9 +138,9 @@
     </div>
     <!-- End of Page Wrapper -->
 
-    @include('admin.template.logoutModal')
+    @include('owner.template.logoutModal')
 
-    @include('admin.template.script')
+    @include('owner.template.script')
 
 </body>
 

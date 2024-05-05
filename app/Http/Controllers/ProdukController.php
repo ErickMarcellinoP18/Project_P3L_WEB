@@ -7,6 +7,7 @@ use Exception;
 use App\Models\Produk;
 use App\Models\Penitip;
 use App\Models\Hampers;
+use App\Models\Resep;
 
 
 class ProdukController extends Controller
@@ -21,7 +22,8 @@ class ProdukController extends Controller
     public function create()
     {
         $hampers = Hampers::all();
-        return view('admin.produk.create', compact('hampers'));
+        $resep = Resep::all();
+        return view('admin.produk.create', compact('hampers', 'resep'));
     }
 
     public function createTitipan()
@@ -53,7 +55,8 @@ class ProdukController extends Controller
         $produk = Produk::find($id);
         $penitip = Penitip::all();
         $hampers = Hampers::all();
-        return view('admin.produk.edit', compact('produk', 'penitip', 'hampers'));
+        $resep = Resep::all();
+        return view('admin.produk.edit', compact('produk', 'penitip', 'hampers', 'resep'));
     }
 
     public function update(Request $request, $id)
@@ -66,7 +69,12 @@ class ProdukController extends Controller
         ]);
 
         try {
-            Produk::find($id)->update($request->all());
+            $produk = Produk::find($id);
+            $produk->update($request->all());
+
+            $produk->resep->kuota_harian = $request->kuota_harian;
+            $produk->resep->save();
+
             return redirect()->route('produk.index')->with('success', 'Data berhasil diubah');
         } catch (Exception $e) {
             return redirect()->route('produk.index')->with('error', 'Data gagal diubah');

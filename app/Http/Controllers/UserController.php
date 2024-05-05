@@ -11,18 +11,18 @@ use App\Models\Pesanan;
 class UserController extends Controller
 {
     use HasFactory;
-   
+
     public function adminindex()
     {
-        
+
         $pesanan = Pesanan::join('users', 'users.id', '=', 'pesanan.id_customer')
             ->select('users.*', 'pesanan.*')
             ->get();
 
-        
 
-        
-        
+
+
+
         return view('admin.dataCustomer.index', compact('pesanan'));
     }
 
@@ -56,7 +56,7 @@ class UserController extends Controller
     }
 
 
-    
+
 
     // public function update(Request $request, $id)
     // {

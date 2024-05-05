@@ -48,6 +48,12 @@ class PembelianBahanBakuController extends Controller
     {
         $pembelian_bahan_baku = Pembelian_bahan_baku::find($id);
         $bahan_baku = Bahan_baku::all();
+
+        // Periksa apakah pembaharuan dilakukan pada tanggal yang sama dengan tanggal pengeluaran
+        if (Carbon::parse($pembelian_bahan_baku->tanggal_pengeluaran)->format('Y-m-d') != now()->format('Y-m-d')) {
+            return redirect()->route('beliBahan.index')->with('error', 'Data hanya dapat diubah pada saat tanggal pengeluaran');
+        }
+
         return view('mo.beliBahan.edit', compact('pembelian_bahan_baku', 'bahan_baku'));
     }
 
@@ -64,11 +70,6 @@ class PembelianBahanBakuController extends Controller
             // Temukan pembelian dengan id yang diberikan
             $pembelian = Pembelian_bahan_baku::find($id);
 
-            // Periksa apakah pembaharuan dilakukan pada tanggal yang sama dengan tanggal pengeluaran
-            if (Carbon::parse($pembelian->tanggal_pengeluaran)->format('Y-m-d') != now()->format('Y-m-d')) {
-                return redirect()->route('beliBahan.index')->with('error', 'Data hanya dapat diubah pada tanggal pengeluaran');
-            }
-
             // Hitung perbedaan kuantitas
             $oldQuantity = $pembelian->kuantitas;
             $newQuantity = $request->kuantitas;
@@ -81,6 +82,7 @@ class PembelianBahanBakuController extends Controller
             $beli = Bahan_baku::find($pembelian->id_bahan_baku);
             $beli->stok_bahan += $quantityDifference;
             $beli->save();
+
 
             // Kembalikan ke halaman index dengan pesan sukses
             return redirect()->route('beliBahan.index')->with('success', 'Data berhasil diubah');
@@ -99,7 +101,7 @@ class PembelianBahanBakuController extends Controller
 
             // Periksa apakah tanggal penghapusan sama dengan tanggal pengeluaran
             if (Carbon::parse($pembelian->tanggal_pengeluaran)->format('Y-m-d') != now()->format('Y-m-d')) {
-                return redirect()->route('beliBahan.index')->with('error', 'Hanya bisa menghapus pada tanggal pengeluaran');
+                return redirect()->route('beliBahan.index')->with('error', 'Hanya bisa menghapus pada saat tanggal pengeluaran');
             }
 
             // Temukan produk yang terkait

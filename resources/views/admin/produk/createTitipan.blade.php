@@ -41,7 +41,7 @@
                                         <input type="text"
                                             class="form-control form-control-user @error('nama_produk') is-invalid @enderror"
                                             id="InputNamaProduk" placeholder="Nama Produk"
-                                            value="{{ old('nama_produk') }}" name="nama_produk">
+                                            value="{{ old('nama_produk') }}" name="nama_produk" required>
                                         @error('nama_produk')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -54,7 +54,7 @@
                                             <input type="number"
                                                 class="form-control form-control-user @error('harga') is-invalid @enderror"
                                                 id="InputHarga" placeholder="Harga Produk" value="{{ old('harga') }}"
-                                                name="harga">
+                                                name="harga" required>
                                             @error('harga')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -66,7 +66,8 @@
                                             <input type="number"
                                                 class="form-control form-control-user @error('jumlah_stok') is-invalid @enderror"
                                                 id="InputJumlahStok" placeholder="Jumlah Stok"
-                                                value="{{ old('jumlah_stok') }}" name="jumlah_stok" min="1">
+                                                value="{{ old('jumlah_stok') }}" name="jumlah_stok" min="1"
+                                                required>
                                             @error('jumlah_stok')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -77,7 +78,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-bold">Penitip</label>
                                         <select class="form-control  @error('nama_penitip') is-invalid @enderror"
-                                            name="id_penitip">
+                                            name="id_penitip" required>
                                             <option selected disabled value="">Pilih Penitip</option>
                                             @foreach ($penitip as $item)
                                                 <option value="{{ $item->id_penitip }}">{{ $item->nama_penitip }}

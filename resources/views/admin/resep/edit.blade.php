@@ -33,8 +33,8 @@
                                 <div class="text-center">
                                     <h1 class="h4 text-gray-900 mb-4">Add Resep</h1>
                                 </div>
-                                <form class="user" action="{{ route('resep.update', $resep->id_resep) }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form class="user" action="{{ route('resep.update', $resep->id_resep) }}"
+                                    method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="form-group">
@@ -51,12 +51,12 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="font-weight-bold">Jumlah Stok</label>
+                                        <label class="font-weight-bold">Kuota Harian</label>
                                         <input type="number"
-                                            class="form-control form-control-user @error('jumlah_stok') is-invalid @enderror"
-                                            id="InputJumlahStokResep" placeholder="Jumlah Stok"
-                                            value="{{ old('jumlah_stok', $resep->jumlah_stok) }}" name="jumlah_stok">
-                                        @error('jumlah_stok')
+                                            class="form-control form-control-user @error('kuota_harian') is-invalid @enderror"
+                                            id="InputKuotaHarian" placeholder="Kuota Harian"
+                                            value="{{ old('kuota_harian', $resep->kuota_harian) }}" name="kuota_harian">
+                                        @error('kuota_harian')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -66,7 +66,7 @@
                                     <button type="submit" class="btn btn-primary btn-user btn-block">
                                         Save
                                     </button>
-                                    
+
                                 </form>
 
                             </div>
