@@ -9,6 +9,8 @@ class Detil_pesanan extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+    public $table = 'detil_pesanan';
     protected $fillable = [
         'no_nota',
         'id_produk',

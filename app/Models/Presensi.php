@@ -9,6 +9,8 @@ class Presensi extends Model
 {
     use HasFactory;
 
+    
+
     protected $fillable = [
         'id_karyawan',
         'tanggal_presensi',

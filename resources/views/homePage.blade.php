@@ -35,7 +35,7 @@
 
         <div class="icons">
             <div id="cart-btn" class="fas fa-shopping-cart"></div>
-            <div id="profile-btn" onclick="window.location.href='{{ url('login') }}'" class="fas fa-user"></div>
+            <div id="profile-btn" onclick="window.location.href='{{ route('user.userProfile') }}'" class="fas fa-user"></div>
             @if (Auth::check())
                 <div id="logout-btn" onclick="window.location.href='<?php echo route('actionLogout'); ?>'" class="fas fa-sign-out-alt">
                 </div>

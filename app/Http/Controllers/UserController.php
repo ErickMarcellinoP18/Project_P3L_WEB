@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Exception;
 use App\Models\User;
 use App\Models\Pesanan;
+use App\Models\Detil_pesanan;
 
 class UserController extends Controller
 {
@@ -85,4 +86,32 @@ class UserController extends Controller
     //         return redirect()->route('user.index')->with('error', 'Data gagal dihapus');
     //     }
     // }
+
+    public function userProfile()
+    {
+        $user = auth()->user();
+        return view('userProfile', compact('user'));
+    }
+
+    public function update(Request $request, $id)
+    {
+            User::find($id)->update($request->all());
+            return redirect()->route('user.userProfile')->with('success', 'Data berhasil diubah');
+        
+    }
+
+    public function historypesanan($id)
+    {   
+        
+        $pesanan = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
+            ->join('pesanan', 'pesanan.no_nota', '=', 'detil_pesanan.no_nota')
+            ->select('produk.*', 'detil_pesanan.*', 'pesanan.*')
+            ->where('pesanan.id_customer', $id)
+            ->get();
+        
+       
+        return view('historyPemesananUser', compact('pesanan'));
+    }
+
+   
 }

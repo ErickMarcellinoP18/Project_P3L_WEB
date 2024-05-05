@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2024 at 09:18 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 05, 2024 at 10:16 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -651,6 +651,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
+('HC8xICyNtHaXbPkzu27uDIjdanZkbPrKaLddZSmd', 2, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:125.0) Gecko/20100101 Firefox/125.0', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiNE9PZU5rRHNlNzZiU2dDSGdIZGhrbk9uUWFkcnY3anZsU1lqemI5MSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyUHJvZmlsZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjI7fQ==', 1714940124),
 ('KBviKGXh0S9pSC1Xu6DjpIlSxBUNB2dzxYB0To9R', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiR2R3WWcweExHc3RFcXJQU0ZONzFhUDdQNTh5YUpra1FJdU94MHRQOSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9iZWxpQmFoYW4iO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1714936720);
 
 -- --------------------------------------------------------
@@ -664,7 +665,7 @@ CREATE TABLE `users` (
   `name` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
-  `ulang_tahun` datetime DEFAULT NULL,
+  `ulang_tahun` date DEFAULT NULL,
   `saldo` int(11) NOT NULL DEFAULT 0,
   `verify_key` varchar(255) NOT NULL,
   `active` int(11) DEFAULT NULL,
@@ -673,6 +674,13 @@ CREATE TABLE `users` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `password`, `email`, `ulang_tahun`, `saldo`, `verify_key`, `active`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'Klasik', '$2y$12$Ll8i2GfRNPs.uPDVf5Bmgu5o7.I2YI1wDTqQqtgFxcv7qxRflV5MO', 'taidiklasik@gmail.com', '2024-05-08', 0, 'q3KSvMXTdMfi7mL6aSxx0koDYjLqUHsdpQ60w2VtI5f1uMPCpxbK8LBi5qkoIT4mfLbFVHtVighI9Sahlx7d6qiwn2RQH8DHgulD', 1, NULL, NULL, '2024-05-05 20:11:34', '2024-05-05 20:12:51');
 
 --
 -- Indexes for dumped tables
@@ -922,7 +930,7 @@ ALTER TABLE `resep`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

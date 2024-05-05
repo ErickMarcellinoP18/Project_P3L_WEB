@@ -99,6 +99,11 @@ Route::post('/reset-password', function (Request $request) {
 })->middleware('guest')->name('password.update');
 
 
+Route::resource('/user', UserController::class);
+Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile' )->name('user.userProfile');
+Route::get('/userProfile/{id}/HistoryPemesanan', 'App\Http\Controllers\UserController@historypesanan' )->name('user.historypesanan');
+
+
 Route::get("/customer_admin", 'App\Http\Controllers\UserController@adminindex')->name('customer_admin.index');
 Route::get('/produk/createTitipan', 'App\Http\Controllers\ProdukController@createTitipan')->name('produk.createTitipan');
 Route::resource('/produk', ProdukController::class);
