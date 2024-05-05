@@ -39,7 +39,7 @@
                 <span>use your email password</span>
                 <input class="form-control" type="text" name="email" placeholder="Email" required>
                 <input class="form-control" type="password" name="password" placeholder="Password" required>
-                <a href="#">Forget Your Password?</a>
+                <a href="/forgot-password">Forget Your Password?</a>
                 <button type="submit">Sign In</button>
             </form>
         </div>
