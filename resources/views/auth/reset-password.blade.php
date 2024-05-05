@@ -80,13 +80,17 @@
             @endif
             <form method="POST" action="{{ route('password.update') }}">
                 @csrf
-                <input type="hidden" name="token" value="{{request()->token}}">
-                <input type="hidden" name="email" value="{{request()->email}}">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" name="password">
-                <label for="password_confirmation" class="form-label">Password Confirmation</label>
-                <input type="password" class="form-control" name="password_confirmation">
-                <input type="submit" value="Update Password" class="btn btn-primary w-100 mt-3">
+                <div>
+                    <input type="hidden" name="token" value="{{request()->token}}">
+                    <input type="hidden" name="email" value="{{request()->email}}">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" name="password">
+                </div>
+                <div>
+                    <label for="password_confirmation" class="form-label">Repeat</label>
+                    <input type="password" class="form-control" name="password_confirmation">
+                    <input type="submit" value="Update Password" class="btn btn-primary w-100 mt-3">
+                </div>
             </form>
         </div>
     </div>
