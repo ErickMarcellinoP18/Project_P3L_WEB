@@ -27,20 +27,24 @@
 
         <nav class="navbar">
             <a href="#home">home</a>
-            <a href="#about">informasi dasar</a>
+            <a href="#about">about</a>
             <a href="#product">produk</a>
             <a href="#gallery">foto</a>
-            <a href="#team">team</a>
-            <a href="#review">review</a>
             <a href="#order">pesan</a>
         </nav>
 
         <div class="icons">
             <div id="cart-btn" class="fas fa-shopping-cart"></div>
-            <div id="login-btn" onclick="window.location.href='{{ url('login') }}'" class="fas fa-user"></div>
+            <div id="profile-btn" onclick="window.location.href='{{ url('login') }}'" class="fas fa-user"></div>
+            @if (Auth::check())
+                <div id="logout-btn" onclick="window.location.href='<?php echo route('actionLogout'); ?>'" class="fas fa-sign-out-alt">
+                </div>
+            @else
+                <div id="login-btn" onclick="window.location.href='{{ url('login') }}'" class="fas fa-sign-in-alt">
+                </div>
+            @endif
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
-
     </header>
 
     <!-- header end -->
@@ -141,7 +145,8 @@
 
             <div class="content">
                 <h3>good things come to those <span>who bake </span> for others</h3>
-                <p>welcome to our website folks! we are here to make happiness with the taste and pride of our special cake!</p>
+                <p>welcome to our website folks! we are here to make happiness with the taste and pride of our special
+                    cake!</p>
                 <p>cake is a special food for us to enjoy life and make our life sweeter!</p>
                 <a href="#" class="btn">read more</a>
             </div>
@@ -332,7 +337,9 @@
             <div class="box">
                 <div class="content">
                     <h3>chocolate cake</h3>
-                    <p>It's a special Chocolate cake! It's has a very special secret ingridients, and used imported chocolate from North Korea that approve from the great leader Kim Jong Un. He likes it very much so don't you.</p>
+                    <p>It's a special Chocolate cake! It's has a very special secret ingridients, and used imported
+                        chocolate from North Korea that approve from the great leader Kim Jong Un. He likes it very much
+                        so don't you.</p>
                 </div>
 
                 <img src="images/promotion1.png" alt="">
@@ -342,7 +349,8 @@
                 <img src="images/promotion2.png" alt="">
                 <div class="content">
                     <h3>nut cake</h3>
-                    <p>This is a nut cake that's win the best cake award from north korea. this is the one and only cake that the great leader always order almost 4 times a week.</p>
+                    <p>This is a nut cake that's win the best cake award from north korea. this is the one and only cake
+                        that the great leader always order almost 4 times a week.</p>
                 </div>
 
             </div>
@@ -352,65 +360,6 @@
     </section>
 
     <!-- weekly promotions ends -->
-
-    <!-- team -->
-
-    <section class="team" id="team">
-
-        <h1 class="heading">our <span>team</span></h1>
-
-        <div class="box-container">
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/team-1.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>erica lacy</h3>
-                    <p>CEO</p>
-                    <div class="share">
-                        <i class="fab fa-facebook-f"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/team-2.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>doe lacy</h3>
-                    <p>manager</p>
-                    <div class="share">
-                        <i class="fab fa-facebook-f"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/team-3.png" alt="">
-                </div>
-                <div class="content">
-                    <h3>john lacy</h3>
-                    <p>manager</p>
-                    <div class="share">
-                        <i class="fab fa-facebook-f"></i>
-                        <i class="fab fa-twitter"></i>
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- team -->
 
     <!-- parallax -->
 
@@ -459,62 +408,6 @@
 
     <!-- parallax -->
 
-    <!-- review -->
-
-    <section class="review" id="review">
-
-        <h1 class="heading"> customer's <span>review</span> </h1>
-
-        <div class="box-container">
-
-            <div class="box">
-                <img src="images/review-1.png" class="user" alt="">
-                <h3>lacy deo</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt qui architecto fuga, voluptatum a
-                    deleniti nostrum rerum illum quidem cupiditate odio perspiciatis.</p>
-            </div>
-
-            <div class="box">
-                <img src="images/review-2.png" class="user" alt="">
-                <h3>lacy deo</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt qui architecto fuga, voluptatum a
-                    deleniti nostrum rerum illum quidem cupiditate odio perspiciatis.</p>
-            </div>
-
-            <div class="box">
-                <img src="images/review-3.png" class="user" alt="">
-                <h3>lacy deo</h3>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star-half-alt"></i>
-                </div>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt qui architecto fuga, voluptatum a
-                    deleniti nostrum rerum illum quidem cupiditate odio perspiciatis.</p>
-            </div>
-
-        </div>
-
-    </section>
-
-    <!-- review -->
-
     <!-- order -->
 
     <section class="order" id="order">
@@ -561,8 +454,9 @@
         <div class="box-container">
 
             <div class="box">
-                <h3>address</h3>
-                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias sit debitis.</p>
+                <h3>alamat</h3>
+                <p>Jl. Babarsari No.43, Janti, Caturtunggal, Kec. Depok, Kabupaten Sleman, DIY
+                </p>
                 <div class="share">
                     <a href="#" class="fab fa-facebook-f"></a>
                     <a href="#" class="fab fa-twitter"></a>
@@ -573,8 +467,8 @@
 
             <div class="box">
                 <h3>E-mail</h3>
-                <a href="#" class="link">ninjashub4@gmail.com</a>
-                <a href="#" class="link">ninjashub4@gmail.com</a>
+                <a href="#" class="link">taidiklasik@gmail.com</a>
+                <a href="#" class="link">elluygabrielp@gmail.com</a>
             </div>
 
             <div class="box">
@@ -586,12 +480,12 @@
 
             <div class="box">
                 <h3> opening hours</h3>
-                <p>Monday - Friday: 9:00 - 23:00 <br> Saturday: 8:00 - 24:00 </p>
+                <p>Senin - Jumat: 9:00 - 23:00 <br> Sabtu: 8:00 - 24:00 </p>
             </div>
 
         </div>
 
-        <div class="credit">created by <span>ninjashub</span> all rights reserved! </div>
+        <div class="credit">created by <span>Atma Kitchen</span> all rights reserved! </div>
 
     </section>
 
