@@ -13,13 +13,20 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form>
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
+
+            <form method="post" action="{{ route('actionRegister') }}">
+                @csrf
                 <h1>Create Account</h1>
-                <span>use your email for registeration</span>
-                <input type="text" placeholder="Name">
-                <input type="email" placeholder="Email">
-                <input type="password" placeholder="Password">
-                <button>Sign Up</button>
+                <span>use your email for registration</span>
+                <input class="form-control" type="text" name="name" placeholder="Name" required>
+                <input class="form-control" type="email" name="email" placeholder="Email" required>
+                <input class="form-control" type="password" name="password" placeholder="Password" required>
+                <button type="submit">Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">

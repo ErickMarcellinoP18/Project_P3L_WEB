@@ -14,21 +14,26 @@ class MailSend extends Mailable
 
     /**
      * Create a new message instance.
+     * @return void
      */
     public function __construct($details)
     {
         $this->details = $details;
     }
-    
-    //Kalau mau kasih attachment
-     public function attachments()
-     {
+
+    /**
+     * Get the attachments for the message.
+     *
+     * @return array
+     */
+    public function attachments()
+    {
         return [];
-     }
+    }
 
     public function build()
     {
-        return $this->subject('Verifikasi Akun')
-                    ->view('mailTemplate');
+        return $this->subject('verifikasi akun')
+            ->view('mailTemplate');
     }
 }

@@ -18,7 +18,7 @@ use App\Http\Controllers\KaryawanController;
 
 
 Route::get('/', function () {
-    return view('mo/dashboardPage');
+    return view('/homePage');
 });
 
 //Login
@@ -29,8 +29,8 @@ Route::post('actionLogin', [LoginController::class, 'actionLogin'])->name('actio
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
 Route::get('home ', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('actionRegister', [RegisterController::class, 'actionRegister'])->name('actionRegister');
+Route::get('register', [RegisterController::class, 'register'])->name('register');
+Route::post('register/action', [RegisterController::class, 'actionRegister'])->name('actionRegister');
 Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify'])->name('verify');
 
 
@@ -38,7 +38,7 @@ Route::get('/admin', function () {
     return view('admin/dashboardPage');
 });
 
-Route::get('/mo', function(){
+Route::get('/mo', function () {
     return view('mo/dashboardPage');
 });
 
@@ -54,9 +54,9 @@ Route::get('/produk/createTitipan', 'App\Http\Controllers\ProdukController@creat
 Route::resource('/produk', ProdukController::class);
 Route::resource('/hampers', HampersController::class);
 Route::resource('/beliBahan', PembelianBahanBakuController::class);
-Route:: resource('/bahan_baku', BahanBakuController::class);
+Route::resource('/bahan_baku', BahanBakuController::class);
 Route::resource('/customer_admin', UserController::class);
-Route::resource('/penitip',PenitipController::class);
+Route::resource('/penitip', PenitipController::class);
 Route::resource('/pengeluaran_lain', PengeluaranLainController::class);
 Route::resource('/karyawan', KaryawanController::class);
 Route::resource('/resep', ResepController::class);

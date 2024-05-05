@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Mail\MailSend;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -21,44 +21,42 @@ class RegisterController extends Controller
     {
         $str = Str::random(100);
         $user = User::create([
+            'email' => $request->email,
             'name' => $request->name,
             'password' => Hash::make($request->password),
-            'email' => $request->email,
             'saldo' => 0,
             'verify_key' => $str,
         ]);
 
         $details = [
-            'username' => $request->name,
+            'name' => $request->name,
             'website' => 'Atma Kitchen',
-            'datetime' => date('Y-m-d H:i:s'),
-            'url' => request()->getHttpHost() . 'register/verify/' . $str,
+            'datetime' => date('Y-m-d H:i:s'), // Use Laravel's built-in date function
+            'url' => request()->getHttpHost() . '/register/verify/' . $str
         ];
 
         Mail::to($request->email)->send(new MailSend($details));
 
-        Session::flash('Pesan', 'Silakan cek email Anda untuk verifikasi akun .');
-        return view('loginPage');
+        Session::flash('message', 'Link verifikasi telah dikirim ke email Anda. Silakan cek email Anda untuk mengaktifkan akun.');
+        return redirect('/register');
     }
 
     public function verify($verify_key)
     {
         $keyCheck = User::select('verify_key')
-        ->where('verify_key', $verify_key)
-        ->exists();
+            ->where('verify_key', $verify_key)
+            ->exists();
 
         if ($keyCheck) {
             $user = User::where('verify_key', $verify_key)
-            ->update([
-                'active' => 1,
-                'email_verified_at' => date('Y-m-d H:i:s'),
-            ]);
+                ->update([
+                    'active' => 1,
+                    'email_verified_at' => date('Y-m-d H:i:s'), // Use Laravel's built-in date function
+                ]);
 
-            
-            return "Akun Anda telah diverifikasi. Silakan login.";
+            return "Verifikasi berhasil. Akun Anda sudah aktif.";
         } else {
-            
-            return "Verifikasi gagal. Silakan coba lagi.";
+            return "Kunci tidak valid.";
         }
     }
 }
