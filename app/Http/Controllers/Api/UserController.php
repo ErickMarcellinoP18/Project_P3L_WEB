@@ -115,8 +115,10 @@ class UserController extends Controller
     {
         try {
             $authenticationData = $request->only('username', 'password');
-            $userLogin = User::where('name', $authenticationData['username'])->where('password', $authenticationData['password'])->first();
-            if (!$userLogin) throw new \Exception("Login Invalid");
+            $userLogin = User::where('name', $authenticationData['username'])->first();
+            if (!$userLogin || !password_verify($authenticationData['password'], $userLogin->password)) {
+                throw new \Exception("Login Invalid");
+            }
             return response()->json([
                 "status" => true,
                 "message" => 'Berhasil Login',
@@ -130,6 +132,7 @@ class UserController extends Controller
             ], 400);
         }
     }
+
 
     public function resetPassword(Request $request)
     {
