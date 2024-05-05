@@ -22,17 +22,17 @@
 
     <header class="header">
         <a href="#" class="logo">
-            <img src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 20px; width: 20px;">
+            <img src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 75px; width: 75px;">
         </a>
 
         <nav class="navbar">
             <a href="#home">home</a>
-            <a href="#about">about</a>
-            <a href="#product">product</a>
-            <a href="#gallery">gallery</a>
+            <a href="#about">informasi dasar</a>
+            <a href="#product">produk</a>
+            <a href="#gallery">foto</a>
             <a href="#team">team</a>
             <a href="#review">review</a>
-            <a href="#order">order</a>
+            <a href="#order">pesan</a>
         </nav>
 
         <div class="icons">
@@ -57,7 +57,7 @@
             <img src="images/cart-1.jpg" alt="">
             <div class="content">
                 <h3>bakery item 1</h3>
-                <div class="price">$45.99/-</div>
+                <div class="Harga">Rp.150.000/-</div>
             </div>
         </div>
 
@@ -66,7 +66,7 @@
             <img src="images/cart-2.jpg" alt="">
             <div class="content">
                 <h3>bakery item 2</h3>
-                <div class="price">$15.99/-</div>
+                <div class="price">Rp.15.999/-</div>
             </div>
         </div>
 
@@ -75,7 +75,7 @@
             <img src="images/cart-3.jpg" alt="">
             <div class="content">
                 <h3>bakery item 3</h3>
-                <div class="price">$29.99/-</div>
+                <div class="price">Rp.29.999/-</div>
             </div>
         </div>
 
@@ -141,10 +141,8 @@
 
             <div class="content">
                 <h3>good things come to those <span>who bake </span> for others</h3>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit veritatis sunt id modi quis in eveniet
-                    at! Vero iusto excepturi.</p>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quisquam molestiae maxime quibusdam rem
-                    necessitatibus optio maiores fugiat. Pariatur molestiae.</p>
+                <p>welcome to our website folks! we are here to make happiness with the taste and pride of our special cake!</p>
+                <p>cake is a special food for us to enjoy life and make our life sweeter!</p>
                 <a href="#" class="btn">read more</a>
             </div>
 
@@ -168,7 +166,7 @@
                     <img src="images/product-1.jpg" alt="">
                 </div>
                 <div class="content">
-                    <h3>apple pie</h3>
+                    <h3>Strawberry Pancake</h3>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -176,7 +174,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <span class="price">$15.99</span>
+                    <span class="price">Rp24.999</span>
                     <a href="#" class="btn">add to cart</a>
                 </div>
             </div>
@@ -186,7 +184,7 @@
                     <img src="images/product-2.jpg" alt="">
                 </div>
                 <div class="content">
-                    <h3>apple pie</h3>
+                    <h3>Blueberry Pancake</h3>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -194,7 +192,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <span class="price">$18.99</span>
+                    <span class="price">Rp.18.999</span>
                     <a href="#" class="btn">add to cart</a>
                 </div>
             </div>
@@ -204,7 +202,7 @@
                     <img src="images/product-3.jpg" alt="">
                 </div>
                 <div class="content">
-                    <h3>apple pie</h3>
+                    <h3>Honey Special Bread</h3>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -212,7 +210,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <span class="price">$11.99</span>
+                    <span class="price">Rp.14.999</span>
                     <a href="#" class="btn">add to cart</a>
                 </div>
             </div>
@@ -222,7 +220,7 @@
                     <img src="images/product-4.jpg" alt="">
                 </div>
                 <div class="content">
-                    <h3>apple pie</h3>
+                    <h3>Great Leader Birthday Cake</h3>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -230,7 +228,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <span class="price">$15.99</span>
+                    <span class="price">Rp.159.999</span>
                     <a href="#" class="btn">add to cart</a>
                 </div>
             </div>
@@ -240,7 +238,7 @@
                     <img src="images/product-5.jpg" alt="">
                 </div>
                 <div class="content">
-                    <h3>apple pie</h3>
+                    <h3>apple pie pancake</h3>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -248,7 +246,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                     </div>
-                    <span class="price">$27.99</span>
+                    <span class="price">Rp.27.999</span>
                     <a href="#" class="btn">add to cart</a>
                 </div>
             </div>
@@ -258,7 +256,7 @@
                     <img src="images/product-6.jpg" alt="">
                 </div>
                 <div class="content">
-                    <h3>apple pie</h3>
+                    <h3>great leader's favourite strawberry pancake</h3>
                     <div class="stars">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -266,7 +264,7 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                     </div>
-                    <span class="price">$25.99</span>
+                    <span class="price">Rp25.999</span>
                     <a href="#" class="btn">add to cart</a>
                 </div>
             </div>
@@ -333,9 +331,8 @@
 
             <div class="box">
                 <div class="content">
-                    <h3>chocolat cake</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum earum tempore rerum totam
-                        necessitatibus ipsum.</p>
+                    <h3>chocolate cake</h3>
+                    <p>It's a special Chocolate cake! It's has a very special secret ingridients, and used imported chocolate from North Korea that approve from the great leader Kim Jong Un. He likes it very much so don't you.</p>
                 </div>
 
                 <img src="images/promotion1.png" alt="">
@@ -345,8 +342,7 @@
                 <img src="images/promotion2.png" alt="">
                 <div class="content">
                     <h3>nut cake</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum earum tempore rerum totam
-                        necessitatibus ipsum.</p>
+                    <p>This is a nut cake that's win the best cake award from north korea. this is the one and only cake that the great leader always order almost 4 times a week.</p>
                 </div>
 
             </div>
@@ -583,8 +579,9 @@
 
             <div class="box">
                 <h3>call us</h3>
-                <p>+61 (2) 1478 2369</p>
-                <p>+61 (2) 1478 2369</p>
+                <p>+62 851 7170 3304</p>
+                <p>+62 812 2833 2396</p>
+                <p>+62 812 4080 5617</p>
             </div>
 
             <div class="box">

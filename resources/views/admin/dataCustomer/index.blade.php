@@ -39,8 +39,9 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Customer</th>
-                                            <th>Alamat</th>
-                                            <th>No HP</th>
+                                            <th>No Nota</th>
+                                            <th>Tanggal Pesanan</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tfoot>
