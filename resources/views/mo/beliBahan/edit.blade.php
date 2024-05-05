@@ -72,9 +72,9 @@
                                             <label class="font-weight-bold">Tanggal Pengeluaran</label>
                                             <input type="date"
                                                 class="form-control form-control-user @error('tanggal_pengeluaran') is-invalid @enderror"
-                                                id="InputTanggalPengeluaran" placeholder="Tanggal Pengeluaran"
-                                                value="{{ old('tanggal_pengeluaran', $pembelian_bahan_baku->tanggal_pengeluaran) }}"
-                                                name="tanggal_pengeluaran">
+                                                id="InputTanggalPengeluaran" placeholder="{{ date('Y-m-d') }}"
+                                                value="{{ old('tanggal_pengeluaran', date('Y-m-d', strtotime($pembelian_bahan_baku->tanggal_pengeluaran))) }}"
+                                                name="tanggal_pengeluaran" disabled readonly>
                                             @error('tanggal_pengeluaran')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

@@ -13,30 +13,24 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            @if (Session::has('Pesan'))
-                <div class="alert alert-danger">{{ Session::get('Pesan') }}
-                </div>
-            @endif
-            <form method="post" action="{{ route('actionRegister') }}">
-                @csrf
+            <form>
                 <h1>Create Account</h1>
-                <span>use your email for registration</span>
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
+                <span>use your email for registeration</span>
+                <input type="text" placeholder="Name">
+                <input type="email" placeholder="Email">
+                <input type="password" placeholder="Password">
                 <button>Sign Up</button>
             </form>
         </div>
         <div class="form-container sign-in">
-            @if (Session::has('error'))
-                <div class="alert alert-danger">{{ Session::get('error') }}
-                </div>
-            @endif
             <form method="post" action="{{ route('actionLogin') }}">
                 @csrf
+                @if (Session::has('error'))
+                    <div class="alert alert-danger">{{ Session::get('error') }}</div>
+                @endif
                 <h1>Sign In</h1>
                 <span>use your email password</span>
-                <input class="form-control" type="email" name="email" placeholder="Email" required>
+                <input class="form-control" type="text" name="email" placeholder="Email" required>
                 <input class="form-control" type="password" name="password" placeholder="Password" required>
                 <a href="#">Forget Your Password?</a>
                 <button type="submit">Sign In</button>

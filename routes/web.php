@@ -34,12 +34,16 @@ Route::post('actionRegister', [RegisterController::class, 'actionRegister'])->na
 Route::get('register/verify/{verify_key}', [RegisterController::class, 'verify'])->name('verify');
 
 
-Route::get('/dashboard', function () {
+Route::get('/admin', function () {
     return view('admin/dashboardPage');
 });
 
 Route::get('/mo', function(){
     return view('mo/dashboardPage');
+});
+
+Route::get('/owner', function () {
+    return view('owner/dashboardPage');
 });
 
 Route::get('/loginAdmin', function () {

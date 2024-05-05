@@ -21,8 +21,9 @@
     <!-- header -->
 
     <header class="header">
-
-        <a href="#" class="logo"> <i class="fas fa-bread-slice"></i> bakery </a>
+        <a href="#" class="logo">
+            <img src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 20px; width: 20px;">
+        </a>
 
         <nav class="navbar">
             <a href="#home">home</a>
