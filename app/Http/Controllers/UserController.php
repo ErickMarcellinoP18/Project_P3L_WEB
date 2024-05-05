@@ -3,20 +3,27 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Exception;
 use App\Models\User;
 use App\Models\Pesanan;
 
 class UserController extends Controller
 {
+    use HasFactory;
+   
     public function adminindex()
     {
         
-        $pesanan = Pesanan::join('users', 'users.id', '=', 'pesanan.user_id')
+        $pesanan = Pesanan::join('users', 'users.id', '=', 'pesanan.id_customer')
             ->select('users.*', 'pesanan.*')
             ->get();
+
         
-        return view('admin.user.index', compact('pesanan'));
+
+        
+        
+        return view('admin.dataCustomer.index', compact('pesanan'));
     }
 
     // public function create()
@@ -47,6 +54,8 @@ class UserController extends Controller
         $user = User::where('name', 'like', "%$tekscari%")->get();
         return view('admin.user.index', compact('user'));
     }
+
+
     
 
     // public function update(Request $request, $id)

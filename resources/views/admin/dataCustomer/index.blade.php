@@ -28,7 +28,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Customer</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Data Customer</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -39,31 +39,36 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Customer</th>
-                                            <th>No Nota</th>
-                                            <th>Tanggal Pesanan</th>
-                                            <th></th>
+                                            <th>Tanggal Pemesanan</th>
+                                            <th>Tanggal Pelunasan</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kuantitas</th>
+                                            <th>Subtotal</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>Nama Customer</th>
-                                            <th>Alamat</th>
-                                            <th>No HP</th>
+                                            <th>Tanggal Pemesanan</th>
+                                            <th>Tanggal Pelunasan</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kuantitas</th>
+                                            <th>Subtotal</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        @forelse ($customer as $item)
+                                        @forelse ($pesanan as $item)
                                             <tr>
-
                                                 <td>{{ $item->nama }}</td>
-                                                <td>{{ $item->alamat }}</td>
-                                                <td>{{ $item->no_hp }}</td>
-                                                <td>
-                                                    
+                                                <td>{{ $item->tanggal_pesan }}</td>
+                                                <td>{{ $item->tanggal_lunas }}</td>
+                                                <td>{{ $item->detil_pesanan->produk->nama_produk }}</td>
+                                                <td>{{ $item->detil_pesanan->kuantitas }}</td>
+                                                <td>{{ $item->detil_pesanan->subtotal }}</td>
                                             </tr>
                                         @empty
                                             <div class="alert alert-danger">
-                                                Belum Memiliki Customer
+                                                Belum Memiliki History Pesanan Customer!
                                             </div>
                                         @endforelse
                                     </tbody>

@@ -53,6 +53,10 @@ Route::get('/loginAdmin', function () {
     return view('admin/loginAdminPage');
 });
 
+// Route::get('/customer_admin', function () {
+//     return view('admin/dataCustomer/index');
+// });
+
 Route::post('/forgot-password', function (Request $request) {
     $request->validate(['email' => 'required|email']);
  
@@ -94,12 +98,13 @@ Route::post('/reset-password', function (Request $request) {
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
+
+Route::get("/customer_admin", 'App\Http\Controllers\UserController@adminindex')->name('customer_admin.index');
 Route::get('/produk/createTitipan', 'App\Http\Controllers\ProdukController@createTitipan')->name('produk.createTitipan');
 Route::resource('/produk', ProdukController::class);
 Route::resource('/hampers', HampersController::class);
 Route::resource('/beliBahan', PembelianBahanBakuController::class);
 Route::resource('/bahan_baku', BahanBakuController::class);
-Route::resource('/customer_admin', UserController::class);
 Route::resource('/penitip', PenitipController::class);
 Route::resource('/pengeluaran_lain', PengeluaranLainController::class);
 Route::resource('/karyawan', KaryawanController::class);
