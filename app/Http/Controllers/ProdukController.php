@@ -72,8 +72,10 @@ class ProdukController extends Controller
             $produk = Produk::find($id);
             $produk->update($request->all());
 
-            $produk->resep->kuota_harian = $request->kuota_harian;
-            $produk->resep->save();
+            if ($request->tipe_produk != 'Titipan') {
+                $produk->resep->kuota_harian = $request->kuota_harian;
+                $produk->resep->save();
+            }
 
             return redirect()->route('produk.index')->with('success', 'Data berhasil diubah');
         } catch (Exception $e) {
