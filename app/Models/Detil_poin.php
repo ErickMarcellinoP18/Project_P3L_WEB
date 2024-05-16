@@ -9,6 +9,10 @@ class Detil_poin extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    public $table = 'detil_poin';
+
     protected $fillable = [
         'no_nota',
         'id_promo',

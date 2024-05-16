@@ -5,13 +5,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atma Kitchen</title>
+    <title>Atma Kithen</title>
+    <link rel="icon" type="image/x-icon" href="images/logoP3L.png">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <link rel="stylesheet" href="homeStyle.css">
 </head>
@@ -21,21 +25,22 @@
     <!-- header -->
 
     <header class="header">
-        <a href="#" class="logo">
-            <img src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 75px; width: 75px;">
-        </a>
+        <img class= "logo"src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 50px; width: 50px;">
 
         <nav class="navbar">
-            <a href="#home">home</a>
-            <a href="#about">about</a>
-            <a href="#product">produk</a>
-            <a href="#gallery">foto</a>
-            <a href="#order">pesan</a>
+            <a href="/#home" class="nav-link">home</a>
+            <a href="/#about" class="nav-link">about</a>
+            <a href="/produkHome" class="nav-link">produk</a>
+            <a href="/#gallery" class="nav-link">foto</a>
+            @if (Auth::check())
+                <a href="{{ route('pesanan.create') }}" class="nav-link">order</a>
+            @endif
         </nav>
 
         <div class="icons">
-            <div id="cart-btn" class="fas fa-shopping-cart"></div>
+
             @if (Auth::check())
+                <div id="cart-btn" class="fas fa-shopping-cart"></div>
                 <div id="profile-btn" onclick="window.location.href='{{ route('user.userProfile') }}'"
                     class="fas fa-user"></div>
             @endif
@@ -161,130 +166,6 @@
 
     <!-- about us end-->
 
-    <!-- product -->
-
-    <section class="product" id="product">
-
-        <h1 class="heading">our <span> products</span></h1>
-
-        <div class="box-container">
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/product-1.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>Strawberry Pancake</h3>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <span class="price">Rp24.999</span>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/product-2.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>Blueberry Pancake</h3>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <span class="price">Rp.18.999</span>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/product-3.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>Honey Special Bread</h3>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <span class="price">Rp.14.999</span>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/product-4.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>Great Leader Birthday Cake</h3>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <span class="price">Rp.159.999</span>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/product-5.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>apple pie pancake</h3>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <span class="price">Rp.27.999</span>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="image">
-                    <img src="images/product-6.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>great leader's favourite strawberry pancake</h3>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <span class="price">Rp25.999</span>
-                    <a href="#" class="btn">add to cart</a>
-                </div>
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- product end-->
-
-
     <!-- gallery -->
 
     <section class="gallery" id="gallery">
@@ -366,7 +247,7 @@
 
     <!-- parallax -->
 
-    <section class="parallax">
+    <section class="parallax" id="parallax">
 
         <h1 class="heading">range of <span>products</span></h1>
 
@@ -411,44 +292,6 @@
 
     <!-- parallax -->
 
-    <!-- order -->
-
-    <section class="order" id="order">
-
-        <h1 class="heading"><span>order</span> now </h1>
-
-        <div class="row">
-
-            <div class="image">
-                <img src="images/order.gif" alt="">
-            </div>
-
-            <form action="">
-
-                <div class="inputBox">
-                    <input type="text" placeholder="first name">
-                    <input type="text" placeholder="last name">
-                </div>
-
-                <div class="inputBox">
-                    <input type="email" placeholder="email address">
-                    <input type="number" placeholder="phone number">
-                </div>
-
-                <div class="inputBox">
-                    <input type="text" placeholder="food name">
-                    <input type="number" placeholder="how much">
-                </div>
-
-                <textarea placeholder="your address" name="" id="" cols="30" rows="10"></textarea>
-                <input type="submit" value="order now" class="btn">
-            </form>
-
-        </div>
-
-    </section>
-
-    <!-- order end -->
 
     <!-- footer -->
 
@@ -458,8 +301,7 @@
 
             <div class="box">
                 <h3>alamat</h3>
-                <p>Jl. Babarsari No.43, Janti, Caturtunggal, Kec. Depok, Kabupaten Sleman, DIY
-                </p>
+                <p>Jl. Centralpark No. 10 Yogyakarta</p>
                 <div class="share">
                     <a href="#" class="fab fa-facebook-f"></a>
                     <a href="#" class="fab fa-twitter"></a>
@@ -496,6 +338,10 @@
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
 
     <script src="homeScript.js"></script>
 

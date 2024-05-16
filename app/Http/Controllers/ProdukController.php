@@ -39,7 +39,8 @@ class ProdukController extends Controller
             'nama_produk' => 'required',
             'harga' => 'required',
             'jumlah_stok' => 'required',
-            'tipe_produk' => 'required'
+            'tipe_produk' => 'required',
+            // 'gambar_produk' => 'required|image|mimes:png,jpg,jpeg,svg,webp|max:1920'
         ]);
 
         try {

@@ -30,6 +30,11 @@
             </form>
         </div>
         <div class="form-container sign-in">
+            @if (session('message'))
+                <div class="alert alert-success">
+                    {{ session('message') }}
+                </div>
+            @endif
             <form method="post" action="{{ route('actionLogin') }}">
                 @csrf
                 @if (Session::has('error'))

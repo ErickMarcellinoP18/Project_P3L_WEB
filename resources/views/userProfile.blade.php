@@ -1,30 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
-    <style>
-        body {
-            padding-top: 50px;
-        }
-        .card {
-            margin-top: 20px;
-        }
-        .card-header {
-            background-color: #007bff;
-            color: #fff;
-            text-align: center;
-        }
-        .form-group {
-            margin-bottom: 20px;
-        }
-    </style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="homeStyle.css">
 </head>
+<!-- Custom CSS -->
+
+
+<style>
+    body {
+        padding-top: 50px;
+        background: #f2f1ec;
+    }
+
+    .card {
+        margin-top: 20px;
+    }
+
+    .card-header {
+        background-color: #783b31;
+        color: #fff;
+        text-align: center;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .btn-primary {
+        background-color: #c98d83;
+        border-color: #c98d83;
+    }
+</style>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
@@ -33,7 +49,7 @@
                     <div class="card-header">
                         <h3>User Profile</h3>
                     </div>
-                    <form class="card-body user" action="{{ route('user.update',$user->id) }}" method="POST"
+                    <form class="card-body user" action="{{ route('user.update', $user->id) }}" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -53,8 +69,20 @@
                             <label for="username" class="col-sm-3 col-form-label">Ulang Tahun :</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="UlangTahun" placeholder="Ulang Tahun"
-                                    value="{{ old('ulang_tahun', $user->ulang_tahun)}}" name="ulang_tahun">
+                                    value="{{ old('ulang_tahun', $user->ulang_tahun) }}" name="ulang_tahun">
                                 @error('ulang_tahun')
+                                    <div class="text-danger">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="username" class="col-sm-3 col-form-label">Poin:</label>
+                            <div class="col-sm-9">
+                                <input type="number" class="form-control" id="Poin" placeholder="Poin"
+                                    value="{{ old('poin', $user->poin) }}" name="poin" disabled>
+                                @error('poin')
                                     <div class="text-danger">
                                         {{ $message }}
                                     </div>
@@ -80,7 +108,8 @@
                         </div>
                     </form>
                     <div class="card-footer">
-                        <a href="{{ route('user.historypesanan',$user->id) }}" class="btn btn-sm btn-primary btn-block">History Pemesanan</a>
+                        <a href="{{ route('user.historypesanan', $user->id) }}"
+                            class="btn btn-sm btn-primary btn-block">History Pemesanan</a>
                     </div>
                 </div>
             </div>
@@ -94,7 +123,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <!-- Initialize Bootstrap Datepicker -->
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#UlangTahun').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true
@@ -102,4 +131,5 @@
         });
     </script>
 </body>
+
 </html>

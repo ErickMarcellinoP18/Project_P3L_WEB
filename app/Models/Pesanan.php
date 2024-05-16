@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pesanan extends Model
-{
+{   
     use HasFactory;
-    public $timestamps = "false";
+    public $timestamps = false;
     public $table = "pesanan";
-    protected $primaryKey = "no_nota";
+    protected $primaryKey = "id_pesanan";
     protected $fillable = [
         'no_nota',
         'id_customer',

@@ -9,15 +9,17 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\HampersController;
 use App\Http\Controllers\PembelianBahanBakuController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\PengeluaranLainController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ResepController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\ProdukHomeController;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
-
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 
 Route::get('/', function () {
@@ -28,7 +30,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 Route::post('actionLogin', [LoginController::class, 'actionLogin'])->name('actionLogin');
 
 Route::get('logout', [LoginController::class, 'actionLogout'])->name('actionLogout')->middleware('auth');
-Route::get('home ', [HomeController::class, 'index'])->name('home')->middleware('auth');
+Route::get('home', [HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Route::get('register', [RegisterController::class, 'register'])->name('register');
 Route::post('register/action', [RegisterController::class, 'actionRegister'])->name('actionRegister');
@@ -55,6 +57,10 @@ Route::get('/loginAdmin', function () {
     return view('admin/loginAdminPage');
 });
 
+Route::get('/produkHome', function () {
+    return view('/produk');
+});
+
 // Route::get('/customer_admin', function () {
 //     return view('admin/dataCustomer/index');
 // });
@@ -67,8 +73,8 @@ Route::post('/forgot-password', function (Request $request) {
     );
 
     return $status === Password::RESET_LINK_SENT
-                ? back()->with(['status' => __($status)])
-                : back()->withErrors(['email' => __($status)]);
+        ? back()->with(['status' => __($status)])
+        : back()->withErrors(['email' => __($status)]);
 })->middleware('guest')->name('password.email');
 
 Route::get('/reset-password/{token}', function (string $token) {
@@ -96,8 +102,8 @@ Route::post('/reset-password', function (Request $request) {
     );
 
     return $status === Password::PASSWORD_RESET
-                ? redirect()->route('login')->with('status', __($status))
-                : back()->withErrors(['email' => [__($status)]]);
+        ? redirect()->route('login')->with('status', __($status))
+        : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
 
@@ -112,10 +118,10 @@ Route::get('/gantiPasswordview', function () {
 
 
 Route::resource('/user', UserController::class);
-Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile' )->name('user.userProfile');
-Route::get('/userProfile/{id}/HistoryPemesanan', 'App\Http\Controllers\UserController@historypesanan' )->name('user.historypesanan');
+Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile')->name('user.userProfile');
+Route::get('/userProfile/{id}/HistoryPemesanan', 'App\Http\Controllers\UserController@historypesanan')->name('user.historypesanan');
 
-Route::post('/gantiPasswordview/gantiPassword/{role}', 'App\Http\Controllers\KaryawanController@changepassword' )->name('karyawan.changepassword');
+Route::post('/gantiPasswordview/gantiPassword/{role}', 'App\Http\Controllers\KaryawanController@changepassword')->name('karyawan.changepassword');
 
 
 Route::get("/customer_admin", 'App\Http\Controllers\UserController@adminindex')->name('customer_admin.index');
@@ -128,3 +134,6 @@ Route::resource('/penitip', PenitipController::class);
 Route::resource('/pengeluaran_lain', PengeluaranLainController::class);
 Route::resource('/karyawan', KaryawanController::class);
 Route::resource('/resep', ResepController::class);
+Route::resource('/produkHome', ProdukHomeController::class);
+Route::resource('/pesanan', 'App\Http\Controllers\PesananController');
+Route::get('/pesanan/pesanProduk/{id}', 'App\Http\Controllers\PesananController@pesanProduk')->name('pesanan.pesanProduk');

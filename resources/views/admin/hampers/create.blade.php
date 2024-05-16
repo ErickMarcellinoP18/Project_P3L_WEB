@@ -41,7 +41,7 @@
                                         <input type="text"
                                             class="form-control form-control-user @error('nama_hampers') is-invalid @enderror"
                                             id="InputNamaHampers" placeholder="Nama Hampers"
-                                            value="{{ old('nama_hampers') }}" name="nama_hampers">
+                                            value="{{ old('nama_hampers') }}" name="nama_hampers" required>
                                         @error('nama_hampers')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -54,9 +54,9 @@
                                             <input type="number"
                                                 class="form-control form-control-user @error('harga_hampers') is-invalid @enderror"
                                                 id="InputHarga" placeholder="Harga Hampers"
-                                                value="{{ old('harga_hampers') }}" name="harga_hampers">
+                                                value="{{ old('harga_hampers') }}" name="harga_hampers" required>
                                             @error('harga_hampers')
-                                                <div class="invalid-feedback">
+                                                <div class="invalid-feedback" re>
                                                     {{ $message }}
                                                 </div>
                                             @enderror
@@ -66,7 +66,7 @@
                                             <input type="date"
                                                 class="form-control form-control-user @error('tgl_mulai_promo') is-invalid @enderror"
                                                 id="InputJumlahStok" placeholder="Tanggal Mulai Promo"
-                                                value="{{ old('tgl_mulai_promo') }}" name="tgl_mulai_promo">
+                                                value="{{ old('tgl_mulai_promo') }}" name="tgl_mulai_promo" required>
                                             @error('tgl_mulai_promo')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -78,7 +78,7 @@
                                             <input type="date"
                                                 class="form-control form-control-user @error('tgl_akhir_promo') is-invalid @enderror"
                                                 id="InputTipeHampers" placeholder="Tanggal Akhir Promo"
-                                                value="{{ old('tgl_akhir_promo') }}" name="tgl_akhir_promo">
+                                                value="{{ old('tgl_akhir_promo') }}" name="tgl_akhir_promo" required>
                                             @error('tgl_akhir_promo')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

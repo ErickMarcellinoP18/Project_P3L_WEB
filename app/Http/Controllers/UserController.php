@@ -95,23 +95,20 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-            User::find($id)->update($request->all());
-            return redirect()->route('user.userProfile')->with('success', 'Data berhasil diubah');
-        
+        User::find($id)->update($request->all());
+        return redirect()->route('user.userProfile')->with('success', 'Data berhasil diubah');
     }
 
     public function historypesanan($id)
-    {   
-        
+    {
+
         $pesanan = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
-            ->join('pesanan', 'pesanan.no_nota', '=', 'detil_pesanan.no_nota')
+            ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
             ->select('produk.*', 'detil_pesanan.*', 'pesanan.*')
             ->where('pesanan.id_customer', $id)
             ->get();
-        
-       
+
+
         return view('historyPemesananUser', compact('pesanan'));
     }
-
-   
 }

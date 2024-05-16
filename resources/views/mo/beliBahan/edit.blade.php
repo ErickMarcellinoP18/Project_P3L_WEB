@@ -86,7 +86,7 @@
                                     <div class="form-group">
                                         <label class="font-weight-bold">Bahan Baku</label>
                                         <select class="form-control  @error('nama_bahan') is-invalid @enderror"
-                                            name="id_bahan_baku" disabled readonly>
+                                            name="id_bahan_baku" readonly>
                                             <option selected disabled>Pilih Bahan Baku</option>
                                             @foreach ($bahan_baku as $item)
                                                 <option value="{{ $item->id_bahan_baku }}"

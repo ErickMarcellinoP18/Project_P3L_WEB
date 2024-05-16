@@ -710,8 +710,9 @@ section {
     flex-wrap: wrap;
 }
 
-.order .row form .inputBox input,
-.order .row form textarea {
+.order .row form .inputBox input:not([type="checkbox"]),
+.order .row form textarea,
+.order .row form select {
     padding: 1rem;
     margin: 1rem 0;
     font-size: 1.7rem;
@@ -719,10 +720,16 @@ section {
     text-transform: capitalize;
     background: var(--bg);
     border-radius: 0.5rem;
-    width: 49%;
+    width: 100%;
+}
+
+input[type="checkbox"] {
+    transform: scale(2);
+    margin-right: 2rem;
 }
 
 .order .row form .inputBox input:focus,
+.order .row form select:focus,
 .order .row form textarea:focus {
     border: 0.1rem solid var(--primary-color);
 }

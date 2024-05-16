@@ -45,7 +45,7 @@
                                             class="form-control form-control-user @error('nama_hampers') is-invalid @enderror"
                                             id="InputNamaHampers" placeholder="Nama Hampers"
                                             value="{{ old('nama_hampers', $hampers->nama_hampers) }}"
-                                            name="nama_hampers">
+                                            name="nama_hampers" required>
                                         @error('nama_hampers')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -59,7 +59,7 @@
                                                 class="form-control form-control-user @error('harga_hampers') is-invalid @enderror"
                                                 id="InputHarga" placeholder="Harga Hampers"
                                                 value="{{ old('harga_hampers', $hampers->harga_hampers) }}"
-                                                name="harga_hampers">
+                                                name="harga_hampers" required>
                                             @error('harga_hampers')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -72,7 +72,7 @@
                                                 class="form-control form-control-user @error('tgl_mulai_promo') is-invalid @enderror"
                                                 id="InputMulaiPromo" placeholder="Tanggal Mulai Promo"
                                                 value="{{ old('tgl_mulai_promo', $hampers->tgl_mulai_promo) }}"
-                                                name="tgl_mulai_promo">
+                                                name="tgl_mulai_promo" required>
                                             @error('tgl_mulai_promo')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -85,7 +85,7 @@
                                                 class="form-control form-control-user @error('tgl_akhir_promo') is-invalid @enderror"
                                                 id="InputAkhirPromo" placeholder="Tanggal Akhir Promo"
                                                 value="{{ old('tgl_akhir_promo', $hampers->tgl_akhir_promo) }}"
-                                                name="tgl_akhir_promo">
+                                                name="tgl_akhir_promo" required>
                                             @error('tgl_akhir_promo')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}

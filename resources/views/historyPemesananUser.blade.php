@@ -1,44 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>History Pesanan</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css"
+        rel="stylesheet">
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <link rel="stylesheet" href="homeStyle.css">
     <style>
         body {
             padding-top: 50px;
-            background-color: #f8f9fa; /* Set background color */
-            color: #212529; /* Set text color */
+            background-color: #f8f9fa;
+            /* Set background color */
+            color: #212529;
+            /* Set text color */
         }
+
         .table-container {
             overflow-x: auto;
-            border-radius: 10px; /* Rounded corners for the table container */
-            padding: 20px; /* Add padding */
+            border-radius: 10px;
+            /* Rounded corners for the table container */
+            padding: 20px;
+            /* Add padding */
         }
-        th, td {
+
+        th,
+        td {
             vertical-align: middle;
         }
+
         .form-group {
             margin-bottom: 20px;
         }
+
         .thead-dark th {
-            background-color: #343a40; /* Dark background color for table header */
-            color: #fff; /* Text color for table header */
+            background-color: #343a40;
+            /* Dark background color for table header */
+            color: #fff;
+            /* Text color for table header */
         }
+
         .btn-primary {
-            background-color: #007bff; /* Primary button color */
-            border-color: #007bff; /* Border color for primary button */
+            background-color: #007bff;
+            /* Primary button color */
+            border-color: #007bff;
+            /* Border color for primary button */
         }
+
         .btn-primary:hover {
-            background-color: #0056b3; /* Button color on hover */
-            border-color: #0056b3; /* Border color on hover */
+            background-color: #0056b3;
+            /* Button color on hover */
+            border-color: #0056b3;
+            /* Border color on hover */
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="row justify-content-center">
@@ -49,7 +74,8 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <input type="text" class="form-control" id="search" placeholder="Search by Product Name">
+                            <input type="text" class="form-control" id="search"
+                                placeholder="Search by Product Name">
                         </div>
                         <div class="table-container">
                             <table class="table table-bordered table-hover" id="dataTable">
@@ -61,6 +87,7 @@
                                         <th>Status</th>
                                         <th>Jenis Delivery</th>
                                         <th>Nama Produk</th>
+                                        <th>Nota</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -72,6 +99,10 @@
                                             <td>{{ $item->status }}</td>
                                             <td>{{ $item->jenis_delivery }}</td>
                                             <td>{{ $item->nama_produk }}</td>
+                                            <td>
+                                                <a href="{{ route('pesanan.show', $item->id_pesanan) }}"
+                                                    class="btn btn-sm btn-primary">Lihat Nota</a>
+                                            </td>
                                         </tr>
                                     @empty
                                         <tr>
@@ -94,7 +125,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
     <!-- Initialize Bootstrap Datepicker -->
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#UlangTahun').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true
@@ -102,14 +133,16 @@
         });
 
         // Add search functionality
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("#search").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
                 $("#dataTable tbody tr").filter(function() {
-                    $(this).toggle($(this).find('td:nth-child(6)').text().toLowerCase().indexOf(value) > -1)
+                    $(this).toggle($(this).find('td:nth-child(6)').text().toLowerCase().indexOf(
+                        value) > -1)
                 });
             });
         });
     </script>
 </body>
+
 </html>
