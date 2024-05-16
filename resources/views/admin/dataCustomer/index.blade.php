@@ -41,24 +41,37 @@
                                             <th>Nama Customer</th>
                                             <th>Tanggal Pemesanan</th>
                                             <th>Tanggal Pelunasan</th>
-                                            <th>pembayaran</th>
-                                            <th>Alamat</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kuantitas</th>
+                                            <th>Subtotal</th>
                                         </tr>
                                     </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Nama Customer</th>
+                                            <th>Tanggal Pemesanan</th>
+                                            <th>Tanggal Pelunasan</th>
+                                            <th>Nama Produk</th>
+                                            <th>Kuantitas</th>
+                                            <th>Subtotal</th>
+                                        </tr>
+                                    </tfoot>
                                     <tbody>
-                                        @forelse ($pesanan as $item)
+                                        @forelse ($detil_pesanan as $item)
                                             <tr>
-                                                <td>{{ $item->name }}</td>
-                                                <td>{{ $item->tanggal_pesan }}</td>
-                                                <td>{{ $item->tanggal_lunas }}</td>
-                                                <td>{{ $item->pembayaran }}</td>
-                                                <td>{{ $item->alamat }}</td>
+                                                <td>{{ $item->pesanan->nama }}</td>
+                                                <td>{{ $item->pesanan->tanggal_pesan }}</td>
+                                                <td>{{ $item->pesanan->tanggal_lunas }}</td>
+                                                <td>{{ $item->produk->nama_produk }}</td>
+                                                <td>{{ $item->kuantitas }}</td>
+                                                <td>{{ $item->subtotal }}</td>
                                             </tr>
                                         @empty
                                             <div class="alert alert-danger">
                                                 Belum Memiliki History Pesanan Customer!
                                             </div>
                                         @endforelse
+
                                     </tbody>
                                 </table>
                             </div>

@@ -16,6 +16,7 @@ class DetilPesananController extends Controller
         return view('detil_pesanan.index', compact('detil_pesanan'));
     }
 
+
     public function create()
     {
         return view('detil_pesanan.create');
