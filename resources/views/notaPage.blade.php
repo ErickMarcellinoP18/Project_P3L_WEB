@@ -126,15 +126,16 @@
                                         </tr>
                                         <tr>
                                             <th scope="row" colspan="4" class="border-0 text-end">
-                                                Ongkos kirim (rad. ) :
+                                                Ongkos kirim (rad. {{ $pesanan->jarak }}) :
                                             </th>
-                                            <td class="border-0 text-end"> Rp. </td>
+                                            <td class="border-0 text-end"> Rp. {{ $pesanan->jarak * 2000 }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row" colspan="4" class="border-0 text-end">
                                                 Total
                                             </th>
-                                            <td class="border-0 text-end">Rp.</td>
+                                            <td class="border-0 text-end">Rp. {{ $total + $pesanan->jarak * 2000 }}
+                                            </td>
                                         </tr>
                                         @if ($pesanan->poin_digunakan > 0)
                                             <tr>
@@ -150,7 +151,9 @@
                                                 Total
                                             </th>
                                             <td class="border-0 text-end">
-                                                <h4 class="m-0 fw-semibold">Rp. {{ $pesanan->total }}</h4>
+                                                <h4 class="m-0 fw-semibold">
+                                                    Rp.{{ $total + $pesanan->jarak * 2000 - $pesanan->poin_digunakan * 100 }}
+                                                </h4>
                                             </td>
                                         </tr>
                                     </tbody>

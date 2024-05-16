@@ -107,7 +107,7 @@
                 @if ($item->tipe_produk === 'Asli')
                     <div class="box">
                         <div class="image">
-                            <img src="{{ $item->gambar_produk }}" alt="Product" />
+                            <img src="data:image/jpeg;base64,{{ $item->gambar_produk }}" alt="Product" />
                         </div>
                         <div class="content">
                             <h3>{{ $item->nama_produk }}</h3>
@@ -128,7 +128,7 @@
             @foreach ($hampers as $item)
                 <div class="box">
                     <div class="image">
-                        <img src="{{ $item->gambar_hampers }}" alt="Hampers" />
+                        <img src="data:image/jpeg;base64,{{ $item->gambar_hampers }}" alt="Hampers" />
                     </div>
                     <div class="content">
                         <h3>{{ $item->nama_hampers }}</h3>
@@ -146,7 +146,7 @@
                 @if ($item->tipe_produk === 'Titipan')
                     <div class="box">
                         <div class="image">
-                            <img src="{{ $item->gambar_produk }}" alt="Product" />
+                            <img src="data:image/jpeg;base64,{{ $item->gambar_produk }}" alt="Product" />
                         </div>
                         <div class="content">
                             <h3>{{ $item->nama_produk }}</h3>
