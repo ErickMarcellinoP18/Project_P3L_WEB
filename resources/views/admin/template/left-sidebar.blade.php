@@ -45,7 +45,7 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ route('customer_admin.index') }}">
+        <a class="nav-link" href="{{ url('/customer_admin') }}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Data Customer</span></a>
     </li>

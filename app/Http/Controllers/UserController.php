@@ -111,4 +111,19 @@ class UserController extends Controller
 
         return view('historyPemesananUser', compact('pesanan'));
     }
+    public function daftarpesanancust($id)
+    {
+
+        $pesanan = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
+            ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
+            ->select('produk.*', 'detil_pesanan.*', 'pesanan.*')
+            ->where('pesanan.id_customer', $id)
+            ->where('pesanan.status', 'selesai')
+            ->get();
+
+
+        return view('customer.pembayaran.index', compact('pesanan'));
+    }
+
+
 }

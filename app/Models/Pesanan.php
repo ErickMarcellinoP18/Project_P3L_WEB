@@ -22,6 +22,7 @@ class Pesanan extends Model
         'alamat',
         'poin_digunakan',
         'pembayaran',
+        'bukti_pembayaran',
         'poin_didapatkan'
     ];
 

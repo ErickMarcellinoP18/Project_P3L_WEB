@@ -26,7 +26,7 @@ class Detil_pesanan extends Model
 
     public function pesanan()
     {
-        return $this->belongsTo(Pesanan::class, 'no_nota');
+        return $this->belongsTo(Pesanan::class, 'id_pesanan');
     }
     
 }

@@ -15,6 +15,7 @@ use App\Http\Controllers\ResepController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\ProdukHomeController;
 use App\Http\Controllers\DetilPesananController;
+use App\Http\Controllers\PesananController;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\URL;
@@ -60,6 +61,10 @@ Route::get('/loginAdmin', function () {
 
 Route::get('/produkHome', function () {
     return view('/produk');
+});
+
+Route::get('/gambar', function () {
+    return view('customer/pembayaran/buktiUpload');
 });
 
 // Route::get('/customer_admin', function () {
@@ -121,12 +126,15 @@ Route::get('/gantiPasswordview', function () {
 Route::resource('/user', UserController::class);
 Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile')->name('user.userProfile');
 Route::get('/userProfile/{id}/HistoryPemesanan', 'App\Http\Controllers\UserController@historypesanan')->name('user.historypesanan');
+Route::get('/userProfile/{id}/daftarpesanancust', 'App\Http\Controllers\UserController@daftarpesanancust')->name('user.daftarpesanancust');
+Route::get('/userProfile/{id}/uploadPage', 'App\Http\Controllers\PesananController@uploadPage')->name('pesanan.uploadPage');
+Route::get('/userProfile/{id}/uploadBukti', 'App\Http\Controllers\PesananController@uploadBukti')->name('pesanan.uploadBukti');
 
 Route::post('/gantiPasswordview/gantiPassword/{role}', 'App\Http\Controllers\KaryawanController@changepassword')->name('karyawan.changepassword');
 
 
-Route::get("/customer_admin", 'App\Http\Controllers\UserController@adminindex')->name('customer_admin.index');
 Route::get('/produk/createTitipan', 'App\Http\Controllers\ProdukController@createTitipan')->name('produk.createTitipan');
+Route::resource('/customer_admin', DetilPesananController::class);
 Route::resource('/produk', ProdukController::class);
 Route::resource('/hampers', HampersController::class);
 Route::resource('/beliBahan', PembelianBahanBakuController::class);

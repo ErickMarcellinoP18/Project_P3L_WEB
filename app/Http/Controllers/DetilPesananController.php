@@ -13,7 +13,7 @@ class DetilPesananController extends Controller
     public function index()
     {
         $detil_pesanan = Detil_pesanan::all();
-        return view('detil_pesanan.index', compact('detil_pesanan'));
+        return view('admin.dataCustomer.index', compact('detil_pesanan'));
     }
 
 
