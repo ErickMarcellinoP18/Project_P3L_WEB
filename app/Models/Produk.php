@@ -25,6 +25,7 @@ class Produk extends Model
         'id_hampers',
         'id_resep',
         'id_penitip',
+        'gambar_produk'
     ];
 
     public function hampers()

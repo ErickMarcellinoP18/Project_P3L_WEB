@@ -8,24 +8,18 @@
     <title>Order</title>
     <link rel="icon" type="image/x-icon" href="images/logoP3L.png">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-
-    <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
-
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
     <link href="{{ asset('homeStyle.css') }}" rel="stylesheet">
 </head>
 
 <body>
 
     <!-- header -->
-
     <header class="header">
-        <img class= "logo"src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 50px; width: 50px;">
+        <img class="logo" src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 50px; width: 50px;">
 
         <nav class="navbar">
             <a href="/#home" class="nav-link">home</a>
@@ -34,17 +28,16 @@
             <a href="/#gallery" class="nav-link">foto</a>
             <a href="/#order" class="nav-link">order</a>
         </nav>
-        </nav>
 
         <div class="icons">
-
             @if (Auth::check())
                 <div id="cart-btn" class="fas fa-shopping-cart"></div>
                 <div id="profile-btn" onclick="window.location.href='{{ route('user.userProfile') }}'"
                     class="fas fa-user"></div>
             @endif
             @if (Auth::check())
-                <div id="logout-btn" onclick="window.location.href='<?php echo route('actionLogout'); ?>'" class="fas fa-sign-out-alt">
+                <div id="logout-btn" onclick="window.location.href='{{ route('actionLogout') }}'"
+                    class="fas fa-sign-out-alt">
                 </div>
             @else
                 <div id="login-btn" onclick="window.location.href='{{ url('login') }}'" class="fas fa-sign-in-alt">
@@ -53,12 +46,11 @@
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
-
     <!-- header end -->
 
     <section class="order" id="order">
-
         <h1 class="heading"><span>order</span> now </h1>
+
         @if (session('error'))
             <div class="alert alert-danger d-flex align-items-center" role="alert">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
@@ -69,72 +61,60 @@
                 </svg>
                 <span style="font-size: 20px">{{ session('error') }}</span>
             </div>
-            </div>
         @endif
-        <div class="row">
 
+        <div class="row">
             <div class="image">
-                <img src="{{ asset('images/order.gif') }}" alt="">
+                <img src="{{ asset('images/order.gif') }}" alt="Order Image">
             </div>
+
             <form class="user" action="{{ route('pesanan.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-
                 <div class="inputBox">
                     <input type="text" class="form-control @error('tanggal_ambil') is-invalid @enderror"
                         id="InputTanggalAmbil" placeholder="Tanggal Ambil" value="{{ old('tanggal_ambil') }}"
-                        name="tanggal_ambil" onfocus="(this.type='date')" onblur="(this.type='text')" required>
+                        name="tanggal_ambil" onfocus="(this.type='date')" onblur="(this.type='text')" required
+                        min="{{ date('Y-m-d', strtotime('+2 days')) }}">
                     @error('tanggal_ambil')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
 
-                    <input type="Number" class="form-control @error('poin_digunakan') is-invalid @enderror"
+                    <input type="number" class="form-control @error('poin_digunakan') is-invalid @enderror"
                         id="InputPoinDigunakan" placeholder="Poin Digunakan"
                         value="{{ old('poin_digunakan', Auth::user()->poin) }}" name="poin_digunakan" required>
                     @error('poin_digunakan')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
 
-                    <select class="form-control  @error('jenis_delivery') is-invalid @enderror" name="jenis_delivery">
+                    <select class="form-control @error('jenis_delivery') is-invalid @enderror" name="jenis_delivery"
+                        required>
                         <option selected disabled>Pilih Jenis Delivery</option>
                         <option value="pickUp">Pick Up</option>
                         <option value="delivery">Delivery</option>
                     </select>
                     @error('jenis_delivery')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
                 <textarea class="form-control @error('alamat') is-invalid @enderror" id="InputAlamat" placeholder="Alamat"
-                    value="{{ old('alamat') }}" name="alamat" required cols="30" rows="10"></textarea>
+                    name="alamat" required cols="30" rows="10">{{ old('alamat') }}</textarea>
                 @error('alamat')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
+                    <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+
                 <button type="submit" class="btn"> order now </button>
             </form>
-
         </div>
-
     </section>
 
-    <!-- footer ends -->
+    <!-- footer -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
     </script>
-
     <script src="homeScript.js"></script>
-
     <script>
         lightGallery(document.querySelector('.gallery .gallery-container'));
     </script>

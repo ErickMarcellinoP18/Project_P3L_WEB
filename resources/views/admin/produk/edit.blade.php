@@ -78,6 +78,19 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">Gambar Produk</label>
+                                        <input type="file"
+                                            class="form-control @error('gambar_produk') is-invalid @enderror"
+                                            id="InputGambar" placeholder="Gambar"
+                                            value="{{ old('gambar_produk', $produk->gambar_produk) }}"
+                                            name="gambar_produk">
+                                        @error('gambar_produk')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
                                     @if ($produk->tipe_produk != 'Asli')
                                         <div class="form-group">
                                             <label class="font-weight-bold">Penitip</label>

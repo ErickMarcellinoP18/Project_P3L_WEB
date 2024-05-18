@@ -30,12 +30,12 @@ class PesananController extends Controller
 
     public function pesanProduk($id)
     {
-
         $produk = Produk::all();
         $hampers = Hampers::all();
 
         $pesanan = Pesanan::find($id);
         $detilPesanan = Detil_pesanan::where('id_pesanan', $id)->get();
+
         return view('pesanProdukPage', compact('produk', 'hampers', 'pesanan', 'detilPesanan'));
     }
 
@@ -55,7 +55,6 @@ class PesananController extends Controller
             'poin_digunakan' => 'required|integer|min:0',
         ]);
 
-        /** @var \App\User $user */
         $user = Auth::User();
         $userPoints = $user->poin;
 
@@ -67,7 +66,7 @@ class PesananController extends Controller
 
             $pesanan = Pesanan::create([
                 'id_customer' => Auth::id(), // Menggunakan id dari user yang sedang login
-                'status' => 'Selesai', // Mengatur status default sebagai "Panding"
+                'status' => 'Panding', // Mengatur status default sebagai "Panding"
                 'tanggal_pesan' => now(), // Mengatur tanggal pesan saat ini
                 'alamat' => $request->alamat,
                 'tanggal_ambil' => $request->tanggal_ambil,

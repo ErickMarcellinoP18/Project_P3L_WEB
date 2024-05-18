@@ -59,6 +59,7 @@
                                         <tr>
                                             <th>Nama Produk</th>
                                             <th>Hampers / Penitip</th>
+                                            <th>Gambar</th>
                                             <th>Harga</th>
                                             <th>Jumlah Stok</th>
                                             <th>Tipe Produk</th>
@@ -75,6 +76,7 @@
 
                                                     {{ $item->tipe_produk == 'Asli' && $item->hampers ? $item->hampers->nama_hampers : '' }}
                                                 </td>
+                                                <td><img src="{{ $item->gambar_produk }}" width="150px"></td>
                                                 <td>Rp. {{ $item->harga }}</td>
                                                 <td>{{ $item->jumlah_stok }}</td>
                                                 <td>{{ $item->tipe_produk }}</td>

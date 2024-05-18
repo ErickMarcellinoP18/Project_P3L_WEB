@@ -112,16 +112,11 @@ Route::post('/reset-password', function (Request $request) {
         : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
-
-
 Route::get('/gantiPasswordview', function () {
     $currentUrl1 = URL::previous();
     $currentUrl = substr($currentUrl1, strrpos($currentUrl1, '/') + 1);
     return view('changeRolePassword', compact('currentUrl'));
 });
-
-
-
 
 Route::resource('/user', UserController::class);
 Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile')->name('user.userProfile');
