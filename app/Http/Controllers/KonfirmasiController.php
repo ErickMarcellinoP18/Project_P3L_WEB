@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\User;
+use App\Models\Detil_pesanan;
+use App\Models\Resep;
+use App\Models\DetilResep;
 use Exception;
 
 
@@ -12,7 +15,10 @@ class KonfirmasiController extends Controller
 {
     public function index()
     {
-        $pesanan = Pesanan::where('status', 'sudah dibayar')->get();
+        $pesanan = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
+            ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
+            ->where('status', 'sudah dibayar')
+            ->get();
         
         return view('mo.konfirmasiPesanan.index', compact('pesanan'));
     }
@@ -24,29 +30,40 @@ class KonfirmasiController extends Controller
     }
 
 
-public function updateStatus($id)
-{
-        $pesanan = Pesanan::findOrFail($id);
-        $pesanan->status = 'Pesanan Diterima';
-        $pesanan->save();
+    public function updateStatus($id)
+    {
+            $pesanan = Pesanan::findOrFail($id);
+            $pesanan->status = 'Pesanan Diterima';
+            $pesanan->save();
 
-        $user = User::find($pesanan->id_customer);
-        $user->poin += $pesanan->poin_didapat; // Assuming 'poin_didapatkan' is the field where the points to be added are stored
-        $user->save();
+            $user = User::find($pesanan->id_customer);
+            $user->poin += $pesanan->poin_didapat; // Assuming 'poin_didapatkan' is the field where the points to be added are stored
+            $user->save();
 
-        return redirect()->route('terimaPesanan.index', $id)->with('success', 'Pesanan Diterima.');
-}
-public function updateStatusN($id)
-{
-        $pesanan = Pesanan::findOrFail($id);
-        $pesanan->status = 'Pesanan Ditolak';
-        $pesanan->save();
+            return redirect()->route('terimaPesanan.index', $id)->with('success', 'Pesanan Diterima.');
+    }
+    public function updateStatusN($id)
+    {
+            $pesanan = Pesanan::findOrFail($id);
+            $pesanan->status = 'Pesanan Ditolak';
+            $pesanan->save();
 
-        $user = User::find($pesanan->id_customer);
-        $user->saldo += $pesanan->pembayaran;
-        $user->save();
+            $user = User::find($pesanan->id_customer);
+            $user->saldo += $pesanan->total_biaya;
+            $user->save();
 
-        return redirect()->route('terimaPesanan.index', $id)->with('danger', 'Pesanan Ditolak.');
-}
+            $detilPesanan = Detil_pesanan::where('id_pesanan', $id)->get();
+            foreach ($detilPesanan as $detil) {
+                $produk = $detil->produk;
+                $produk->jumlah_stok += $detil->kuantitas;
+                $produk->save();
+            }
+
+            
+
+
+
+            return redirect()->route('terimaPesanan.index', $id)->with('danger', 'Pesanan Ditolak.');
+    }
 
 }

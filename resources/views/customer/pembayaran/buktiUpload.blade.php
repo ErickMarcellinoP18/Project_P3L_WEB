@@ -39,6 +39,8 @@
         border-color: #c98d83;
     }
 </style>
+<a href='{{ route('user.userProfile') }}' class="back-button btn btn-primary">Back</a>
+
 <div class="container mt-5" style="max-width: 500px; margin: auto;">
     <h2 class="mb-4 text-center" style="color: #007bff;">Upload Bukti Pembayaran</h2>
     @if(isset($pesanan))

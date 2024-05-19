@@ -61,10 +61,17 @@
             border-color: #0056b3;
             /* Border color on hover */
         }
+
+        .back-button {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
     </style>
 </head>
 
 <body>
+    <a href='{{ route('user.userProfile') }}' class="back-button btn btn-primary">Back</a>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-10">

@@ -42,6 +42,7 @@
 </style>
 
 <body>
+<a href='/' class="back-button btn btn-primary">Back</a>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">

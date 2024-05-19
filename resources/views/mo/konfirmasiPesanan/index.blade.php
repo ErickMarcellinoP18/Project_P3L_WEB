@@ -57,7 +57,7 @@
                                         <th>Status</th>
                                         <th>Jenis Delivery</th>
                                         <th>Nama Produk</th>
-                                        <th></th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>

@@ -68,6 +68,12 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link" href="{{ url('/terimaPesanan1')}}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>List Bahan Kurang</span></a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="{{ url('/gantiPasswordview')}}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Ganti Password</span></a>
