@@ -62,6 +62,12 @@
             <span>Ganti Password</span></a>
     </li>
 
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/inputjarak')}}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Input Jarak</span></a>
+    </li>
+
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
 

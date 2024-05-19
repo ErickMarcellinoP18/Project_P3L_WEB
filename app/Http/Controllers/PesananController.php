@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Models\Hampers;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Customer;
 
 class PesananController extends Controller
 {
@@ -146,6 +147,63 @@ class PesananController extends Controller
 
         // Check if the pesanan date is within 3 days before or after the customer's birthday
         return abs($diff) <= 3;
+    }
+
+    public function toInputJarakIndex(){
+        
+            $pesanan = Pesanan::join('customer', 'pesanan.id_customer', '=', 'customer.id_customer')
+                    ->select('pesanan.*', 'customer.nama_customer')
+                    ->where('pesanan.status','menunggu konfirmasi')
+                    ->where('pesanan.jarak', 0)
+                    ->where('pesanan.jenis_delivery', 'Antar')
+                    ->get();
+                    
+            return view('admin.inputJarakPesanan.index', compact('pesanan'));
+        
+        }
+        
+        
+        
+        
+    
+    
+
+    public function editjarak($id){
+        $pesanan = Pesanan::find($id);
+        return view('admin.inputJarakPesanan.edit', compact('pesanan'));
+    }
+
+    public function updateJarak($id , Request $request){
+        $request->validate([
+            'jarak' => 'required'
+        ]);
+
+        try {
+            $pesanan = Pesanan::find($id);
+
+            $pesanan->jarak = $request->jarak;
+
+            if($request->jarak <= 5){
+                $pesanan->total_biaya += 10000;
+                $pesanan->ongkir = 10000;
+            } else if($request->jarak > 5 && $request->jarak <= 10){
+                $pesanan->total_biaya += 15000;
+                $pesanan->ongkir = 15000;
+            }else if($request->jarak > 10 && $request->jarak <= 15){
+                $pesanan->total_biaya += 20000;
+                $pesanan->ongkir = 20000;
+            }else if($request->jarak > 15){
+                $pesanan->total_biaya += 25000;
+                $pesanan->ongkir = 25000;
+            }
+
+            $pesanan->save();
+
+
+            return redirect()->route('inputJarakPesanan.index')->with('success',['Biaya Pesanan' => $pesanan->total_biaya, 'Ongkir' => $pesanan->ongkir]);
+        } catch (Exception $e) {
+            return redirect()->route('inputJarakPesanan.index')->with('error', 'Data gagal diubah');
+        }
     }
     
     

@@ -146,3 +146,8 @@ Route::resource('/pesanan', 'App\Http\Controllers\PesananController');
 Route::get('/terimaPesanan/updateStatus/{id}', 'App\Http\Controllers\KonfirmasiController@updateStatus')->name('terimaPesanan.updateStatus');
 Route::get('/terimaPesanan/updateStatusN/{id}', 'App\Http\Controllers\KonfirmasiController@updateStatusN')->name('terimaPesanan.updateStatusN');
 Route::get('/pesanan/pesanProduk/{id}', 'App\Http\Controllers\PesananController@pesanProduk')->name('pesanan.pesanProduk');
+
+
+Route::get('/inputjarak','App\Http\Controllers\PesananController@toInputJarakIndex')->name('inputJarakPesanan.index');
+Route::get('/inputjarak/{id}/edit','App\Http\Controllers\PesananController@editjarak')->name('pesanan.inputJarakPesanan');
+Route::put('/inputjarak/{id}/update','App\Http\Controllers\PesananController@updatejarak')->name('pesanan.updateJarakPesanan');

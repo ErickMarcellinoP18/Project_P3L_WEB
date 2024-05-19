@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 09:21 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: May 19, 2024 at 02:22 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -502,6 +502,8 @@ CREATE TABLE `pesanan` (
   `alamat` text NOT NULL,
   `jarak` float NOT NULL DEFAULT 0,
   `poin_digunakan` int(11) DEFAULT NULL,
+  `total_biaya` int(11) NOT NULL DEFAULT 0,
+  `ongkir` int(11) NOT NULL DEFAULT 0,
   `pembayaran` int(11) DEFAULT NULL,
   `bukti_pembayaran` varchar(255) DEFAULT NULL,
   `poin_didapat` int(11) DEFAULT NULL
@@ -511,13 +513,13 @@ CREATE TABLE `pesanan` (
 -- Dumping data for table `pesanan`
 --
 
-INSERT INTO `pesanan` (`id_pesanan`, `no_nota`, `id_customer`, `tanggal_ambil`, `tanggal_pesan`, `status`, `jenis_delivery`, `tanggal_lunas`, `alamat`, `jarak`, `poin_digunakan`, `pembayaran`, `bukti_pembayaran`, `poin_didapat`) VALUES
-(1, '2024.03.01', 1, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 120, 723000, '', 106),
-(2, '2024.03.02', 2, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 140000, '', 19),
-(3, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'menunggu konfirmasi', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 190000, '1716049293.png', 60),
-(4, '2024.03.04', 5, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 440000, '', 64),
-(5, '2024.03.05', 6, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 75000, '', 6),
-(6, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 190000, '', 24);
+INSERT INTO `pesanan` (`id_pesanan`, `no_nota`, `id_customer`, `tanggal_ambil`, `tanggal_pesan`, `status`, `jenis_delivery`, `tanggal_lunas`, `alamat`, `jarak`, `poin_digunakan`, `total_biaya`, `ongkir`, `pembayaran`, `bukti_pembayaran`, `poin_didapat`) VALUES
+(1, '2024.03.01', 1, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 120, 0, 0, 723000, '', 106),
+(2, '2024.03.02', 2, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 0, 0, 140000, '', 19),
+(3, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'menunggu konfirmasi', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 40, 100, 215000, 25000, 190000, '1716049293.png', 60),
+(4, '2024.03.04', 5, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 0, 0, 440000, '', 64),
+(5, '2024.03.05', 6, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 0, 0, 75000, '', 6),
+(6, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 0, 0, 190000, '', 24);
 
 -- --------------------------------------------------------
 
@@ -635,7 +637,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('xXGk1hjK1RUPyj8CZZA4pwYnVdfUO26ka6Nz6aof', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiT1pzRUtMbXdFYUdWam1tTGtleFh6SHJYU0Q3eXpvN3hoYUdWbmNPbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyUHJvZmlsZS8zL2RhZnRhclBlc2FuYW5DdXN0Ijt9czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2xvZ291dCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1716049480);
+('F9s9TWTkJiG5uQRJkVObNjERij1jI7PIZISQOIMC', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiZmRuaUc2OEhRbkU4NHhiQ2lmY1d3TUwzNm1Yb2RxY2tWZk82MFlKMSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzI6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9pbnB1dGphcmFrIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1716121253);
 
 -- --------------------------------------------------------
 
