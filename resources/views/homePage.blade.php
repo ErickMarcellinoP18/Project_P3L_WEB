@@ -153,8 +153,11 @@
 
             <div class="content">
                 <h3>good things come to those <span>who bake </span> for others</h3>
-                <p>welcome to our website folks! we are here to make happiness with the taste and pride of our special
-                    cake!</p>
+                <p>Memakan kue adalah sebuah perjalanan rasa yang memanjakan lidah, Setiap gigitan membawa ke dalam dunia fantasi, Dimana rasa manis, gurih, dan lembut berdansa bersama.
+
+Ketika kue menyentuh lidah, detik itu juga, Semesta seakan berhenti, dan waktu menjadi abadi, Rasa coklat yang lembut, krim yang manis, Semuanya berpadu sempurna, menciptakan simfoni di mulut.
+
+Setiap lapisan kue membawa cerita, Cerita tentang cinta, kasih sayang, dan kebahagiaan, Oh, betapa indahnya kenikmatan memakan kue, Sebuah pengalaman yang selalu membuat kita ingin kembali lagi dan lagi.</p>
                 <p>cake is a special food for us to enjoy life and make our life sweeter!</p>
                 <a href="#" class="btn">read more</a>
             </div>
@@ -221,9 +224,7 @@
             <div class="box">
                 <div class="content">
                     <h3>chocolate cake</h3>
-                    <p>It's a special Chocolate cake! It's has a very special secret ingridients, and used imported
-                        chocolate from North Korea that approve from the great leader Kim Jong Un. He likes it very much
-                        so don't you.</p>
+                    <p>Bagai permata hitam yang berkilau, Dibungkus dalam balutan cinta dan kasih sayang, Membawa kebahagiaan di setiap gigitan.</p>
                 </div>
 
                 <img src="images/promotion1.png" alt="">
@@ -233,8 +234,7 @@
                 <img src="images/promotion2.png" alt="">
                 <div class="content">
                     <h3>nut cake</h3>
-                    <p>This is a nut cake that's win the best cake award from north korea. this is the one and only cake
-                        that the great leader always order almost 4 times a week.</p>
+                    <p>Sebuah simfoni rasa yang tak terlupakan, Coklat lembutmu berpadu dengan kacang yang renyah, Menciptakan harmoni dalam setiap gigitan.</p>
                 </div>
 
             </div>
@@ -259,8 +259,6 @@
                 </div>
                 <div class="content">
                     <h3>bread</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea minus laudantium placeat suscipit.
-                    </p>
                 </div>
             </div>
 
@@ -270,8 +268,6 @@
                 </div>
                 <div class="content">
                     <h3>cakes</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea minus laudantium placeat suscipit.
-                    </p>
                 </div>
             </div>
 
@@ -281,8 +277,6 @@
                 </div>
                 <div class="content">
                     <h3>donuts</h3>
-                    <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ea minus laudantium placeat suscipit.
-                    </p>
                 </div>
             </div>
 
@@ -312,6 +306,7 @@
 
             <div class="box">
                 <h3>E-mail</h3>
+                <a href="#" class="link">resibebekeke5@gmail.com</a>
                 <a href="#" class="link">taidiklasik@gmail.com</a>
                 <a href="#" class="link">elluygabrielp@gmail.com</a>
             </div>

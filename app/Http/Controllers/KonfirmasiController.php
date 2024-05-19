@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Detil_pesanan;
 use App\Models\Resep;
 use App\Models\DetilResep;
+use App\Models\Bahan_baku;
 use Exception;
 
 
@@ -17,7 +18,7 @@ class KonfirmasiController extends Controller
     {
         $pesanan = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
             ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
-            ->where('status', 'sudah dibayar')
+            ->where('status', 'menunggu konfirmasi')
             ->get();
         
         return view('mo.konfirmasiPesanan.index', compact('pesanan'));
@@ -37,8 +38,12 @@ class KonfirmasiController extends Controller
             $pesanan->save();
 
             $user = User::find($pesanan->id_customer);
-            $user->poin += $pesanan->poin_didapat; // Assuming 'poin_didapatkan' is the field where the points to be added are stored
+            $user->poin += $pesanan->poin_didapat;
             $user->save();
+
+            $bahanBaku = Bahan_baku::find($id);
+            $bahanBaku->stok_bahan -= 100;
+            $bahanBaku->save();
 
             return redirect()->route('terimaPesanan.index', $id)->with('success', 'Pesanan Diterima.');
     }

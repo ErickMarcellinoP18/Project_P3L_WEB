@@ -10,9 +10,7 @@ class listBahanController extends Controller
 {
     public function index()
     {
-        $bahan_baku = Detail_resep::join('bahan_baku', 'resep.id_bahan_baku', '=', 'detail_resep.id_bahan_baku')
-        ->where('stok_bahan', '<', 'takaran')
-        ->get();
+        $bahan_baku = Bahan_baku::where('stok_bahan', '<', 0)->get();
         return view('mo.listBahanBaku.listBahanBaku', compact('bahan_baku'));
     }
 }
