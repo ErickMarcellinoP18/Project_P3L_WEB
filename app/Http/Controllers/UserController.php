@@ -152,7 +152,7 @@ class UserController extends Controller
         $pesanan->status = "menunggu konfirmasi";
         $pesanan->save();
 
-        return redirect()->route('user.daftarPesananCust', $id_pesanan)->with('success', 'Bukti pembayaran berhasil diupload.');
+        return redirect()->route('user.daftarpesanancust', $id_pesanan)->with('success', 'Bukti pembayaran berhasil diupload.');
     }
 
 

@@ -122,7 +122,7 @@ Route::get('/gantiPasswordview', function () {
 Route::resource('/user', UserController::class);
 Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile')->name('user.userProfile');
 Route::get('/userProfile/{id}/HistoryPemesanan', 'App\Http\Controllers\UserController@historypesanan')->name('user.historypesanan');
-Route::get('/userProfile/{id}/daftarPesananCust', 'App\Http\Controllers\UserController@daftarPesananCust')->name('user.daftarPesananCust');
+Route::get('/userProfile/{id}/daftarpesanancust', 'App\Http\Controllers\UserController@daftarpesanancust')->name('user.daftarpesanancust');
 Route::get('/userProfile/{id}/uploadPage', 'App\Http\Controllers\UserController@uploadPage')->name('user.uploadPage');
 Route::post('/userProfile/{id}/uploadBukti', 'App\Http\Controllers\UserController@uploadBukti')->name('user.uploadBukti');
 
