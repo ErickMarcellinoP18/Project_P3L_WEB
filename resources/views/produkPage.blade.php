@@ -10,14 +10,44 @@
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="homeStyle.css">
+    <style>
+        .product {
+            padding: 20px;
+        }
+
+        .box:hover {
+            transform: translateY(-10px);
+        }
+
+        .box img {
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .box .content {
+            padding: 15px;
+            text-align: center;
+        }
+
+        .box .content h3 {
+            margin: 10px 0;
+        }
+
+        .box .content .price {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- header -->
     <header class="header">
-        <img class="logo" src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 50px; width: 50px;">
+        <img class="logo" src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L">
         <nav class="navbar">
             <a href="/#home" class="nav-link">home</a>
             <a href="/#about" class="nav-link">about</a>
@@ -52,7 +82,7 @@
             <img src="images/cart-1.jpg" alt="">
             <div class="content">
                 <h3>bakery item 1</h3>
-                <div class="Harga">Rp.150.000/-</div>
+                <div class="price">Rp.150.000/-</div>
             </div>
         </div>
         <div class="cart-item">
@@ -82,7 +112,9 @@
         <div class="box-container">
             @foreach ($produk as $item)
                 @if ($item->tipe_produk === 'Asli')
-                    @include('partials.productBox', ['item' => $item])
+                    <a href="{{ route('produkHome.show', $item->id_produk) }}" class="text-decoration-none">
+                        @include('partials.productBox', ['item' => $item])
+                    </a>
                 @endif
             @endforeach
         </div>
@@ -91,19 +123,21 @@
         <div class="box-container">
             @foreach ($hampers as $item)
                 <div class="box">
-                    <div class="image">
-                        <img src="{{ $item->gambar_hampers }}" alt="Hampers" />
-                    </div>
-                    <div class="content">
-                        <h3>{{ $item->nama_hampers }}</h3>
-                        @foreach ($produk as $pro)
-                            @if ($pro->id_hampers === $item->id_hampers)
-                                <span class="produk" style="font-size: larger;">{{ $pro->nama_produk }}</span>
-                            @endif
-                        @endforeach
-                        <br>
-                        <span class="price">Rp. {{ $item->harga_hampers }}</span>
-                    </div>
+                    <a href="{{ route('produkHome.edit', $item->id_hampers) }}" class="text-decoration-none">
+                        <div class="image">
+                            <img src="{{ $item->gambar_hampers }}" alt="Hampers" />
+                        </div>
+                        <div class="content">
+                            <h3>{{ $item->nama_hampers }}</h3>
+                            @foreach ($produk as $pro)
+                                @if ($pro->id_hampers === $item->id_hampers)
+                                    <span class="stars" style="font-size: larger;">{{ $pro->nama_produk }}, </span>
+                                @endif
+                            @endforeach
+                            <br>
+                            <span class="price">Rp. {{ $item->harga_hampers }},-</span>
+                        </div>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -112,7 +146,9 @@
         <div class="box-container">
             @foreach ($produk as $item)
                 @if ($item->tipe_produk === 'Titipan')
-                    @include('partials.productBox', ['item' => $item])
+                    <a href="{{ route('produkHome.show', $item->id_produk) }}" class="text-decoration-none">
+                        @include('partials.productBox', ['item' => $item])
+                    </a>
                 @endif
             @endforeach
         </div>
@@ -154,6 +190,9 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/js/lightgallery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <script defer src="homeScript.js"></script>
     <script>
         lightGallery(document.querySelector('.gallery .gallery-container'));

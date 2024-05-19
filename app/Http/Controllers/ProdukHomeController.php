@@ -15,4 +15,19 @@ class ProdukHomeController extends Controller
 
         return view('produkPage', compact('produk', 'hampers'));
     }
+
+    public function show($id)
+    {
+        $produk = Produk::find($id);
+
+        return view('detailProdukPage', compact('produk'));
+    }
+
+    public function edit($id)
+    {
+        $hampers = Hampers::find($id);
+        $produk = Produk::all();
+
+        return view('detailProdukPage', compact('hampers', 'produk'));
+    }
 }

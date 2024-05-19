@@ -37,6 +37,11 @@ class PesananController extends Controller
         $pesanan = Pesanan::find($id);
         $detilPesanan = Detil_pesanan::where('id_pesanan', $id)->get();
 
+        // Get the tanggal_ambil from the pesanan
+        $tanggalAmbil = $pesanan->tanggal_ambil;
+
+        
+
         return view('pesanProdukPage', compact('produk', 'hampers', 'pesanan', 'detilPesanan'));
     }
 
@@ -150,23 +155,23 @@ class PesananController extends Controller
     }
 
     public function toInputJarakIndex(){
-        
+
             $pesanan = Pesanan::join('customer', 'pesanan.id_customer', '=', 'customer.id_customer')
                     ->select('pesanan.*', 'customer.nama_customer')
                     ->where('pesanan.status','menunggu konfirmasi')
                     ->where('pesanan.jarak', 0)
                     ->where('pesanan.jenis_delivery', 'Antar')
                     ->get();
-                    
+
             return view('admin.inputJarakPesanan.index', compact('pesanan'));
-        
+
         }
-        
-        
-        
-        
-    
-    
+
+
+
+
+
+
 
     public function editjarak($id){
         $pesanan = Pesanan::find($id);
@@ -205,10 +210,10 @@ class PesananController extends Controller
             return redirect()->route('inputJarakPesanan.index')->with('error', 'Data gagal diubah');
         }
     }
-    
-    
 
-   
+
+
+
 
     // public function edit($id)
     // {
