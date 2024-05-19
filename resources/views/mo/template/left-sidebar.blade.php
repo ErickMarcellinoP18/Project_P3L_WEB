@@ -62,6 +62,12 @@
     </li>
 
     <li class="nav-item">
+        <a class="nav-link" href="{{ url('/terimaPesanan')}}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Update Status</span></a>
+    </li>
+
+    <li class="nav-item">
         <a class="nav-link" href="{{ url('/gantiPasswordview')}}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Ganti Password</span></a>

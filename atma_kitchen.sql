@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 18, 2024 at 02:40 PM
+-- Generation Time: May 19, 2024 at 09:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -496,7 +496,7 @@ CREATE TABLE `pesanan` (
   `id_customer` int(11) NOT NULL,
   `tanggal_ambil` datetime DEFAULT NULL,
   `tanggal_pesan` datetime NOT NULL,
-  `status` varchar(15) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
   `jenis_delivery` varchar(10) NOT NULL,
   `tanggal_lunas` datetime DEFAULT NULL,
   `alamat` text NOT NULL,
@@ -512,11 +512,11 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id_pesanan`, `no_nota`, `id_customer`, `tanggal_ambil`, `tanggal_pesan`, `status`, `jenis_delivery`, `tanggal_lunas`, `alamat`, `jarak`, `poin_digunakan`, `pembayaran`, `bukti_pembayaran`, `poin_didapat`) VALUES
-(1, '2024.03.01', 1, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 120, 723000, '', 106),
-(2, '2024.03.02', 2, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 140000, '', 19),
-(3, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 190000, '', 60),
-(4, '2024.03.04', 5, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 440000, '', 64),
-(5, '2024.03.05', 6, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 75000, '', 6),
+(1, '2024.03.01', 1, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 120, 723000, '', 106),
+(2, '2024.03.02', 2, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 140000, '', 19),
+(3, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'menunggu konfirmasi', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 190000, '1716049293.png', 60),
+(4, '2024.03.04', 5, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 440000, '', 64),
+(5, '2024.03.05', 6, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 75000, '', 6),
 (6, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Selesai', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 190000, '', 24);
 
 -- --------------------------------------------------------
@@ -635,7 +635,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('DJYKEhgajGcqXILTHgYWWG9w7Jim5F6gJOYHolPq', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiYUViSzVFUUo1cHRLQ1NMZjdPaWNNa0VyODNmb0doR1dUZVpBMmpHMyI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTU6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9wZXNhbmFuL3Blc2FuUHJvZHVrL2hvbWVTY3JpcHQuanMiO31zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aTozO30=', 1716034324);
+('xXGk1hjK1RUPyj8CZZA4pwYnVdfUO26ka6Nz6aof', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiT1pzRUtMbXdFYUdWam1tTGtleFh6SHJYU0Q3eXpvN3hoYUdWbmNPbCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyUHJvZmlsZS8zL2RhZnRhclBlc2FuYW5DdXN0Ijt9czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czoyODoiaHR0cDovLzEyNy4wLjAuMTo4MDAwL2xvZ291dCI7fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1716049480);
 
 -- --------------------------------------------------------
 

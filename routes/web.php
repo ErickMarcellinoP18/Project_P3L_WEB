@@ -16,6 +16,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\ProdukHomeController;
 use App\Http\Controllers\DetilPesananController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\KonfirmasiController;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\URL;
@@ -121,9 +122,9 @@ Route::get('/gantiPasswordview', function () {
 Route::resource('/user', UserController::class);
 Route::get('/userProfile', 'App\Http\Controllers\UserController@userProfile')->name('user.userProfile');
 Route::get('/userProfile/{id}/HistoryPemesanan', 'App\Http\Controllers\UserController@historypesanan')->name('user.historypesanan');
-Route::get('/userProfile/{id}/daftarpesanancust', 'App\Http\Controllers\UserController@daftarpesanancust')->name('user.daftarpesanancust');
-Route::get('/userProfile/{id}/uploadPage', 'App\Http\Controllers\PesananController@uploadPage')->name('pesanan.uploadPage');
-Route::get('/userProfile/{id}/uploadBukti', 'App\Http\Controllers\PesananController@uploadBukti')->name('pesanan.uploadBukti');
+Route::get('/userProfile/{id}/daftarPesananCust', 'App\Http\Controllers\UserController@daftarPesananCust')->name('user.daftarPesananCust');
+Route::get('/userProfile/{id}/uploadPage', 'App\Http\Controllers\UserController@uploadPage')->name('user.uploadPage');
+Route::post('/userProfile/{id}/uploadBukti', 'App\Http\Controllers\UserController@uploadBukti')->name('user.uploadBukti');
 
 Route::post('/gantiPasswordview/gantiPassword/{role}', 'App\Http\Controllers\KaryawanController@changepassword')->name('karyawan.changepassword');
 
@@ -140,5 +141,8 @@ Route::resource('/karyawan', KaryawanController::class);
 Route::resource('/resep', ResepController::class);
 Route::resource('/produkHome', ProdukHomeController::class);
 Route::resource('/detil_pesanan', DetilPesananController::class);
+Route::resource('/terimaPesanan', KonfirmasiController::class);
 Route::resource('/pesanan', 'App\Http\Controllers\PesananController');
+Route::get('/terimaPesanan/updateStatus/{id}', 'App\Http\Controllers\KonfirmasiController@updateStatus')->name('terimaPesanan.updateStatus');
+Route::get('/terimaPesanan/updateStatusN/{id}', 'App\Http\Controllers\KonfirmasiController@updateStatusN')->name('terimaPesanan.updateStatusN');
 Route::get('/pesanan/pesanProduk/{id}', 'App\Http\Controllers\PesananController@pesanProduk')->name('pesanan.pesanProduk');

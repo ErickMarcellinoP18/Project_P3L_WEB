@@ -100,7 +100,7 @@
                                             <td>{{ $item->jenis_delivery }}</td>
                                             <td>{{ $item->nama_produk }}</td>
                                             <td>
-                                                <a href="{{ route('pesanan.uploadPage', $item->id_pesanan) }}"
+                                                <a href="{{ route('user.uploadPage', $item->id_pesanan) }}"
                                                     class="btn btn-sm btn-success">Bayar Nota</a>
                                             </td>
                                         </tr>

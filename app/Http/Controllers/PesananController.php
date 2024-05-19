@@ -147,33 +147,10 @@ class PesananController extends Controller
         // Check if the pesanan date is within 3 days before or after the customer's birthday
         return abs($diff) <= 3;
     }
+    
+    
 
-    public function uploadPage($id)
-    {
-        $pesanan = Pesanan::find($id);
-        return view('customer.pembayaran.buktiUpload', compact('pesanan'));
-    }
-
-    public function uploadBukti(Request $request, $id_pesanan)
-    {
-        $request->validate([
-            'bukti_pembayaran' => 'required|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        $pesanan = Pesanan::find($id_pesanan);
-        if (!$pesanan) {
-            return redirect()->back()->with('error', 'Pesanan tidak ditemukan.');
-        }
-
-        $file = $request->file('bukti_pembayaran');
-        $filename = time() . '.' . $file->getClientOriginalExtension();
-        $file->move(public_path('uploads/bukti_pembayaran'), $filename);
-
-        $pesanan->bukti_pembayaran = $filename;
-        $pesanan->save();
-
-        return redirect()->route('pesanan.show', $id_pesanan)->with('success', 'Bukti pembayaran berhasil diupload.');
-    }
+   
 
     // public function edit($id)
     // {

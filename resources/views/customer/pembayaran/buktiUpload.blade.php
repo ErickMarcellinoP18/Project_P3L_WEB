@@ -42,7 +42,7 @@
 <div class="container mt-5" style="max-width: 500px; margin: auto;">
     <h2 class="mb-4 text-center" style="color: #007bff;">Upload Bukti Pembayaran</h2>
     @if(isset($pesanan))
-        <form action="{{ route('pesanan.uploadBukti', $pesanan->id_pesanan) }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded shadow-sm" style="background-color: #f8f9fa;">
+        <form action="{{ route('user.uploadBukti', $pesanan->id_pesanan) }}" method="POST" enctype="multipart/form-data" class="p-4 border rounded shadow-sm" style="background-color: #f8f9fa;">
             @csrf
             <div class="mb-3">
                 <label for="bukti_pembayaran" class="form-label" style="font-weight: bold; color: #007bff;">Pilih File Bukti Pembayaran:</label>

@@ -111,6 +111,7 @@ class UserController extends Controller
 
         return view('historyPemesananUser', compact('pesanan'));
     }
+
     public function daftarpesanancust($id)
     {
 
@@ -118,11 +119,40 @@ class UserController extends Controller
             ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
             ->select('produk.*', 'detil_pesanan.*', 'pesanan.*')
             ->where('pesanan.id_customer', $id)
-            ->where('pesanan.status', 'selesai')
+            ->where('pesanan.status', 'belum dibayar')
             ->get();
 
 
         return view('customer.pembayaran.index', compact('pesanan'));
+    }
+
+
+    public function uploadPage($id)
+    {
+        $pesanan = Pesanan::find($id);
+        return view('customer.pembayaran.buktiUpload', compact('pesanan'));
+    }
+
+    public function uploadBukti(Request $request, $id_pesanan)
+    {
+        $request->validate([
+            'bukti_pembayaran' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+
+        $pesanan = Pesanan::find($id_pesanan);
+        if (!$pesanan) {
+            return redirect()->back()->with('error', 'Pesanan tidak ditemukan.');
+        }
+
+        $file = $request->file('bukti_pembayaran');
+        $filename = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads/bukti_pembayaran'), $filename);
+
+        $pesanan->bukti_pembayaran = $filename;
+        $pesanan->status = "menunggu konfirmasi";
+        $pesanan->save();
+
+        return redirect()->route('user.daftarPesananCust', $id_pesanan)->with('success', 'Bukti pembayaran berhasil diupload.');
     }
 
 
