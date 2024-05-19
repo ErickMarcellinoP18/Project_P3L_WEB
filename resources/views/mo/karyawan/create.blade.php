@@ -67,10 +67,9 @@
                                             <select class="form-control form-control-user @error('jabatan') is-invalid @enderror"
                                                     id="inputJabatan" name="jabatan">
                                                 <option value="">Select Jabatan</option>
-                                                <option value="Pegawai" {{ old('jabatan') == 'Pegawai' ? 'selected' : '' }}>Pegawai</option>
-                                                <option value="MO" {{ old('jabatan') == 'MO' ? 'selected' : '' }}>MO</option>
-                                                <option value="Admin" {{ old('jabatan') == 'Admin' ? 'selected' : '' }}>Admin</option>
-                                                <option value="Owner" {{ old('jabatan') == 'Owner' ? 'selected' : '' }}>Owner</option>
+                                                <option value="Pegawai" {{ old('jabatan') }}>Pegawai</option>
+                                                <option value="MO" {{ old('jabatan')  }}>MO</option>
+                                                <option value="Admin" {{ old('jabatan')  }}>Owner</option>
                                             </select>
                                             @error('jabatan')
                                                 <div class="invalid-feedback">
