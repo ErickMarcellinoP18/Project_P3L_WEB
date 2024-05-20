@@ -33,6 +33,7 @@ class User extends Authenticatable
         'email',
         'ulang_tahun',
         'saldo',
+        'poin',
         'verify_key',
         'active',
     ];

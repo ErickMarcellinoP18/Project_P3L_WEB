@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 
 class Pesanan extends Model
-{   
+{
     use HasFactory;
     public $timestamps = false;
     public $table = "pesanan";
@@ -31,6 +31,6 @@ class Pesanan extends Model
 
     public function customer()
     {
-        return $this->belongsTo(Customer::class, 'id_customer');
+        return $this->belongsTo(User::class, 'id_customer');
     }
 }

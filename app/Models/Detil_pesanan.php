@@ -12,7 +12,7 @@ class Detil_pesanan extends Model
     public $timestamps = false;
     public $table = 'detil_pesanan';
     protected $fillable = [
-        'no_nota',
+        'id_pesanan',
         'id_produk',
         'kuantitas',
         'subtotal',
@@ -28,5 +28,4 @@ class Detil_pesanan extends Model
     {
         return $this->belongsTo(Pesanan::class, 'id_pesanan');
     }
-    
 }
