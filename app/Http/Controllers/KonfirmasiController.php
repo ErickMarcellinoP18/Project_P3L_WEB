@@ -18,7 +18,7 @@ class KonfirmasiController extends Controller
     {
         $pesanan = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
             ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
-            ->where('status', 'menunggu konfirmasi')
+            ->where('status', 'sudah dibayar')
             ->get();
         
         return view('mo.konfirmasiPesanan.index', compact('pesanan'));
@@ -42,7 +42,7 @@ class KonfirmasiController extends Controller
             $user->save();
 
             $bahanBaku = Bahan_baku::find($id);
-            $bahanBaku->stok_bahan -= 100;
+            $bahanBaku->stok_bahan -= 50;
             $bahanBaku->save();
 
             return redirect()->route('terimaPesanan.index', $id)->with('success', 'Pesanan Diterima.');

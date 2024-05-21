@@ -149,7 +149,7 @@ class UserController extends Controller
         $file->move(public_path('uploads/bukti_pembayaran'), $filename);
 
         $pesanan->bukti_pembayaran = $filename;
-        $pesanan->status = "menunggu konfirmasi";
+        $pesanan->status = "sudah dibayar";
         $pesanan->save();
 
         return redirect()->route('user.userProfile')->with('success', 'Bukti pembayaran berhasil diupload.');
