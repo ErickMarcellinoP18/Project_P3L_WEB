@@ -9,6 +9,10 @@ class Detail_resep extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    public $table = 'detail_resep';
+
     protected $fillable = [
         'id_resep',
         'id_bahan',
@@ -22,6 +26,6 @@ class Detail_resep extends Model
 
     public function bahan()
     {
-        return $this->belongsTo(Bahan::class, 'id_bahan');
+        return $this->belongsTo(Bahan_baku::class, 'id_bahan');
     }
 }

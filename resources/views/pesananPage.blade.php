@@ -2,51 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Order</title>
-    <link rel="icon" type="image/x-icon" href="images/logoP3L.png">
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery-js/1.4.0/css/lightgallery.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link href="{{ asset('homeStyle.css') }}" rel="stylesheet">
+    @include('templateUser.head')
 </head>
 
 <body>
 
     <!-- header -->
-    <header class="header">
-        <img class="logo" src="{{ asset('images/logoP3L.png') }}" alt="Logo P3L" style="height: 50px; width: 50px;">
-
-        <nav class="navbar">
-            <a href="/#home" class="nav-link">home</a>
-            <a href="/#about" class="nav-link">about</a>
-            <a href="/produkHome" class="nav-link">produk</a>
-            <a href="/#gallery" class="nav-link">foto</a>
-            <a href="/#order" class="nav-link">order</a>
-        </nav>
-
-        <div class="icons">
-            @if (Auth::check())
-                <div id="cart-btn" class="fas fa-shopping-cart"></div>
-                <div id="profile-btn" onclick="window.location.href='{{ route('user.userProfile') }}'"
-                    class="fas fa-user"></div>
-            @endif
-            @if (Auth::check())
-                <div id="logout-btn" onclick="window.location.href='{{ route('actionLogout') }}'"
-                    class="fas fa-sign-out-alt">
-                </div>
-            @else
-                <div id="login-btn" onclick="window.location.href='{{ url('login') }}'" class="fas fa-sign-in-alt">
-                </div>
-            @endif
-            <div id="menu-btn" class="fas fa-bars"></div>
-        </div>
-    </header>
+    @include('templateUser.navbar')
     <!-- header end -->
+
+    <!-- shopping cart -->
+    @include('templateUser.shoppingCart')
+    <!-- shopping cart end-->
 
     <section class="order" id="order">
         <h1 class="heading"><span>order</span> now </h1>

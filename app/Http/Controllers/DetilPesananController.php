@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Exception;
 use App\Models\Detil_pesanan;
+use App\Models\Produk;
+use App\Models\Pesanan;
 
 
 class DetilPesananController extends Controller
 {
-    
+
     public function index()
     {
         $detil_pesanan = Detil_pesanan::all();
@@ -27,7 +29,7 @@ class DetilPesananController extends Controller
         $request->validate([
             'id_pesanan' => 'required',
             'id_produk' => 'required',
-            'jumlah' => 'required',
+            'kuantitas' => 'required',
             'subtotal' => 'required',
         ]);
 
@@ -50,7 +52,7 @@ class DetilPesananController extends Controller
         $request->validate([
             'id_pesanan' => 'required',
             'id_produk' => 'required',
-            'jumlah' => 'required',
+            'kuantitas' => 'required',
             'subtotal' => 'required',
         ]);
 
@@ -62,4 +64,43 @@ class DetilPesananController extends Controller
         }
     }
 
+    public function addProduktoCart($id)
+    {
+        $produk = Produk::findOrFail($id);
+        $cart = session()->get('cart', []);
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity']++;
+        } else {
+            $cart[$id] = [
+                "nama_produk" => $produk->nama_produk,
+                "quantity" => 1,
+                "harga" => $produk->harga,
+                "gambar_produk" => $produk->gambar_produk
+            ];
+        }
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Produk has been added to cart!');
+    }
+
+    public function updateCart(Request $request)
+    {
+        if ($request->id && $request->quantity) {
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Produk added to cart.');
+        }
+    }
+
+    public function deleteProduct(Request $request)
+    {
+        if ($request->id) {
+            $cart = session()->get('cart');
+            if (isset($cart[$request->id])) {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Produk successfully deleted.');
+        }
+    }
 }

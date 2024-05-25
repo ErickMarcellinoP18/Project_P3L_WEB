@@ -16,6 +16,7 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\ProdukHomeController;
 use App\Http\Controllers\DetilPesananController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\KonfirmasiProsesController;
 use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\listBahanController;
 use Illuminate\Http\Request;
@@ -140,6 +141,7 @@ Route::resource('/penitip', PenitipController::class);
 Route::resource('/pengeluaran_lain', PengeluaranLainController::class);
 Route::resource('/karyawan', KaryawanController::class);
 Route::resource('/resep', ResepController::class);
+Route::resource('/konfirmasiProses', KonfirmasiProsesController::class);
 Route::resource('/produkHome', ProdukHomeController::class);
 Route::resource('/detil_pesanan', DetilPesananController::class);
 Route::resource('/terimaPesanan', KonfirmasiController::class);
@@ -149,7 +151,14 @@ Route::get('/terimaPesanan/updateStatus/{id}', 'App\Http\Controllers\KonfirmasiC
 Route::get('/terimaPesanan/updateStatusN/{id}', 'App\Http\Controllers\KonfirmasiController@updateStatusN')->name('terimaPesanan.updateStatusN');
 Route::get('/pesanan/pesanProduk/{id}', 'App\Http\Controllers\PesananController@pesanProduk')->name('pesanan.pesanProduk');
 
+Route::get('/inputjarak', 'App\Http\Controllers\PesananController@toInputJarakIndex')->name('inputJarakPesanan.index');
+Route::get('/inputjarak/{id}/edit', 'App\Http\Controllers\PesananController@editjarak')->name('pesanan.inputJarakPesanan');
+Route::put('/inputjarak/{id}/update', 'App\Http\Controllers\PesananController@updatejarak')->name('pesanan.updateJarakPesanan');
 
-Route::get('/inputjarak','App\Http\Controllers\PesananController@toInputJarakIndex')->name('inputJarakPesanan.index');
-Route::get('/inputjarak/{id}/edit','App\Http\Controllers\PesananController@editjarak')->name('pesanan.inputJarakPesanan');
-Route::put('/inputjarak/{id}/update','App\Http\Controllers\PesananController@updatejarak')->name('pesanan.updateJarakPesanan');
+
+Route::get('/shopping-cart', [DetilPesananController::class, 'ProdukCart'])->name('shopping.cart');
+Route::get('/product/{id}', [DetilPesananController::class, 'addProduktoCart'])->name('addproduk.to.cart');
+Route::patch('/update-shopping-cart', [DetilPesananController::class, 'updateCart'])->name('update.sopping.cart');
+Route::delete('/delete-cart-product', [DetilPesananController::class, 'deleteProduct'])->name('delete.cart.product');
+
+Route::post('/process-order/{orderId}', 'App\Http\Controllers\KonfirmasiProsesController@processOrder')->name('process.order');

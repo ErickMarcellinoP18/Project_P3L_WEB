@@ -7,12 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Penggunaan_bahan_baku extends Model
 {
+
+    public $timestamps = false;
+
+    public $table = 'penggunaan_bahan_baku';
+
     use HasFactory;
 
     protected $fillable = [
         'id_bahan_baku',
         'kuantitas',
-        'tanggal_penggunaan'
+        'tgl_pengeluaran'
     ];
 
     public function bahan_baku()

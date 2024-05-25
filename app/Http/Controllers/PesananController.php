@@ -11,7 +11,6 @@ use App\Models\User;
 use App\Models\Hampers;
 use App\Models\Produk;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Customer;
 use Illuminate\Support\Facades\DB;
 
 class PesananController extends Controller
@@ -21,9 +20,9 @@ class PesananController extends Controller
         $pesanan = Pesanan::all();
         return view('notaPage', compact('pesanan'));
     }
+
     public function show($id)
     {
-
         $pesanan = Pesanan::find($id);
         $detilPesanan = Detil_pesanan::where('id_pesanan', $id)->get();
         $detilPoin = Detil_poin::where('id_pesanan', $id)->get();
@@ -34,14 +33,11 @@ class PesananController extends Controller
     {
         $produk = Produk::all();
         $hampers = Hampers::all();
-
         $pesanan = Pesanan::find($id);
         $detilPesanan = Detil_pesanan::where('id_pesanan', $id)->get();
 
-
         return view('pesanProdukPage', compact('produk', 'hampers', 'pesanan', 'detilPesanan'));
     }
-
 
     public function create()
     {
@@ -65,16 +61,6 @@ class PesananController extends Controller
             return redirect()->back()->with('error', 'Poin yang digunakan melebihi poin yang Anda miliki.');
         }
 
-        // Example products data (you should replace it with your actual data)
-        $products = [
-            [
-                'id_produk' => 1,
-                'kuantitas' => 2,
-            ],
-            // Add more products as needed
-        ];
-
-        // Begin transaction
         DB::beginTransaction();
 
         try {
@@ -88,65 +74,84 @@ class PesananController extends Controller
                 'poin_digunakan' => $request->poin_digunakan,
             ]);
 
-            foreach ($products as $productData) {
-                $product = Produk::find($productData['id_produk']);
-                $quantityNeeded = $productData['kuantitas'];
+            $pesanan->no_nota = date('Y.m') . '.' . $pesanan->id_pesanan;
+            $pesanan->save();
 
-                if ($product->jumlah_stok >= $quantityNeeded) {
-                    // Reduce stock if sufficient
-                    $product->jumlah_stok -= $quantityNeeded;
-                    $quantityNeeded = 0;
-                } else {
-                    // Reduce stock by available amount and calculate remaining quantity needed
-                    $quantityNeeded -= $product->jumlah_stok;
-                    $product->jumlah_stok = 0;
-                }
-
-                if ($quantityNeeded > 0) {
-                    // Reduce quota by the remaining quantity needed
-                    $product->kuota -= $quantityNeeded;
-                }
-
-                $product->save();
-
+            foreach (session('cart') as $id => $details) {
                 Detil_pesanan::create([
                     'id_pesanan' => $pesanan->id_pesanan,
-                    'id_produk' => $productData['id_produk'],
-                    'kuantitas' => $productData['kuantitas'],
-                    'harga_produk' => $product->harga,
-                    'subtotal' => $product->harga * $productData['kuantitas'],
+                    'id_produk' => $id,
+                    'kuantitas' => $details['quantity'],
+                    'harga_produk' => $details['harga'],
+                    'subtotal' => $details['quantity'] * $details['harga'],
                 ]);
             }
 
-            // Calculate points
             $this->calculatePoints($pesanan->id_pesanan);
+            $this->handleProductStock(session('cart'));
+
+            // Clear the session cart
+            session()->forget('cart');
 
             DB::commit();
 
-            return redirect()->route('pesanan.pesanProduk', $pesanan->id_pesanan)->with('success', 'Data berhasil ditambahkan');
+            return redirect()->route('home')->with('success', 'Data berhasil ditambahkan');
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->route('pesanan.pesanProduk', $pesanan->id_pesanan)->with('error', 'Data gagal ditambahkan');
+            return redirect()->route('home')->with('error', 'Data gagal ditambahkan');
+        }
+    }
+
+
+    private function handleProductStock($cart)
+    {
+        foreach ($cart as $id => $details) {
+            $produk = Produk::find($id);
+            $quantityNeeded = $details['quantity'];
+
+            if ($produk->jumlah_stok >= $quantityNeeded) {
+                $produk->jumlah_stok -= $quantityNeeded;
+            } else {
+                $quantityNeeded -= $produk->jumlah_stok;
+                $produk->jumlah_stok = 0;
+                $produk->kuota -= $quantityNeeded;
+            }
+
+            $produk->save();
         }
     }
 
     public function calculatePoints($id)
     {
-        // Fetch pesanan and user details
         $pesanan = Pesanan::find($id);
         $user = User::find($pesanan->id_customer);
         $detilPesanan = Detil_pesanan::where('id_pesanan', $id)->get();
 
-        $totalHarga = 0;
-
-        foreach ($detilPesanan as $detil) {
-            $totalHarga += $detil->subtotal; // Calculate the total
-        }
-        $pesananDate = $pesanan->tanggal_pesan;
+        $totalHarga = $detilPesanan->sum('subtotal');
         $customerBirthday = $user->ulang_tahun;
-        $points = 0;
+        $points = $this->calculateBasePoints($totalHarga);
 
-        // Calculate points based on totalHarga
+        if ($this->isCustomerBirthday($customerBirthday, $pesanan->tanggal_pesan)) {
+            $points *= 2;
+        }
+
+        $user->poin -= $pesanan->poin_digunakan;
+        $user->poin += $points;
+        $user->save();
+
+        try {
+            $pesanan->poin_didapat = $points;
+            $pesanan->save();
+
+            return redirect()->route('pesanan.show', $pesanan->id_pesanan)->with('success', 'Poin berhasil ditambahkan');
+        } catch (Exception $e) {
+            return redirect()->route('pesanan.pesanProduk', $pesanan->id_pesanan)->with('error', 'Poin gagal ditambahkan');
+        }
+    }
+
+    private function calculateBasePoints($totalHarga)
+    {
+        $points = 0;
         if ($totalHarga >= 1000000) {
             $points += floor($totalHarga / 1000000) * 200;
             $totalHarga %= 1000000;
@@ -163,44 +168,20 @@ class PesananController extends Controller
             $points += floor($totalHarga / 10000);
             $totalHarga %= 10000;
         }
-
-        // Check if the pesanan date is within 3 days before or after the customer's birthday
-        if ($this->isCustomerBirthday($customerBirthday, $pesananDate)) {
-            $points *= 2;
-        }
-        // Update user points
-        $user->poin -= $pesanan->poin_digunakan;
-        $user->poin += $points;
-        $user->save();
-
-        try {
-            $pesanan->poin_didapat = $points;
-            $pesanan->save();
-
-            return redirect()->route('pesanan.show', $pesanan->id_pesanan)->with('success', 'Poin berhasil ditambahkan');
-        } catch (Exception $e) {
-            // Handle the error here
-            return redirect()->route('pesanan.pesanProduk', $pesanan->id_pesanan)->with('error', 'Poin gagal ditambahkan');
-        }
+        return $points;
     }
-
 
     private function isCustomerBirthday($customerBirthday, $pesananDate)
     {
-        // Convert string dates to DateTime objects
         $customerBirthday = new \DateTime($customerBirthday);
         $pesananDate = new \DateTime($pesananDate);
-
-        // Calculate the difference in days between customer's birthday and pesanan date
         $diff = $customerBirthday->diff($pesananDate)->days;
 
-        // Check if the pesanan date is within 3 days before or after the customer's birthday
         return abs($diff) <= 3;
     }
 
     public function toInputJarakIndex()
     {
-
         $pesanan = Pesanan::join('customer', 'pesanan.id_customer', '=', 'customer.id_customer')
             ->select('pesanan.*', 'customer.nama_customer')
             ->where('pesanan.status', 'menunggu konfirmasi')
@@ -225,25 +206,11 @@ class PesananController extends Controller
 
         try {
             $pesanan = Pesanan::find($id);
-
             $pesanan->jarak = $request->jarak;
 
-            if ($request->jarak <= 5) {
-                $pesanan->total_biaya += 10000;
-                $pesanan->ongkir = 10000;
-            } else if ($request->jarak > 5 && $request->jarak <= 10) {
-                $pesanan->total_biaya += 15000;
-                $pesanan->ongkir = 15000;
-            } else if ($request->jarak > 10 && $request->jarak <= 15) {
-                $pesanan->total_biaya += 20000;
-                $pesanan->ongkir = 20000;
-            } else if ($request->jarak > 15) {
-                $pesanan->total_biaya += 25000;
-                $pesanan->ongkir = 25000;
-            }
+            $this->calculateOngkir($pesanan);
 
             $pesanan->save();
-
 
             return redirect()->route('inputJarakPesanan.index')->with('success', ['Biaya Pesanan' => $pesanan->total_biaya, 'Ongkir' => $pesanan->ongkir]);
         } catch (Exception $e) {
@@ -251,9 +218,22 @@ class PesananController extends Controller
         }
     }
 
-
-
-
+    private function calculateOngkir($pesanan)
+    {
+        if ($pesanan->jarak <= 5) {
+            $pesanan->total_biaya += 10000;
+            $pesanan->ongkir = 10000;
+        } elseif ($pesanan->jarak > 5 && $pesanan->jarak <= 10) {
+            $pesanan->total_biaya += 15000;
+            $pesanan->ongkir = 15000;
+        } elseif ($pesanan->jarak > 10 && $pesanan->jarak <= 15) {
+            $pesanan->total_biaya += 20000;
+            $pesanan->ongkir = 20000;
+        } else {
+            $pesanan->total_biaya += 25000;
+            $pesanan->ongkir = 25000;
+        }
+    }
 
     // public function edit($id)
     // {
