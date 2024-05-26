@@ -67,16 +67,18 @@
                             <div class="col-sm-5">
                                 <div class="text-muted text-sm-end">
                                     <div>
-                                        <h5 class="font-size-15 mb-1">Invoice Date</h5>
-                                        <p>{{ $pesanan->tanggal_pesan }}</p>
-                                    </div>
-                                    <div class="mt-4">
-                                        <h5 class="font-size-15 mb-1">Paid Off Date</h5>
-                                        <p>{{ $pesanan->tanggal_lunas }}</p>
-                                    </div>
-                                    <div class="mt-4">
-                                        <h5 class="font-size-15 mb-1">Retrieve Date</h5>
-                                        <p>{{ $pesanan->tanggal_ambil }}</p>
+                                        <div>
+                                            <h5 class="font-size-15 mb-1">Invoice Date</h5>
+                                            <p>{{ date('d/m/Y H:i', strtotime($pesanan->tanggal_pesan)) }}</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h5 class="font-size-15 mb-1">Paid Off Date</h5>
+                                            <p>{{ date('d/m/Y H:i', strtotime($pesanan->tanggal_lunas)) }}</p>
+                                        </div>
+                                        <div class="mt-4">
+                                            <h5 class="font-size-15 mb-1">Retrieve Date</h5>
+                                            <p>{{ date('d/m/Y H:i', strtotime($pesanan->tanggal_ambil)) }}</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -89,9 +91,9 @@
                                     <thead>
                                         <tr>
                                             <th style="width: 70px">No.</th>
-                                            <th>Item</th>
-                                            <th>Price</th>
-                                            <th>Quantity</th>
+                                            <th>Produk</th>
+                                            <th>Harga</th>
+                                            <th>Kuantitas</th>
                                             <th class="text-end" style="width: 120px">Total</th>
                                         </tr>
                                     </thead>
@@ -105,10 +107,10 @@
                                                         </p>
                                                     </div>
                                                 </td>
-                                                <td>Rp. {{ $detil->harga_produk }}</td>
+                                                <td>Rp. {{ number_format($detil->harga_produk, 0, ',', '.') }}</td>
                                                 <td>{{ $detil->kuantitas }}</td>
                                                 <td class="text-end">Rp.
-                                                    {{ $detil->subtotal }}</td>
+                                                    {{ number_format($detil->subtotal, 0, ',', '.') }}</td>
                                             </tr>
                                         @endforeach
 
@@ -122,7 +124,7 @@
                                                     $total += $detil->subtotal; // Calculate the subtotal
                                                 }
                                             @endphp
-                                            <td class="text-end">Rp. {{ $total }}</td>
+                                            <td class="text-end">Rp. {{ number_format($total, 0, ',', '.') }}</td>
                                         </tr>
                                         <tr>
                                             <th scope="row" colspan="4" class="border-0 text-end">
@@ -134,7 +136,8 @@
                                             <th scope="row" colspan="4" class="border-0 text-end">
                                                 Total
                                             </th>
-                                            <td class="border-0 text-end">Rp. {{ $total + $pesanan->jarak * 2000 }}
+                                            <td class="border-0 text-end">Rp.
+                                                {{ number_format($total + $pesanan->jarak * 2000, 0, ',', '.') }}
                                             </td>
                                         </tr>
                                         @if ($pesanan->poin_digunakan > 0)
@@ -152,7 +155,7 @@
                                             </th>
                                             <td class="border-0 text-end">
                                                 <h4 class="m-0 fw-semibold">
-                                                    Rp.{{ $total + $pesanan->jarak * 2000 - $pesanan->poin_digunakan * 100 }}
+                                                    {{ number_format($total + $pesanan->jarak * 2000 - $pesanan->poin_digunakan * 100, 0, ',', '.') }}
                                                 </h4>
                                             </td>
                                         </tr>

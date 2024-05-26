@@ -97,12 +97,16 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link" href="{{ url('/gantiPasswordview')}}">
+        <a class="nav-link" href="{{ url('/gantiPasswordview') }}">
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Ganti Password</span></a>
     </li>
 
-
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/konfirmasiProses') }}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Pemrosesan</span></a>
+    </li>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

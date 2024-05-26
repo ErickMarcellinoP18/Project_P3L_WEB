@@ -76,7 +76,7 @@
                                 @endif
                             @endforeach
                             <br>
-                            <span class="price">Rp. {{ $item->harga_hampers }},-</span>
+                            <span class="price">Rp. {{ number_format($item->harga_hampers, 0, ',', '.') }},-</span>
                             <br>
                             @if (Auth::check())
                                 <a href="{{ route('addproduk.to.cart', $item->id_hampers) }}" class="btn">add to

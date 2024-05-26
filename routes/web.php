@@ -19,6 +19,7 @@ use App\Http\Controllers\PesananController;
 use App\Http\Controllers\KonfirmasiProsesController;
 use App\Http\Controllers\KonfirmasiController;
 use App\Http\Controllers\listBahanController;
+use App\Http\Controllers\LaporanController;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\URL;
@@ -162,3 +163,6 @@ Route::patch('/update-shopping-cart', [DetilPesananController::class, 'updateCar
 Route::delete('/delete-cart-product', [DetilPesananController::class, 'deleteProduct'])->name('delete.cart.product');
 
 Route::post('/process-order/{orderId}', 'App\Http\Controllers\KonfirmasiProsesController@processOrder')->name('process.order');
+
+Route::get('/laporan/stokBahan', [LaporanController::class, 'stokBahan'])->name('laporan.stokBahan');
+Route::get('/laporan/penjualanProduk', [LaporanController::class, 'penjualanProduk'])->name('laporan.penjualanProduk');

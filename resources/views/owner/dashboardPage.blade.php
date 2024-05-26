@@ -31,8 +31,15 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <div>
+                            <a href="{{ route('laporan.stokBahan') }}"
+                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    class="fas fa-download fa-sm text-white-50"></i> Stok Bahan Report</a>
+                            <a href="javascript:void(0);" id="penjualanProdukReportBtn"
+                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fas fa-download fa-sm text-white-50"></i> Penjualan Produk Report
+                            </a>
+                        </div>
                     </div>
 
                     <!-- Content Row -->
@@ -138,9 +145,43 @@
     </div>
     <!-- End of Page Wrapper -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="penjualanProdukModal" tabindex="-1" aria-labelledby="penjualanProdukModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="penjualanProdukModalLabel">Pilih Bulan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('laporan.penjualanProduk') }}" method="GET">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="bulan">Bulan</label>
+                            <input type="month" class="form-control" id="bulan" name="bulan" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     @include('owner.template.logoutModal')
 
     @include('owner.template.script')
+
+    <script>
+        // Show modal when button is clicked
+        document.getElementById('penjualanProdukReportBtn').addEventListener('click', function() {
+            $('#penjualanProdukModal').modal('show');
+        });
+    </script>
 
 </body>
 

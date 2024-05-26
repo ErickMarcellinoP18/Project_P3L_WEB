@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\PresensiController;
 use App\Http\Controllers\Api\ProdukController;
 use App\Http\Controllers\Api\HampersController;
 use App\Http\Controllers\Api\ResepController;
+use App\Http\Controllers\Api\BahanBakuController;
 
 Route::apiResource('user', UserController::class);
 Route::post('/login', [UserController::class, 'authenticate']);
@@ -25,3 +26,6 @@ Route::get('hampersShow/{id}', [HampersController::class, 'showByUser']);
 
 Route::apiResource('resep', ResepController::class);
 Route::get('resepShow/{id}', [ResepController::class, 'showByUser']);
+
+Route::apiResource('bahanBaku', BahanBakuController::class);
+Route::get('bahanBakuShow/{id}', [BahanBakuController::class, 'showByUser']);

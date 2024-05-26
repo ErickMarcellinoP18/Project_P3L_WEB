@@ -9,7 +9,7 @@
     @endif
     <span class="stock" style="font-size: larger;">Stok Produk: {{ $item->jumlah_stok }}</span>
     <br>
-    <span class="price">Rp. {{ $item->harga }}</span>
+    <span class="price">Rp. {{ number_format($item->harga, 0, ',', '.') }}</span>
     <br>
     @if (Auth::check())
         <a href="{{ route('addproduk.to.cart', $item->id_produk) }}" class="btn">add to cart</a>
