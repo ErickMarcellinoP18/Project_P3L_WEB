@@ -18,6 +18,7 @@ use App\Http\Controllers\DetilPesananController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\KonfirmasiProsesController;
 use App\Http\Controllers\KonfirmasiController;
+use App\Http\Controllers\KonfirmasiSaldoController;
 use App\Http\Controllers\listBahanController;
 use App\Http\Controllers\LaporanController;
 use Illuminate\Http\Request;
@@ -166,3 +167,7 @@ Route::post('/process-order/{orderId}', 'App\Http\Controllers\KonfirmasiProsesCo
 
 Route::get('/laporan/stokBahan', [LaporanController::class, 'stokBahan'])->name('laporan.stokBahan');
 Route::get('/laporan/penjualanProduk', [LaporanController::class, 'penjualanProduk'])->name('laporan.penjualanProduk');
+
+Route::resource('/saldo', KonfirmasiSaldoController::class);
+Route::get('/saldo/updateStatus/{id}', 'App\Http\Controllers\KonfirmasiSaldoController@updateStatus')->name('saldo.updateStatus');
+Route::get('/saldo/updateStatusN/{id}', 'App\Http\Controllers\KonfirmasiSaldoController@updateStatusN')->name('saldo.updateStatusN');

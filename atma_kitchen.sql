@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2024 at 04:32 AM
+-- Generation Time: May 29, 2024 at 06:24 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -629,6 +629,27 @@ INSERT INTO `resep` (`id_resep`, `nama_resep`, `kuota_harian`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `saldo`
+--
+
+CREATE TABLE `saldo` (
+  `id_saldo` int(11) NOT NULL,
+  `id_customer` int(11) NOT NULL,
+  `saldoKembali` int(11) NOT NULL,
+  `nomorRekening` varchar(255) NOT NULL,
+  `statusPenarikan` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `saldo`
+--
+
+INSERT INTO `saldo` (`id_saldo`, `id_customer`, `saldoKembali`, `nomorRekening`, `statusPenarikan`) VALUES
+(1, 3, 100000, '2350551945', 'Diterima');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `sessions`
 --
 
@@ -646,7 +667,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('WC2BjLd8rJgSIaCNVnfUPlwOrNm9lsCjFsFgY0Yw', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoib2EwdVZDT0ZpakxqRU9HS1YySkhEYUZBVTdlZ0R3WDB6OXZuSjRETyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyUHJvZmlsZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1716171495);
+('WC2BjLd8rJgSIaCNVnfUPlwOrNm9lsCjFsFgY0Yw', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoib2EwdVZDT0ZpakxqRU9HS1YySkhEYUZBVTdlZ0R3WDB6OXZuSjRETyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyUHJvZmlsZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1716171495),
+('y4KBYa5VxxXeXIADQSpSNPoKJq3je2hrmEYBGvQU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicnRZaTdhTWNKOHk3VDFGUUFvRVBhNDNld3NaS2RNaklTMFJJNXJDeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zYWxkbz8xPSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1716999820);
 
 -- --------------------------------------------------------
 
@@ -676,7 +698,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `password`, `email`, `ulang_tahun`, `poin`, `saldo`, `verify_key`, `active`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
 (2, 'Klasik', '$2y$12$Ll8i2GfRNPs.uPDVf5Bmgu5o7.I2YI1wDTqQqtgFxcv7qxRflV5MO', 'taidiklasik@gmail.com', '2024-05-08', 0, 0, 'q3KSvMXTdMfi7mL6aSxx0koDYjLqUHsdpQ60w2VtI5f1uMPCpxbK8LBi5qkoIT4mfLbFVHtVighI9Sahlx7d6qiwn2RQH8DHgulD', 1, NULL, NULL, '2024-05-05 20:11:34', '2024-05-05 20:12:51'),
-(3, 'Elluy', '$2y$12$G30vwwBRdBhaBEIwgCgRLeNVqKY25MzjeRx..07kP96/KFZxOQp6i', 'elluygabrielpanambe@gmail.com', '2024-03-26', 1245, 0, 'QAxwimt1TavgIdwal5CkLQbqsLtApeYpc70haAba94WTsNrw7st3DHPnA9wo1kkkULYPSGD4Fll67qp7oLVfOW7uOoqPHL0SWRpb', 1, '2024-05-10 13:03:05', NULL, '2024-05-10 13:01:51', '2024-05-20 02:12:43');
+(3, 'Elluy', '$2y$12$G30vwwBRdBhaBEIwgCgRLeNVqKY25MzjeRx..07kP96/KFZxOQp6i', 'elluygabrielpanambe@gmail.com', '2024-03-26', 1245, 1000000, 'QAxwimt1TavgIdwal5CkLQbqsLtApeYpc70haAba94WTsNrw7st3DHPnA9wo1kkkULYPSGD4Fll67qp7oLVfOW7uOoqPHL0SWRpb', 1, '2024-05-10 13:03:05', NULL, '2024-05-10 13:01:51', '2024-05-29 16:23:40');
 
 --
 -- Indexes for dumped tables
@@ -820,6 +842,13 @@ ALTER TABLE `resep`
   ADD PRIMARY KEY (`id_resep`);
 
 --
+-- Indexes for table `saldo`
+--
+ALTER TABLE `saldo`
+  ADD PRIMARY KEY (`id_saldo`),
+  ADD KEY `fk_customer_saldo` (`id_customer`);
+
+--
 -- Indexes for table `sessions`
 --
 ALTER TABLE `sessions`
@@ -923,6 +952,12 @@ ALTER TABLE `resep`
   MODIFY `id_resep` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
+-- AUTO_INCREMENT for table `saldo`
+--
+ALTER TABLE `saldo`
+  MODIFY `id_saldo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
@@ -989,6 +1024,12 @@ ALTER TABLE `produk`
   ADD CONSTRAINT `fk_hampers` FOREIGN KEY (`id_hampers`) REFERENCES `hampers` (`id_hampers`),
   ADD CONSTRAINT `fk_penitip` FOREIGN KEY (`id_penitip`) REFERENCES `penitip` (`id_penitip`),
   ADD CONSTRAINT `fk_resep` FOREIGN KEY (`id_resep`) REFERENCES `resep` (`id_resep`);
+
+--
+-- Constraints for table `saldo`
+--
+ALTER TABLE `saldo`
+  ADD CONSTRAINT `fk_customer_saldo` FOREIGN KEY (`id_customer`) REFERENCES `customer` (`id_customer`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

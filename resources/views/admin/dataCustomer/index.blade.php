@@ -59,7 +59,7 @@
                                     <tbody>
                                         @forelse ($detil_pesanan as $item)
                                             <tr>
-                                                <td>{{ $item->pesanan->users->name ?? 'N/A' }}</td>
+                                                <td>{{ $item->pesanan->customer->name ?? 'N/A' }}</td>
                                                 <td>{{ $item->pesanan->tanggal_pesan }}</td>
                                                 <td>{{ $item->pesanan->tanggal_lunas }}</td>
                                                 <td>{{ $item->produk->nama_produk }}</td>

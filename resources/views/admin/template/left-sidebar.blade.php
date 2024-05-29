@@ -49,6 +49,12 @@
             <i class="fas fa-fw fa-clipboard"></i>
             <span>Data Customer</span></a>
     </li>
+    
+    <li class="nav-item">
+        <a class="nav-link" href="{{ url('/saldo') }}">
+            <i class="fas fa-fw fa-clipboard"></i>
+            <span>Saldo</span></a>
+    </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/resep') }}">
