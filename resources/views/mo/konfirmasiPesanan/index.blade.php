@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Atma Kitchen - Pembelian Bahan Baku</title>
+    <title>Atma Kitchen - Konfirmasi Pesanan</title>
     @include('mo.template.head')
 </head>
 

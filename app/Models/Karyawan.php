@@ -20,6 +20,7 @@ class Karyawan extends Model
         'password',
         'honor_harian',
         'bonus',
-        'jabatan'
+        'jabatan',
+        'kehadiran'
     ];
 }
