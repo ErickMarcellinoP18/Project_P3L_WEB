@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2024 at 06:24 PM
+-- Generation Time: Jun 03, 2024 at 02:00 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -328,20 +328,21 @@ CREATE TABLE `karyawan` (
   `honor_harian` int(11) NOT NULL,
   `bonus` int(11) NOT NULL DEFAULT 0,
   `nama_karyawan` varchar(30) DEFAULT NULL,
-  `jabatan` varchar(255) NOT NULL
+  `jabatan` varchar(255) NOT NULL,
+  `kehadiran` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `karyawan`
 --
 
-INSERT INTO `karyawan` (`id_karyawan`, `password`, `honor_harian`, `bonus`, `nama_karyawan`, `jabatan`) VALUES
-(2, '12345678', 10000, 0, 'Asep', 'admin'),
-(3, '23456789', 10000, 0, 'Elu', 'mo'),
-(4, '34567890', 10000, 0, 'Klasik', 'owner'),
-(5, 'qwertyui', 10000, 0, 'Eric', 'admin'),
-(7, 'asdfghjk', 15000, 0, 'Bona', 'mo'),
-(8, '09876543', 20000, 0, 'Sql', 'owner');
+INSERT INTO `karyawan` (`id_karyawan`, `password`, `honor_harian`, `bonus`, `nama_karyawan`, `jabatan`, `kehadiran`) VALUES
+(2, '12345678', 10000, 0, 'Asep', 'admin', 15),
+(3, '23456789', 150000, 0, 'Elu', 'mo', 30),
+(4, '34567890', 5000, 0, 'Klasik', 'owner', 27),
+(5, 'qwertyui', 10000000, 100000, 'Eric', 'admin', 30),
+(7, 'asdfghjk', 150000, 0, 'Bona', 'mo', 8),
+(8, '09876543', 200000, 0, 'Sql', 'owner', 31);
 
 -- --------------------------------------------------------
 
@@ -416,7 +417,6 @@ CREATE TABLE `pengeluaran_lain` (
 
 INSERT INTO `pengeluaran_lain` (`id_pengeluaran`, `total_pengeluaran`, `jenis`, `tanggal_pengeluaran`) VALUES
 (5, 3890000, 'Listrik', '2024-03-25 00:00:00'),
-(6, 11800000, 'Gaji Karyawan', '2024-03-25 00:00:00'),
 (8, 500000, 'Iuran RT', '2024-03-25 00:00:00'),
 (9, 900000, 'Bensin', '2024-03-25 00:00:00'),
 (10, 2200000, 'Gas', '2024-03-25 00:00:00');
@@ -517,8 +517,8 @@ CREATE TABLE `pesanan` (
 --
 
 INSERT INTO `pesanan` (`id_pesanan`, `no_nota`, `id_customer`, `tanggal_ambil`, `tanggal_pesan`, `status`, `jenis_delivery`, `tanggal_lunas`, `alamat`, `jarak`, `poin_digunakan`, `total_biaya`, `ongkir`, `pembayaran`, `bukti_pembayaran`, `poin_didapat`) VALUES
-(1, '2024.03.01', 1, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 120, 0, 0, 723000, '', 106),
-(2, '2024.03.02', 2, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 0, 0, 140000, '', 19),
+(1, '2024.03.01', 1, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 120, 723000, 0, 723000, '', 106),
+(2, '2024.03.02', 2, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 140000, 0, 140000, '', 19),
 (3, '2024.03.03', 3, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'menunggu konfirmasi', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 40, 50, 215000, 25000, 190000, '1716049293.png', 60),
 (4, '2024.03.04', 5, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 0, 0, 440000, '', 64),
 (5, '2024.03.05', 6, '2024-03-27 00:00:00', '2024-03-26 00:00:00', 'Pesanan Diterima', 'Antar', '2024-03-27 00:00:00', 'jalan pengangsaan, Caturtunggal ,Depok ,Sleman ,DI Yogyakarta', 0, 100, 0, 0, 75000, '', 6),
@@ -538,19 +538,20 @@ CREATE TABLE `presensi` (
   `id_presensi` int(11) NOT NULL,
   `id_karyawan` int(11) NOT NULL,
   `tanggal_presensi` date NOT NULL,
-  `status_presensi` varchar(15) NOT NULL
+  `status_presensi` varchar(15) NOT NULL,
+  `hitung` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `presensi`
 --
 
-INSERT INTO `presensi` (`id_presensi`, `id_karyawan`, `tanggal_presensi`, `status_presensi`) VALUES
-(1, 2, '2024-03-26', 'Hadir'),
-(5, 2, '2024-03-27', 'Tidak Hadir'),
-(6, 3, '2024-03-26', 'Hadir'),
-(7, 4, '2024-03-26', 'Hadir'),
-(8, 5, '2024-03-26', 'Tidak Hadir');
+INSERT INTO `presensi` (`id_presensi`, `id_karyawan`, `tanggal_presensi`, `status_presensi`, `hitung`) VALUES
+(1, 2, '2024-03-26', 'Hadir', 1),
+(5, 2, '2024-03-27', 'Tidak Hadir', 0),
+(6, 3, '2024-03-26', 'Hadir', 1),
+(7, 4, '2024-03-26', 'Hadir', 1),
+(8, 5, '2024-03-26', 'Tidak Hadir', 0);
 
 -- --------------------------------------------------------
 
@@ -645,7 +646,7 @@ CREATE TABLE `saldo` (
 --
 
 INSERT INTO `saldo` (`id_saldo`, `id_customer`, `saldoKembali`, `nomorRekening`, `statusPenarikan`) VALUES
-(1, 3, 100000, '2350551945', 'Diterima');
+(1, 3, 50000, '2350551945', 'belum dikonfirmasi');
 
 -- --------------------------------------------------------
 
@@ -667,8 +668,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('WC2BjLd8rJgSIaCNVnfUPlwOrNm9lsCjFsFgY0Yw', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoib2EwdVZDT0ZpakxqRU9HS1YySkhEYUZBVTdlZ0R3WDB6OXZuSjRETyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC91c2VyUHJvZmlsZSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjM7fQ==', 1716171495),
-('y4KBYa5VxxXeXIADQSpSNPoKJq3je2hrmEYBGvQU', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoicnRZaTdhTWNKOHk3VDFGUUFvRVBhNDNld3NaS2RNaklTMFJJNXJDeSI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzA6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9zYWxkbz8xPSI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fX0=', 1716999820);
+('fnLfDMkHly5bZmaP6E7buTin0AqHQAsM96ckIF5O', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:126.0) Gecko/20100101 Firefox/126.0', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUDAxTHFQVFRHS3FFWlZURDFEWHNPQk13emlhaGpkcERtNkxzOEw3byI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6Mzc6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sYXBvcmFuL3Blbml0aXAiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1717372497);
 
 -- --------------------------------------------------------
 

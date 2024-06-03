@@ -35,9 +35,20 @@
                             <a href="{{ route('laporan.stokBahan') }}"
                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                     class="fas fa-download fa-sm text-white-50"></i> Stok Bahan Report</a>
+                            <a href="{{ route('laporan.penitip') }}"
+                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                    class="fas fa-download fa-sm text-white-50"></i> Penitip Report</a>
                             <a href="javascript:void(0);" id="penjualanProdukReportBtn"
                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 <i class="fas fa-download fa-sm text-white-50"></i> Penjualan Produk Report
+                            </a>
+                            <a href="javascript:void(0);" id="presensiBtn"
+                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fas fa-download fa-sm text-white-50"></i> Presensi Gaji Karyawan Report
+                            </a>
+                            <a href="javascript:void(0);" id="pemasukanBtn"
+                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fas fa-download fa-sm text-white-50"></i> Pemasukan dan Pengeluaran Report
                             </a>
                         </div>
                     </div>
@@ -63,7 +74,7 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Earnings (Annual) Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-success shadow h-100 py-2">
                                 <div class="card-body">
@@ -81,7 +92,7 @@
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
+                        <!-- Tasks Card Example -->
                         <div class="col-xl-3 col-md-6 mb-4">
                             <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
@@ -171,15 +182,72 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="presensiModal" tabindex="-1" aria-labelledby="presensiModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="presensiLabel">Choose Month</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('laporan.presensi') }}" method="GET">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="bulan">Month</label>
+                            <input type="month" class="form-control" id="bulan" name="bulan" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="pemasukanModal" tabindex="-1" aria-labelledby="pemasukanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pemasukanLabel">Choose Month</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('laporan.pemasukan') }}" method="GET">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="bulan">Month</label>
+                            <input type="month" class="form-control" id="bulan" name="bulan" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     @include('owner.template.logoutModal')
 
     @include('owner.template.script')
 
     <script>
-        // Show modal when button is clicked
         document.getElementById('penjualanProdukReportBtn').addEventListener('click', function() {
             $('#penjualanProdukModal').modal('show');
+        });
+        document.getElementById('presensiBtn').addEventListener('click', function() {
+            $('#presensiModal').modal('show');
+        });
+        document.getElementById('pemasukanBtn').addEventListener('click', function() {
+            $('#pemasukanModal').modal('show');
         });
     </script>
 

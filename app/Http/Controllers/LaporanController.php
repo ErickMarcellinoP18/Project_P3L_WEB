@@ -193,6 +193,13 @@ class LaporanController extends Controller
             $bahanbaku = Pembelian_bahan_baku::whereYear('tanggal_pengeluaran', Carbon::parse($monthYear)->year)
                 ->whereMonth('tanggal_pengeluaran', Carbon::parse($monthYear)->month)
                 ->get();
+
+                $karyawan = Presensi::join('karyawan', 'karyawan.id_karyawan', '=', 'presensi.id_karyawan')
+        ->where('presensi.status_presensi', 'Hadir')
+        ->whereYear('tanggal_presensi', Carbon::parse($monthYear)->year)
+            ->whereMonth('tanggal_presensi', Carbon::parse($monthYear)->month)
+            ->get();
+
         $total = $pesanan->sum(function ($item) {
             return $item->kuantitas * $item->harga_produk;
         });
@@ -209,7 +216,12 @@ class LaporanController extends Controller
             return 20/100*$item->kuantitas * $item->harga_produk;
         });
 
-        $total4 = $total + -1*$total1 + -1*$total2 + $total3;
+        $total5 = $karyawan->sum(function($item){
+            return $item->karyawan->sum('honor_harian') * $item->hitung;
+        });
+        
+        $total4 = $total + -1*$total1 + -1*$total2 + $total3 + -1*$total5;
+
 
         $data = [
             'title' => 'Laporan Penjualan Produk',
@@ -225,6 +237,7 @@ class LaporanController extends Controller
             'total2' => $total2,
             'total3' => $total3,
             'total4' => $total4,
+            'total5' => $total5,
         ];
 
         $pdf = PDF::loadView('report.laporanPemPengBul', $data);
