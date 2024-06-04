@@ -87,8 +87,8 @@ class LaporanController extends Controller
         $karyawanList = Karyawan::all();
 
         $karyawan = Presensi::join('karyawan', 'karyawan.id_karyawan', '=', 'presensi.id_karyawan')
-        ->where('presensi.status_presensi', 'Hadir')
-        ->whereYear('tanggal_presensi', Carbon::parse($monthYear)->year)
+            ->where('presensi.status_presensi', 'Hadir')
+            ->whereYear('tanggal_presensi', Carbon::parse($monthYear)->year)
             ->whereMonth('tanggal_presensi', Carbon::parse($monthYear)->month)
             ->get();
 
@@ -97,10 +97,10 @@ class LaporanController extends Controller
         $karyawanData = [];
 
         foreach ($karyawanList as $karyawan) {
-            
+
             $karyawanId = $karyawan->id;
             $presensiKaryawan = $presensiGrouped->get($karyawanId, collect());
-            
+
 
             $karyawanData[] = [
                 'nama_karyawan' => $karyawan->nama_karyawan,
@@ -140,18 +140,17 @@ class LaporanController extends Controller
         $bulan = $request->input('bulan');
         $monthYear = Carbon::parse($bulan)->format('Y-m');
         $penitip = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
-        ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
-        ->where('produk.id_penitip', '!=', null)
-        ->get();
-        foreach($penitip as $item)
-        {
+            ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
+            ->where('produk.id_penitip', '!=', null)
+            ->get();
+        foreach ($penitip as $item) {
             $data = [
                 'title' => 'Laporan Penitip',
                 'date' => Carbon::now()->translatedFormat('j F Y'), // Use translated format for date
                 'bulan' => Carbon::parse($bulan)->translatedFormat('F'), // Translate month name
-                'tahun' => Carbon::parse($bulan)->year, 
-                'penitip' => $penitip, 
-                
+                'tahun' => Carbon::parse($bulan)->year,
+                'penitip' => $penitip,
+
             ];
         }
         $pdf = Pdf::loadView('report.laporanPenitip', $data);
@@ -167,36 +166,34 @@ class LaporanController extends Controller
         $monthYear = Carbon::parse($bulan)->format('Y-m');
 
         $pesanan = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
-        ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
-        ->whereHas('pesanan', function ($query) use ($monthYear) {
-            $query->whereYear('tanggal_lunas', Carbon::parse($monthYear)->year)
-                ->whereMonth('tanggal_lunas', Carbon::parse($monthYear)->month)
-                ->where('produk.id_penitip', '=', null)
-                ->where('tanggal_lunas', '!=', null);
-
-        })->get();
+            ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
+            ->whereHas('pesanan', function ($query) use ($monthYear) {
+                $query->whereYear('tanggal_lunas', Carbon::parse($monthYear)->year)
+                    ->whereMonth('tanggal_lunas', Carbon::parse($monthYear)->month)
+                    ->where('produk.id_penitip', '=', null)
+                    ->where('tanggal_lunas', '!=', null);
+            })->get();
 
         $pesanan1 = Detil_pesanan::join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
-        ->join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
-        ->whereHas('pesanan', function ($query) use ($monthYear) {
-            $query->whereYear('tanggal_lunas', Carbon::parse($monthYear)->year)
-                ->whereMonth('tanggal_lunas', Carbon::parse($monthYear)->month)
-                ->where('produk.id_penitip', '!=', null)
-                ->where('tanggal_lunas', '!=', null);
-
-        })->get();
+            ->join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
+            ->whereHas('pesanan', function ($query) use ($monthYear) {
+                $query->whereYear('tanggal_lunas', Carbon::parse($monthYear)->year)
+                    ->whereMonth('tanggal_lunas', Carbon::parse($monthYear)->month)
+                    ->where('produk.id_penitip', '!=', null)
+                    ->where('tanggal_lunas', '!=', null);
+            })->get();
 
         $pengeluaran_lain = Pengeluaran_lain::whereYear('tanggal_pengeluaran', Carbon::parse($monthYear)->year)
-                ->whereMonth('tanggal_pengeluaran', Carbon::parse($monthYear)->month)
-                ->get();
+            ->whereMonth('tanggal_pengeluaran', Carbon::parse($monthYear)->month)
+            ->get();
 
-            $bahanbaku = Pembelian_bahan_baku::whereYear('tanggal_pengeluaran', Carbon::parse($monthYear)->year)
-                ->whereMonth('tanggal_pengeluaran', Carbon::parse($monthYear)->month)
-                ->get();
+        $bahanbaku = Pembelian_bahan_baku::whereYear('tanggal_pengeluaran', Carbon::parse($monthYear)->year)
+            ->whereMonth('tanggal_pengeluaran', Carbon::parse($monthYear)->month)
+            ->get();
 
-                $karyawan = Presensi::join('karyawan', 'karyawan.id_karyawan', '=', 'presensi.id_karyawan')
-        ->where('presensi.status_presensi', 'Hadir')
-        ->whereYear('tanggal_presensi', Carbon::parse($monthYear)->year)
+        $karyawan = Presensi::join('karyawan', 'karyawan.id_karyawan', '=', 'presensi.id_karyawan')
+            ->where('presensi.status_presensi', 'Hadir')
+            ->whereYear('tanggal_presensi', Carbon::parse($monthYear)->year)
             ->whereMonth('tanggal_presensi', Carbon::parse($monthYear)->month)
             ->get();
 
@@ -204,29 +201,29 @@ class LaporanController extends Controller
             return $item->kuantitas * $item->harga_produk;
         });
 
-        $total1 = $pengeluaran_lain->sum(function($item){
+        $total1 = $pengeluaran_lain->sum(function ($item) {
             return $item->total_pengeluaran;
         });
 
-        $total2 = $bahanbaku->sum(function($item){
+        $total2 = $bahanbaku->sum(function ($item) {
             return  $item->harga_bahan_baku * $item->kuantitas;
         });
 
         $total3 = $pesanan1->sum(function ($item) {
-            return 20/100*$item->kuantitas * $item->harga_produk;
+            return 20 / 100 * $item->kuantitas * $item->harga_produk;
         });
 
-        $total5 = $karyawan->sum(function($item){
+        $total5 = $karyawan->sum(function ($item) {
             return $item->karyawan->sum('honor_harian') * $item->hitung;
         });
-        
-        $total4 = $total + -1*$total1 + -1*$total2 + $total3 + -1*$total5;
+
+        $total4 = $total + -1 * $total1 + -1 * $total2 + $total3 + -1 * $total5;
 
 
         $data = [
             'title' => 'Laporan Penjualan Produk',
-            'date' => Carbon::now()->translatedFormat('j F Y'), 
-            'bulan' => Carbon::parse($bulan)->translatedFormat('F'), 
+            'date' => Carbon::now()->translatedFormat('j F Y'),
+            'bulan' => Carbon::parse($bulan)->translatedFormat('F'),
             'tahun' => Carbon::parse($bulan)->year,
             'pesanan' => $pesanan,
             'pesanan1' => $pesanan1,
@@ -245,4 +242,64 @@ class LaporanController extends Controller
         return $pdf->stream('laporan_bulanan.pdf');
     }
 
+    public function penjualanKeseluruhan()
+    {
+        Carbon::setLocale('id');
+
+        $pesananBulan = Pesanan::selectRaw('MONTH(tanggal_lunas) as bulan, COUNT(*) as total, SUM(pembayaran) as total_uang')
+            ->where('status', 'Selesai')
+            ->groupBy('bulan')
+            ->orderBy('bulan')
+            ->get();
+
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyData[$i] = [
+                'bulan' => $i,
+                'total' => 0,
+                'total_uang' => 0
+            ];
+        }
+
+        foreach ($pesananBulan as $data) {
+            $monthlyData[$data->bulan]['total'] = $data->total;
+            $monthlyData[$data->bulan]['total_uang'] = $data->total_uang;
+        }
+
+        $totalUang = array_sum(array_column($monthlyData, 'total_uang'));
+        $totalTransaksi = array_sum(array_column($monthlyData, 'total'));
+
+        $tahun = Carbon::now()->year;
+
+        $chartData = [
+            'labels' => array_map(function ($month) {
+                return \Carbon\Carbon::create()->month($month)->translatedFormat('F');
+            }, array_keys($monthlyData)),
+            'data' => array_column($monthlyData, 'total_uang')
+        ];
+
+        // Generate the chart image using Puppeteer or another method
+        $this->generateChartImage($chartData);
+
+        $data = [
+            'title' => 'Laporan Penjualan Keseluruhan',
+            'date' => Carbon::now()->translatedFormat('j F Y'),
+            'pesanan' => $monthlyData,
+            'total_transaksi' => $totalTransaksi,
+            'total_uang' => $totalUang,
+            'tahun' => $tahun
+        ];
+
+        $pdf = PDF::loadView('report.laporanKeseluruhan', $data);
+
+        return $pdf->stream('laporan_bulanan.pdf');
+    }
+
+    protected function generateChartImage($chartData)
+    {
+        // Save chart data to a temporary view and then use Puppeteer to generate the image
+        view()->share('chartData', $chartData);
+        $nodeCommand = 'node generateChart.js';
+        shell_exec($nodeCommand);
+    }
 }

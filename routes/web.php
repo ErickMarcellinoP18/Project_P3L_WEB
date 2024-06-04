@@ -171,9 +171,9 @@ Route::get('/laporan/penjualanProduk', [LaporanController::class, 'penjualanProd
 Route::get('/laporan/presensi', [LaporanController::class, 'presensi'])->name('laporan.presensi');
 Route::get('/laporan/penitip', [LaporanController::class, 'penitip'])->name('laporan.penitip');
 Route::get('/laporan/bulanan', [LaporanController::class, 'pemasukan'])->name('laporan.pemasukan');
+Route::get('/laporan/penjualanKeseluruhan', [LaporanController::class, 'penjualanKeseluruhan'])->name('laporan.penjualanKeseluruhan');
 
 
 Route::resource('/saldo', KonfirmasiSaldoController::class);
 Route::get('/saldo/updateStatus/{id}', 'App\Http\Controllers\KonfirmasiSaldoController@updateStatus')->name('saldo.updateStatus');
 Route::get('/saldo/updateStatusN/{id}', 'App\Http\Controllers\KonfirmasiSaldoController@updateStatusN')->name('saldo.updateStatusN');
-

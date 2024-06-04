@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atma Kitchen - Laporan Stok Bahan Baku</title>
+    <title>{{ $title }}</title>
     <style>
         table {
             width: 100%;
@@ -41,6 +41,11 @@
             text-decoration: underline;
             margin-top: 50px;
         }
+
+        .chart-container {
+            text-align: center;
+            margin: 20px 0;
+        }
     </style>
 </head>
 
@@ -48,37 +53,35 @@
     <div class="container">
         <h2>Atma Kitchen</h2>
         <p>Jl. Centralpark No. 10 Yogyakarta</p>
-        <h3>LAPORAN Stok Bahan Baku</h3>
+        <h3>{{ $title }}</h3>
+        <p>Tahun: {{ $tahun }}</p>
         <p>Tanggal cetak: {{ $date }}</p>
+
+        <div class="chart-container">
+            <img src="{{ public_path('chart.png') }}" alt="Chart">
+        </div>
+
         <table>
             <thead>
                 <tr>
-                    <th>Nama Bahan</th>
-                    <th>Satuan</th>
-                    <th>Stok</th>
+                    <th>Bulan</th>
+                    <th>Jumlah Transaksi</th>
+                    <th>Jumlah Uang</th>
                 </tr>
             </thead>
             <tbody>
-                @forelse ($bahan as $item)
+                @foreach ($pesanan as $month)
                     <tr>
-                        <td>{{ $item->nama_bahan }}</td>
-                        <td>{{ $item->satuan }}</td>
-                        <td>
-                            @if ($item->stok_bahan < 1000)
-                                <span style="color: red;">{{ number_format($item->stok_bahan, 0, ',', '.') }}</span>
-                            @else
-                                {{ number_format($item->stok_bahan, 0, ',', '.') }}
-                            @endif
-                        </td>
+                        <td>{{ \Carbon\Carbon::create()->month($month['bulan'])->translatedFormat('F') }}</td>
+                        <td>{{ $month['total'] }}</td>
+                        <td>{{ number_format($month['total_uang'], 0, ',', '.') }}</td>
                     </tr>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="3" class="alert alert-danger">
-                            Belum Memiliki Stok Bahan Baku
-                        </td>
-                    </tr>
-                @endforelse
+                @endforeach
+                <tr>
+                    <th>Total</th>
+                    <th>{{ $total_transaksi }}</th>
+                    <th>{{ number_format($total_uang, 0, ',', '.') }}</th>
+                </tr>
             </tbody>
         </table>
     </div>

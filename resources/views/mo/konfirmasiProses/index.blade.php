@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-    <title>Atma Kitchen - Resep</title>
+    <title>Atma Kitchen - Pesanan untuk Diproses Hari Ini</title>
     @include('mo.template.head')
 </head>
 
@@ -31,15 +31,19 @@
                     <h1 class="h3 mb-2 text-gray-800">Pesanan untuk Diproses Hari Ini</h1>
 
                     <!-- Display session status -->
-                    @if (session('status'))
+                    @if (session('success'))
                         <div class="alert alert-success">
-                            {{ session('status') }}
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
                         </div>
                     @endif
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" id="dataTable" width="100%"
@@ -49,6 +53,7 @@
                                             <th>Nomor Nota</th>
                                             <th>Tanggal Ambil</th>
                                             <th>Tanggal Pesan</th>
+                                            <th>Produk</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
@@ -57,11 +62,22 @@
                                         @forelse ($pesanan as $item)
                                             <tr>
                                                 <td>{{ $item->no_nota }}</td>
-                                                <td>{{ $item->tanggal_ambil }}</td>
-                                                <td>{{ $item->tanggal_pesan }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($item->tanggal_ambil)->format('d/m/Y') }}
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($item->tanggal_pesan)->format('d/m/Y') }}
+                                                </td>
+                                                <td>
+                                                    <ul>
+                                                        @foreach ($details->where('id_pesanan', $item->id_pesanan) as $detail)
+                                                            <li>{{ $detail->produk->nama_produk }}
+                                                                ({{ $detail->kuantitas }})
+                                                            </li>
+                                                        @endforeach
+                                                    </ul>
+                                                </td>
                                                 <td>{{ $item->status }}</td>
                                                 <td>
-                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                    <form onsubmit="return confirm('Apakah Anda Yakin?');"
                                                         action="{{ route('process.order', ['orderId' => $item->id_pesanan]) }}"
                                                         method="POST">
                                                         <a href="{{ route('konfirmasiProses.show', $item->id_pesanan) }}"
@@ -74,7 +90,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="9" class="text-center alert alert-danger">
+                                                <td colspan="6" class="text-center alert alert-danger">
                                                     Tidak ada pesanan untuk diproses hari ini
                                                 </td>
                                             </tr>
