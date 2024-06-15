@@ -42,7 +42,7 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Bahan</th>
-                                            <th>Jumlah</th>
+                                            <th>Digunakan</th>
                                             <th>Satuan</th>
                                         </tr>
                                     </thead>

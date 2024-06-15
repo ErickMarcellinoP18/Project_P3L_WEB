@@ -22,7 +22,9 @@ class KonfirmasiProsesController extends Controller
             ->whereBetween('tanggal_ambil', [$today, $twoDaysAfterToday])
             ->get();
 
-        return view('mo.konfirmasiProses.index', compact('pesanan'));
+        $details = Detil_pesanan::whereIn('id_pesanan', $pesanan->pluck('id_pesanan'))->get();
+
+        return view('mo.konfirmasiProses.index', compact('pesanan', 'details'));
     }
 
     public function show($id)
@@ -76,14 +78,21 @@ class KonfirmasiProsesController extends Controller
 
         $pemakaianBahan = $this->calculatePemakaianBahan($details);
         $isEnough = $this->checkBahanBaku($pemakaianBahan);
-        $this->catatPemakaian($pemakaianBahan);
 
         if ($isEnough) {
-            Pesanan::where('id_pesanan', $orderId)->update(['status' => 'diproses']);
+            Pesanan::where('id_pesanan', $orderId)->update(['status' => 'Diproses']);
+            $this->catatPemakaian($pemakaianBahan);
             $this->reduceStock($pemakaianBahan);
-            return redirect()->route('konfirmasiProses.index')->with('success', 'Pesanan berhasil diproses');
+            return redirect()->route('konfirmasiProses.index')->with('success', 'Pesanan berhasil Diproses');
         } else {
-            return redirect()->route('konfirmasiProses.index')->with('error', 'Bahan baku tidak cukup');
+            $bahanBakuTidakCukup = [];
+            foreach ($pemakaianBahan as $bahan) {
+                $bahanBaku = Bahan_baku::where('nama_bahan', $bahan['nama_bahan'])->first();
+                if ($bahanBaku->stok_bahan < $bahan['jumlah']) {
+                    $bahanBakuTidakCukup[] = $bahanBaku->nama_bahan;
+                }
+            }
+            return redirect()->route('konfirmasiProses.index')->with('error', 'Bahan baku tidak cukup: ' . implode(', ', $bahanBakuTidakCukup));
         }
     }
 
