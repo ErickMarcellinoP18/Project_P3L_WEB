@@ -36,9 +36,11 @@
                             <a href="{{ route('laporan.stokBahan') }}"
                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
                                     class="fas fa-download fa-sm text-white-50"></i> Stok Bahan Report</a>
-                            <a href="{{ route('laporan.penitip') }}"
-                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-                                    class="fas fa-download fa-sm text-white-50"></i> Penitip Report</a>
+                           
+                            <a href="javascript:void(0);" id="penitipBtn"
+                                class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                <i class="fas fa-download fa-sm text-white-50"></i> Penitip Report
+                            </a>
                             <a href="javascript:void(0);" id="penjualanProdukReportBtn"
                                 class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                 <i class="fas fa-download fa-sm text-white-50"></i> Penjualan Produk Report
@@ -184,6 +186,32 @@
         </div>
     </div>
     <!-- Modal -->
+    <div class="modal fade" id="penitipModal" tabindex="-1" aria-labelledby="penitipLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="penitipLabel">Masukkan nama penitip</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="{{ route('laporan.penitip') }}" method="GET">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="bulan">Nama Penitip</label>
+                            <input type="month" class="form-control" id="bulan" name="bulan" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
     <div class="modal fade" id="presensiModal" tabindex="-1" aria-labelledby="presensiModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
@@ -249,6 +277,9 @@
         });
         document.getElementById('pemasukanBtn').addEventListener('click', function() {
             $('#pemasukanModal').modal('show');
+        });
+        document.getElementById('penitipBtn').addEventListener('click', function() {
+            $('#penitipModal').modal('show');
         });
     </script>
 

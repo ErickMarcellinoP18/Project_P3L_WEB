@@ -100,6 +100,8 @@ class LaporanController extends Controller
             
             $karyawanId = $karyawan->id;
             $presensiKaryawan = $presensiGrouped->get($karyawanId, collect());
+            $bolos = 31 - $presensiKaryawan->count();
+            
             
 
             $karyawanData[] = [
@@ -111,13 +113,17 @@ class LaporanController extends Controller
             ];
         }
 
+        
+
         $itung = $presensiGrouped->sum(function ($presensiKaryawan) {
             return $presensiKaryawan->sum('hitung');
         });
 
         $total = $karyawanList->sum(function ($item) use ($itung) {
-            return $item->honor_harian * $itung;
+            return $item->honor_harian * $itung + $item->bonus;
         });
+
+        
 
         $data = [
             'title' => 'Laporan Presensi Karyawan',
@@ -127,6 +133,8 @@ class LaporanController extends Controller
             'karyawanData' => $karyawanData,
             'total' => $total,
             'itung' => $itung,
+            'bolos' => $bolos
+            
         ];
 
         $pdf = Pdf::loadView('report.laporanPresensi', $data);
@@ -138,22 +146,19 @@ class LaporanController extends Controller
     {
         Carbon::setLocale('id');
         $bulan = $request->input('bulan');
-        $monthYear = Carbon::parse($bulan)->format('Y-m');
+        $bulan = ucfirst($bulan);
         $penitip = Detil_pesanan::join('produk', 'produk.id_produk', '=', 'detil_pesanan.id_produk')
         ->join('pesanan', 'pesanan.id_pesanan', '=', 'detil_pesanan.id_pesanan')
+        ->join('penitip', 'penitip.id_penitip', '=', 'produk.id_penitip')
         ->where('produk.id_penitip', '!=', null)
+        ->where('penitip.nama_penitip', '=', $bulan)
         ->get();
-        foreach($penitip as $item)
-        {
-            $data = [
-                'title' => 'Laporan Penitip',
-                'date' => Carbon::now()->translatedFormat('j F Y'), // Use translated format for date
-                'bulan' => Carbon::parse($bulan)->translatedFormat('F'), // Translate month name
-                'tahun' => Carbon::parse($bulan)->year, 
-                'penitip' => $penitip, 
-                
-            ];
-        }
+        $data = [
+            'title' => 'Laporan Penitip',
+            'date' => Carbon::now()->translatedFormat('j F Y'), // Use translated format for date
+            'bulan' => $bulan ,
+            'penitip' => $penitip, 
+        ];
         $pdf = Pdf::loadView('report.laporanPenitip', $data);
         return $pdf->stream('Laporan Penitip.pdf');
     }
@@ -220,7 +225,7 @@ class LaporanController extends Controller
             return $item->karyawan->sum('honor_harian') * $item->hitung;
         });
         
-        $total4 = $total + -1*$total1 + -1*$total2 + $total3 + -1*$total5;
+        $total4 = $total - $total1 - $total2 + $total3 + - $total5;
 
 
         $data = [
@@ -243,6 +248,66 @@ class LaporanController extends Controller
         $pdf = PDF::loadView('report.laporanPemPengBul', $data);
 
         return $pdf->stream('laporan_bulanan.pdf');
+    }
+    public function penjualanKeseluruhan()
+    {
+        Carbon::setLocale('id');
+
+        $pesananBulan = Pesanan::selectRaw('MONTH(tanggal_lunas) as bulan, COUNT(*) as total, SUM(pembayaran) as total_uang')
+            ->where('status', 'Selesai')
+            ->groupBy('bulan')
+            ->orderBy('bulan')
+            ->get();
+
+        $monthlyData = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $monthlyData[$i] = [
+                'bulan' => $i,
+                'total' => 0,
+                'total_uang' => 0
+            ];
+        }
+
+        foreach ($pesananBulan as $data) {
+            $monthlyData[$data->bulan]['total'] = $data->total;
+            $monthlyData[$data->bulan]['total_uang'] = $data->total_uang;
+        }
+
+        $totalUang = array_sum(array_column($monthlyData, 'total_uang'));
+        $totalTransaksi = array_sum(array_column($monthlyData, 'total'));
+
+        $tahun = Carbon::now()->year;
+
+        $chartData = [
+            'labels' => array_map(function ($month) {
+                return \Carbon\Carbon::create()->month($month)->translatedFormat('F');
+            }, array_keys($monthlyData)),
+            'data' => array_column($monthlyData, 'total_uang')
+        ];
+
+        // Generate the chart image using Puppeteer or another method
+        $this->generateChartImage($chartData);
+
+        $data = [
+            'title' => 'Laporan Penjualan Keseluruhan',
+            'date' => Carbon::now()->translatedFormat('j F Y'),
+            'pesanan' => $monthlyData,
+            'total_transaksi' => $totalTransaksi,
+            'total_uang' => $totalUang,
+            'tahun' => $tahun
+        ];
+
+        $pdf = PDF::loadView('report.laporanKeseluruhan', $data);
+
+        return $pdf->stream('laporan_bulanan.pdf');
+    }
+
+    protected function generateChartImage($chartData)
+    {
+        // Save chart data to a temporary view and then use Puppeteer to generate the image
+        view()->share('chartData', $chartData);
+        $nodeCommand = 'node generateChart.js';
+        shell_exec($nodeCommand);
     }
 
 }

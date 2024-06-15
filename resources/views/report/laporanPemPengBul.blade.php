@@ -130,7 +130,7 @@
                     </tr>
                 <tr>
                     <td colspan="2" class="text-right"><strong>Total Pengeluaran Lain</strong></td>
-                    <td class="text-right">Rp.{{ number_format($total1 + $total5, 0, ',', '.') }}</td>
+                    <td class="text-right">Rp.{{ number_format($total1 + $total5 , 0, ',', '.') }}</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
@@ -155,7 +155,7 @@
                 </tr>
                 <tr>
                     <td colspan="2" class="text-right"><strong>Total Pengeluaran</strong></td>
-                    <td class="text-right">Rp.{{ number_format($total2 + $total + $total5, 0, ',', '.') }}</td>
+                    <td class="text-right">Rp.{{ number_format($total2 + $total1 + $total5, 0, ',', '.') }}</td>
                 </tr>
                 <tr>
                     <td colspan="3"></td>
