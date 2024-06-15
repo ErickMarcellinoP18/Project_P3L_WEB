@@ -46,13 +46,13 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/customer') }}">
-            <i class="fas fa-fw fa-clipboard"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 14 14"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9.284 3.503a1.621 1.621 0 1 0 3.242 0a1.621 1.621 0 1 0-3.242 0"/><path d="M8.473 8.367v-.81a2.432 2.432 0 0 1 4.865 0v.81M6.6 8.369h6.738M3.604 5.612a1.712 1.712 0 1 0 0-3.425a1.712 1.712 0 0 0 0 3.425"/><path d="M6.6 8.609a2.996 2.996 0 1 0-5.993 0v1.284h1.285l.428 3.424h2.568l.428-3.424H6.6z"/></g></svg>
             <span>Data Customer</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/resep') }}">
-            <i class="fas fa-fw fa-clipboard"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9.231 30.234c4.746-1.353 9.124-1.447 12.631 1.441M9.231 27.256c4.746-1.353 9.124-1.448 12.631 1.44M9.231 24.357c4.746-1.353 9.124-1.448 12.631 1.44M9.231 21.243c4.746-1.353 9.124-1.448 12.631 1.44M9.231 18.206c4.746-1.352 9.124-1.447 12.631 1.441"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="m5.5 9.647l.117 28.625c6.889-2.91 13.067-2.542 18.402 1.714c5.657-3.267 11.575-5.01 18.364-1.675L42.5 9.958c-5.727-2.244-11.963-3.367-18.48 1.285C18.854 7.395 12.035 7.268 5.5 9.647"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M9.231 15.372c4.746-1.353 9.124-1.448 12.631 1.44m4.625 7.198c-.077 2.73 1.627 4.636 4.237 6.122l5.48-.657c3.441-2.47 3.41-4.841 3.303-7.21zm1.438-7.664l-1.477 4.07c1.735.102 3.566-.661 5.111 1.148l1.05-2.784c-2.432.204-3.472-1.396-4.684-2.434"/></svg>
             <span>Resep</span></a>
     </li>
 
@@ -98,13 +98,13 @@
 
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/gantiPasswordview') }}">
-            <i class="fas fa-fw fa-clipboard"></i>
+            <i><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 32 32"><path fill="currentColor" d="M21 2a8.998 8.998 0 0 0-8.612 11.612L2 24v6h6l10.388-10.388A9 9 0 1 0 21 2m0 16a7 7 0 0 1-2.032-.302l-1.147-.348l-.847.847l-3.181 3.181L12.414 20L11 21.414l1.379 1.379l-1.586 1.586L9.414 23L8 24.414l1.379 1.379L7.172 28H4v-3.172l9.802-9.802l.848-.847l-.348-1.147A7 7 0 1 1 21 18"/><circle cx="22" cy="10" r="2" fill="currentColor"/></svg></i>
             <span>Ganti Password</span></a>
     </li>
 
     <li class="nav-item">
         <a class="nav-link" href="{{ url('/konfirmasiProses') }}">
-            <i class="fas fa-fw fa-clipboard"></i>
+            <i><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24"><path fill="currentColor" d="M8.625 8.5h-4.5a1 1 0 0 1-1-1V3a1 1 0 0 1 2 0v3.5h3.5a1 1 0 0 1 0 2"/><path fill="currentColor" d="M21 13a1 1 0 0 1-1-1A7.995 7.995 0 0 0 5.08 8.001a1 1 0 0 1-1.731-1.002A9.995 9.995 0 0 1 22 12a1 1 0 0 1-1 1m-1.125 9a1 1 0 0 1-1-1v-3.5h-3.5a1 1 0 0 1 0-2h4.5a1 1 0 0 1 1 1V21a1 1 0 0 1-1 1"/><path fill="currentColor" d="M12 22A10.012 10.012 0 0 1 2 12a1 1 0 0 1 2 0a7.995 7.995 0 0 0 14.92 3.999a1 1 0 0 1 1.731 1.002A10.032 10.032 0 0 1 12 22"/></svg></i>
             <span>Pemrosesan</span></a>
     </li>
 
