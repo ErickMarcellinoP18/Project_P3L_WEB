@@ -33,8 +33,8 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
 
-                       
-                      
+
+
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered table-hover" id="dataTable" width="100%"
@@ -47,14 +47,14 @@
                                             <th>Status</th>
                                             <th>Jenis Delivery</th>
                                             <th>Jarak</th>
-                                        
+                                            <th>Action</th>s
+
 
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($pesanan as $item)
                                             <tr>
-
                                                 <td>{{ $item->no_nota }}</td>
                                                 <td>{{ $item->tanggal_ambil }}</td>
                                                 <td>{{ $item->tanggal_pesan }}</td>
@@ -65,8 +65,8 @@
                                                 <td>
                                                         <a href="{{ route('pesanan.inputJarakPesanan', $item->id_pesanan) }}"
                                                             class="btn btn-sm btn-primary">Edit</a>
-                                                </td>  
-                                                      
+                                                </td>
+
                                         @empty
                                             <div class="alert alert-danger">
                                                 Belum Memiliki Pesanan

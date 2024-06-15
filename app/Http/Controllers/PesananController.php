@@ -184,9 +184,9 @@ class PesananController extends Controller
     {
         $pesanan = Pesanan::join('customer', 'pesanan.id_customer', '=', 'customer.id_customer')
             ->select('pesanan.*', 'customer.nama_customer')
-            ->where('pesanan.status', 'menunggu konfirmasi')
+            ->where('pesanan.status', 'Panding')
             ->where('pesanan.jarak', 0)
-            ->where('pesanan.jenis_delivery', 'Antar')
+            ->where('pesanan.jenis_delivery', 'delivery')
             ->get();
 
         return view('admin.inputJarakPesanan.index', compact('pesanan'));
@@ -207,6 +207,7 @@ class PesananController extends Controller
         try {
             $pesanan = Pesanan::find($id);
             $pesanan->jarak = $request->jarak;
+            $pesanan->status = 'belum dibayar';
 
             $this->calculateOngkir($pesanan);
 

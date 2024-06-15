@@ -86,7 +86,6 @@
                                         <th>Tanggal Pesan</th>
                                         <th>Status</th>
                                         <th>Jenis Delivery</th>
-                                        <th>Nama Produk</th>
                                         <th>Nota</th>
                                     </tr>
                                 </thead>
@@ -98,7 +97,6 @@
                                             <td>{{ $item->tanggal_pesan }}</td>
                                             <td>{{ $item->status }}</td>
                                             <td>{{ $item->jenis_delivery }}</td>
-                                            <td>{{ $item->nama_produk }}</td>
                                             <td>
                                                 <a href="{{ route('pesanan.show', $item->id_pesanan) }}"
                                                     class="btn btn-sm btn-primary">Lihat Nota</a>
