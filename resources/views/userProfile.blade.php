@@ -110,7 +110,7 @@
                     </form>
                     <div class="card-footer">
                         <a href="{{ route('user.daftarpesanancust', $user->id) }}"
-                            class="btn btn-sm btn-primary btn-block">Daftar Pesanan</a>
+                            class="btn btn-sm btn-primary btn-block">Pesanan Harus Dibayar</a>
                     </div>
                     <div class="card-footer">
                         <a href="{{ route('user.historypesanan', $user->id) }}"

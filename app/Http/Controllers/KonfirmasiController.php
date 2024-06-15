@@ -41,10 +41,6 @@ class KonfirmasiController extends Controller
             $user->poin += $pesanan->poin_didapat;
             $user->save();
 
-            $bahanBaku = Bahan_baku::find($id);
-            $bahanBaku->stok_bahan -= 50;
-            $bahanBaku->save();
-
             return redirect()->route('terimaPesanan.index', $id)->with('success', 'Pesanan Diterima.');
     }
     public function updateStatusN($id)
